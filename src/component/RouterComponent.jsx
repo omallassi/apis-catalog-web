@@ -6,6 +6,7 @@ import DashBoardComponent from "./DashboardComponent"
 
 import React from "react";
 import Dashboard from '../Dashboard';
+import ListEnvsComponent from './envs/ListEnvsComponent';
 
 const AppRouter = () => {
     return (
@@ -15,6 +16,7 @@ const AppRouter = () => {
                     <Route path="/" exact component={DashBoardComponent} />
                     <Route path="/domains" exact component={ListDomainsComponent} />
                     <Route path="/apis" exact component={ListApiComponent} />
+                    <Route path="/envs" exact component={ListEnvsComponent} />
                 </Switch>
             </Router>
         </div>

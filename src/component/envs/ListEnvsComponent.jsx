@@ -9,42 +9,44 @@ import Typography from '@material-ui/core/Typography';
 import CreateIcon from '@material-ui/icons/Create';
 import DeleteIcon from '@material-ui/icons/Delete';
 
-class ListDomainsComponent extends Component {
+class ListEnvsComponent extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            domains: [],
+            envs: [],
         }
 
-        this.listAllDomains = this.listAllDomains.bind(this);
+        this.listAllEnvs = this.listAllEnvs.bind(this);
     }
 
     componentDidMount() {
-        this.listAllDomains();
+        this.listAllEnvs();
     }
 
-    listAllDomains() {
-        ApiService.listAllDomains().then((res) => {
-            this.setState({domains: res.data.domains})
+    listAllEnvs() {
+        ApiService.listAllEnvs().then((res) => {
+            this.setState({envs: res.data.envs})
         });
     }
 
     render() {
         return (
             <div>
-                <Typography component="h2" variant="h6" color="primary" gutterBottom>Domains List</Typography>
+                <Typography component="h2" variant="h6" color="primary" gutterBottom>Envs List</Typography>
                 <Table>
                     <TableHead>
                         <TableRow>
                             <TableCell>Id</TableCell>
-                            <TableCell>Domain Name</TableCell>
+                            <TableCell>Env Name</TableCell>
+                            <TableCell>Description</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {this.state.domains.map ( row => (
+                        {this.state.envs.map ( row => (
                             <TableRow hover key = {row.id}>
                                 <TableCell>{row.id}</TableCell>
                                 <TableCell>{row.name}</TableCell>
+                                <TableCell>{row.description}</TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
@@ -59,4 +61,4 @@ const style = {
     justifyContent: 'center'
 }
 
-export default ListDomainsComponent;
+export default ListEnvsComponent;

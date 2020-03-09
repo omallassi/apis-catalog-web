@@ -13,6 +13,7 @@ import LayersIcon from '@material-ui/icons/Layers';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import ListAltIcon from '@material-ui/icons/ListAlt';
 import FilterTiltShiftIcon from '@material-ui/icons/FilterTiltShift';
+import ComputerIcon from '@material-ui/icons/Computer';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
@@ -25,6 +26,7 @@ import { useHistory } from "react-router-dom";
 
 import ListApiComponent from "./component/apis/ListApiComponent";
 import ListDomainsComponent from "./component/domains/ListDomainsComponent"
+import ListEnvsComponent from "./component/envs/ListEnvsComponent"
 
 function  ListItemLink(props) {
   const {icon, primary, to} = props;
@@ -77,6 +79,7 @@ export default function ListRouter() {
             <ListItemLink to="/" primary="Dashboard" icon={<DashboardIcon />} />
             <ListItemLink to="/domains" primary="Domains" icon={<FilterTiltShiftIcon />} />
             <ListItemLink to="/apis" primary="Apis" icon={<ListAltIcon />} />
+            <ListItemLink to="/envs" primary="Environments" icon={<ComputerIcon />} />
           </List>
         </Paper>
       </div>

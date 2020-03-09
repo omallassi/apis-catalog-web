@@ -5,18 +5,27 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import TableContainer from '@material-ui/core/TableContainer';
 import Typography from '@material-ui/core/Typography';
 import CreateIcon from '@material-ui/icons/Create';
 import DeleteIcon from '@material-ui/icons/Delete';
+import { Link } from '@material-ui/core';
+import ApiDetails from './ApiDetails';
+import Paper from '@material-ui/core/Paper';
 
 class ListApiComponent extends Component {
     constructor(props) {
         super(props)
         this.state = {
             apis: [],
+            showDetails: false, 
+            selectedApi: 0
         }
 
+        this.apiDetails = React.createRef();
+
         this.listAllApis = this.listAllApis.bind(this);
+        this.displaySpecsForApi = this.displaySpecsForApi.bind(this);
     }
 
     componentDidMount() {
@@ -29,11 +38,22 @@ class ListApiComponent extends Component {
         });
     }
 
+    displaySpecsForApi(id) {
+        this.setState({showDetails: true});        
+        this.setState({selectedApi: id});
+        if (this.apiDetails.current !== null) {
+            this.apiDetails.current.updateSelectedApi(id);
+        }
+    }
+
     render() {
         return (
             <div>
+            <div>
+                <Paper>
                 <Typography component="h2" variant="h6" color="primary" gutterBottom>APIs List</Typography>
-                <Table>
+                <TableContainer>
+                <Table stickyHeader>
                     <TableHead>
                         <TableRow>
                             <TableCell>Id</TableCell>
@@ -45,8 +65,14 @@ class ListApiComponent extends Component {
                     </TableHead>
                     <TableBody>
                         {this.state.apis.map ( row => (
-                            <TableRow key = {row.id}>
-                                <TableCell component="th" scope="row">{row.id}</TableCell>
+                            <TableRow hover key = {row.id}>
+                                <TableCell component="th" scope="row">
+                                    <Link component="button" variant="body2" onClick={() => {
+                                        this.displaySpecsForApi(row.id)
+                                    }}>
+                                        {row.id}
+                                    </Link>
+                                </TableCell>
                                 <TableCell>{row.name}</TableCell>
                                 <TableCell>{row.domain_id}</TableCell>
                                 <TableCell>{row.domain_name}</TableCell>
@@ -57,6 +83,12 @@ class ListApiComponent extends Component {
                         ))}
                     </TableBody>
                 </Table>
+                </TableContainer>
+                </Paper>
+            </div>
+            { 
+                this.state.showDetails ?  <ApiDetails ref={this.apiDetails} api={this.state.selectedApi}/> : null 
+            }
             </div>
         );
     }
