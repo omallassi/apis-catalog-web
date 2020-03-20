@@ -19,6 +19,11 @@ class ApiService {
         console.info("Get Specs for api [" + selectedApi + "]");
         return axios.get(API_BASE_URL + '/v1/specs');
     }
+
+    listDeploymentsForApi(selectedApi) {
+        console.info("Get Deployments for api [" + selectedApi + "]");
+        return axios.get(API_BASE_URL + '/v1/deployments');
+    }
 }
 
 export default new ApiService();

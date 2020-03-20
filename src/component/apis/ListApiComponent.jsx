@@ -12,6 +12,8 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import { Link } from '@material-ui/core';
 import ApiDetails from './ApiDetails';
 import Paper from '@material-ui/core/Paper';
+import Divider from '@material-ui/core/Divider';
+import Box from '@material-ui/core/Box';
 
 class ListApiComponent extends Component {
     constructor(props) {
@@ -38,58 +40,68 @@ class ListApiComponent extends Component {
         });
     }
 
-    displaySpecsForApi(id) {
+    displaySpecsForApi(id, name) {
         this.setState({showDetails: true});        
         this.setState({selectedApi: id});
+        this.setState({selectedApiName: name});
         if (this.apiDetails.current !== null) {
-            this.apiDetails.current.updateSelectedApi(id);
+            this.apiDetails.current.updateSelectedApi(id, name);
         }
     }
 
     render() {
+        const {classes} = this.props;
+
         return (
-            <div>
-            <div>
-                <Paper>
+            
+            <Paper>
+                <Box component="span" m={1}>
                 <Typography component="h2" variant="h6" color="primary" gutterBottom>APIs List</Typography>
                 <TableContainer>
-                <Table stickyHeader>
-                    <TableHead>
-                        <TableRow>
-                            <TableCell>Id</TableCell>
-                            <TableCell>Name</TableCell>
-                            <TableCell>Domain Id</TableCell>
-                            <TableCell>Domain Name</TableCell>
-                            <TableCell>Spec Ids</TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {this.state.apis.map ( row => (
-                            <TableRow hover key = {row.id}>
-                                <TableCell component="th" scope="row">
-                                    <Link component="button" variant="body2" onClick={() => {
-                                        this.displaySpecsForApi(row.id)
-                                    }}>
-                                        {row.id}
-                                    </Link>
-                                </TableCell>
-                                <TableCell>{row.name}</TableCell>
-                                <TableCell>{row.domain_id}</TableCell>
-                                <TableCell>{row.domain_name}</TableCell>
-                                <TableCell>{row.spec_ids}</TableCell>
-                                <TableCell align="right" onClick={() => this.editUser(row.id)}><CreateIcon /></TableCell>
-                                <TableCell align="right" onClick={() => this.deleteUser(row.id)}><DeleteIcon /></TableCell>
-                            </TableRow>   
-                        ))}
-                    </TableBody>
-                </Table>
+                    <Table stickyHeader>
+                        <TableHead>
+                            <TableRow>
+                                <TableCell>Id</TableCell>
+                                <TableCell>Name</TableCell>
+                                <TableCell>Version</TableCell>
+                                <TableCell>Domain Id</TableCell>
+                                <TableCell>Domain Name</TableCell>
+                                <TableCell>Product Manager</TableCell>
+                                <TableCell>Architect</TableCell>
+                                <TableCell>Spec Ids</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {this.state.apis.map ( row => (
+                                <TableRow hover key = {row.id}>
+                                    <TableCell component="th" scope="row">
+                                        <Link component="button" variant="body2" onClick={() => {
+                                            this.displaySpecsForApi(row.id, row.name)
+                                        }}>
+                                            {row.id}
+                                        </Link>
+                                    </TableCell>
+                                    <TableCell>{row.name}</TableCell>
+                                    <TableCell>TBD</TableCell>
+                                    <TableCell>{row.domain_id}</TableCell>
+                                    <TableCell>{row.domain_name}</TableCell>
+                                    <TableCell>TBD</TableCell>
+                                    <TableCell>TBD</TableCell>
+                                    <TableCell>{row.spec_ids}</TableCell>
+                                    <TableCell align="right" onClick={() => this.editUser(row.id)}><CreateIcon /></TableCell>
+                                    <TableCell align="right" onClick={() => this.deleteUser(row.id)}><DeleteIcon /></TableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
                 </TableContainer>
-                </Paper>
-            </div>
-            { 
-                this.state.showDetails ?  <ApiDetails ref={this.apiDetails} api={this.state.selectedApi}/> : null 
-            }
-            </div>
+                </Box>
+                <Divider />
+                { 
+                    this.state.showDetails ?  <ApiDetails ref={this.apiDetails} api={this.state.selectedApi} api_name={this.state.selectedApiName}/> : null 
+                }
+            </Paper>
+            
         );
     }
 }

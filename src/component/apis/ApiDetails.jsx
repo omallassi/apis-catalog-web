@@ -21,10 +21,13 @@ class ApiDetails extends Component {
         super(props)
         this.state = {
             api: props.api,
-            specs: []
+            name: props.api_name,
+            specs: [],
+            deployments: []
         }
 
         this.listSpecsForApi = this.listSpecsForApi.bind(this);
+        this.listDeploymentsForApi = this.listDeploymentsForApi.bind(this);
         this.updateSelectedApi = this.updateSelectedApi.bind(this);
     }
 
@@ -37,42 +40,77 @@ class ApiDetails extends Component {
         });
     }
 
-    updateSelectedApi(api) {
+    listDeploymentsForApi(id) {
+        ApiService.listDeploymentsForApi(id).then( (res) => {
+            this.setState( {deployments: res.data.deployments} );
+        });
+    }
+
+    updateSelectedApi(api, name) {
         this.setState( {api: api} );
+        this.setState( {name: name} );
         this.listSpecsForApi(api);
+        this.listDeploymentsForApi(api);
     }
 
     render() {
+        //const classes = useStyles();
+
         return (
-            <div>
-                <Box p={2}>
-                    <Paper>
-                        <Typography component="h2" variant="h6" color="primary" gutterBottom>APIs Details - {this.props.api} - {this.state.api}</Typography>
-                        <TableContainer>
-                        <Table stickyHeader>
-                            <TableHead>
-                            <TableRow>
-                                <TableCell>Id</TableCell>
-                                <TableCell>Name</TableCell>
-                            </TableRow>
-                            </TableHead>
-                            <TableBody>
-                                {
-                                    this.state.specs.map ( row => (
-                                        <TableRow hover key = {row.id}>
-                                            <TableCell component="th" scope="row">
-                                                {row.id}
-                                            </TableCell>
-                                            <TableCell>{row.name}</TableCell>
-                                        </TableRow>
-                                    ))
-                                }
-                            </TableBody>
-                        </Table>
-                        </TableContainer>
-                    </Paper>
-                </Box>
-            </div>
+            <Box component="span" m={1}>
+            <Paper>
+                <Typography component="h6" variant="h6" color="inherit" gutterBottom>Specification Details for API [{this.state.name}]</Typography>
+                <TableContainer>
+                <Table stickyHeader>
+                    <TableHead>
+                    <TableRow>
+                        <TableCell>Id</TableCell>
+                        <TableCell>Name</TableCell>
+                    </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {
+                            this.state.specs.map ( row => (
+                                <TableRow hover key = {row.id}>
+                                    <TableCell component="th" scope="row">
+                                        {row.id}
+                                    </TableCell>
+                                    <TableCell>{row.name}</TableCell>
+                                </TableRow>
+                            ))
+                        }
+                    </TableBody>
+                </Table>
+                </TableContainer>
+            </Paper>
+            <Paper>
+                <Typography component="h6" variant="h6" color="inherit" gutterBottom>Deployments Details for API [{this.state.name}]</Typography>
+                <TableContainer>
+                <Table stickyHeader>
+                    <TableHead>
+                    <TableRow>
+                        <TableCell>Env Id</TableCell>
+                        <TableCell>Name</TableCell>
+                        <TableCell>Api Id</TableCell>
+                    </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {
+                            this.state.deployments.map ( row => (
+                                <TableRow hover key = {row.id}>
+                                    <TableCell component="th" scope="row">
+                                        {row.env}
+                                    </TableCell>
+                                    <TableCell>TBD</TableCell>
+                                    <TableCell>{row.api}</TableCell>
+                                </TableRow>
+                            ))
+                        }
+                    </TableBody>
+                </Table>
+                </TableContainer>
+            </Paper>
+            </Box>  
         );
     }
 }
