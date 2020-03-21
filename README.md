@@ -1,6 +1,11 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Overview 
+
+<aside class="warning">
+All of this is, at this stage ideas and POC
+</aside>
+
 ![screenshot](img/screen.png)
 
 HTTP backend is available here https://github.com/omallassi/apis-catalog
