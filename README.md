@@ -2,9 +2,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Overview 
 
-<aside class="warning">
-All of this is, at this stage ideas and POC
-</aside>
+> :warning: All of this is, at this stage ideas and POC
 
 ![screenshot](img/screen.png)
 
