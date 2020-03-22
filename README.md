@@ -4,6 +4,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 > :warning: All of this is, at this stage ideas and POC
 
+![screenshot](img/dashboard.png)
+
 ![screenshot](img/screen.png)
 
 HTTP backend is available here https://github.com/omallassi/apis-catalog
