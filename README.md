@@ -3,7 +3,6 @@
 ![Node CI](https://github.com/omallassi/apis-catalog-web/workflows/Node%20CI/badge.svg)
 
 ## Overview 
-
 > :warning: All of this is, at this stage ideas and POC
 
 The Web UI (at this stage, mostly providing read-only access) to [apis-catalog](https://github.com/omallassi/apis-catalog/).
