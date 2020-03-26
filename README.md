@@ -1,3 +1,6 @@
+![logo](img/logo.png)
+
+![Node CI](https://github.com/omallassi/apis-catalog-web/workflows/Node%20CI/badge.svg)
 
 ## Overview 
 
