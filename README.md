@@ -1,4 +1,4 @@
-![logo](img/logo.png)
+![logo](https://raw.githubusercontent.com/wiki/omallassi/apis-catalog/assets/logo.png)
 
 ![Node CI](https://github.com/omallassi/apis-catalog-web/workflows/Node%20CI/badge.svg)
 
