@@ -100,6 +100,9 @@ const useStyles = makeStyles(theme => ({
   fixedHeight: {
     height: 240,
   },
+  logo: {
+    maxWidth: 160,
+  },
 }));
 
 export default function Dashboard() {
@@ -135,6 +138,7 @@ export default function Dashboard() {
               <NotificationsIcon />
             </Badge>
           </IconButton> */}
+          <img src="logo.png" alt="logo" className={classes.logo} />
         </Toolbar>
       </AppBar>
       <Drawer
