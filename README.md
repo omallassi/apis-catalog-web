@@ -1,6 +1,6 @@
 ![logo](https://raw.githubusercontent.com/wiki/omallassi/apis-catalog/assets/logo.png)
 
-![Node CI](https://github.com/omallassi/apis-catalog-web/workflows/Node%20CI/badge.svg)
+![Node CI](https://github.com/omallassi/apis-catalog-web/workflows/Node%20CI/badge.svg) [![Build Status](https://travis-ci.org/omallassi/apis-catalog-web.svg?branch=master)](https://travis-ci.org/omallassi/apis-catalog-web) [![Coverage Status](https://coveralls.io/repos/github/omallassi/apis-catalog-web/badge.svg?branch=master)](https://coveralls.io/github/omallassi/apis-catalog-web?branch=master)
 
 ## Overview 
 > :warning: All of this is, at this stage ideas and POC
