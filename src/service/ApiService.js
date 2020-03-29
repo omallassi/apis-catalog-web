@@ -24,6 +24,10 @@ class ApiService {
         console.info("Get Deployments for api [" + selectedApi + "]");
         return axios.get(API_BASE_URL + '/v1/deployments');
     }
+
+    getPullRequestNumber() {
+        return axios.get(API_BASE_URL + '/v1/metrics');
+    }
 }
 
 export default new ApiService();

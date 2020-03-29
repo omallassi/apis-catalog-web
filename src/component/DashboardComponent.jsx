@@ -14,26 +14,33 @@ import Chart from "react-google-charts";
 import Grid from '@material-ui/core/Grid';
 
 class ListApiComponent extends Component {
+    data_points = [];
+
     constructor(props) {
         super(props)
         this.state = {
-            apis: [],
+            pr_num: [],
         }
 
-        this.listAllApis = this.listAllApis.bind(this);
+        this.getPullRequestNumber = this.getPullRequestNumber.bind(this);
     }
 
     componentDidMount() {
-        this.listAllApis();
+        this.getPullRequestNumber();
     }
 
-    listAllApis() {
-        ApiService.listAllApis().then((res) => {
-            this.setState({apis: res.data.apis})
+    getPullRequestNumber() {
+        // var data_points = [];
+        const t = this;
+        ApiService.getPullRequestNumber().then((res) => {
+            console.log("Response Status " + res.status);
+                this.setState({pr_num: res.data.pr_num});
         });
     }
 
     render() {
+        var data_points = this.state.pr_num;
+        
         return (
             <Paper>
                 <Typography component="h2" variant="h6" color="primary" gutterBottom>Dashboard</Typography>
@@ -46,24 +53,14 @@ class ListApiComponent extends Component {
                                     height={'400px'}
                                     chartType="LineChart"
                                     loader={<div>Loading Chart</div>}
-                                    data={[
-                                        ['x', 'Pull Requests #'],
-                                        [0, 0],
-                                        [1, 10],
-                                        [2, 23],
-                                        [3, 17],
-                                        [4, 18],
-                                        [5, 9],
-                                        [6, 11],
-                                        [7, 27],
-                                        [8, 33],
-                                        [9, 40],
-                                        [10, 32],
-                                        [11, 35],
-                                    ]}
+                                    columns={['Date', 'Pull Requests #']}
+                                    rows={data_points}
                                     options={{
+                                        // title: "Pull Requests #",
+                                        // curveType: "function",
+                                        // legend: { position: "bottom",},
                                         hAxis: {
-                                        title: 'Time',
+                                        title: 'Date',
                                         },
                                         vAxis: {
                                         title: '#',
