@@ -20,6 +20,7 @@ class ListApiComponent extends Component {
         super(props)
         this.state = {
             pr_num: [],
+            pr_ages: [],
         }
 
         this.getPullRequestNumber = this.getPullRequestNumber.bind(this);
@@ -30,17 +31,14 @@ class ListApiComponent extends Component {
     }
 
     getPullRequestNumber() {
-        // var data_points = [];
         const t = this;
         ApiService.getPullRequestNumber().then((res) => {
-            console.log("Response Status " + res.status);
-                this.setState({pr_num: res.data.pr_num});
+            this.setState({pr_num: res.data.pr_num});
+            this.setState({pr_ages: res.data.pr_ages});
         });
     }
 
-    render() {
-        var data_points = this.state.pr_num;
-        
+    render() {    
         return (
             <Paper>
                 <Typography component="h2" variant="h6" color="primary" gutterBottom>Dashboard</Typography>
@@ -54,16 +52,19 @@ class ListApiComponent extends Component {
                                     chartType="LineChart"
                                     loader={<div>Loading Chart</div>}
                                     columns={['Date', 'Pull Requests #']}
-                                    rows={data_points}
+                                    rows={this.state.pr_num}
                                     options={{
-                                        // title: "Pull Requests #",
+                                        title: "Opened Pull Requests #",
                                         // curveType: "function",
                                         // legend: { position: "bottom",},
+                                        curveType: 'function',
+                                        lineWidth: 4,
+                                        intervals: { style: 'line' },
                                         hAxis: {
                                         title: 'Date',
                                         },
                                         vAxis: {
-                                        title: '#',
+                                        title: '# of PRs',
                                         },
                                     }}
                                     rootProps={{ 'data-testid': '1' }}
@@ -75,22 +76,13 @@ class ListApiComponent extends Component {
                                 height={'400px'}
                                 chartType="LineChart"
                                 loader={<div>Loading Chart</div>}
-                                data={[
-                                    ['x', 'Pull Request Avg Duration'],
-                                    [0, 0],
-                                    [1, 5],
-                                    [2, 5],
-                                    [3, 5],
-                                    [4, 6],
-                                    [5, 5],
-                                    [6, 7],
-                                    [7, 10],
-                                    [8, 8],
-                                    [9, 5],
-                                    [10, 4],
-                                    [11, 5],
-                                ]}
+                                columns={['Date', 'min (days)', 'p50 (days)', 'max (days)', 'mean (days)']}
+                                rows={this.state.pr_ages}
                                 options={{
+                                    title: "Opened Pull Requests Stats",
+                                    curveType: 'function',
+                                    lineWidth: 4,
+                                    intervals: { style: 'line' },
                                     hAxis: {
                                     title: 'Time',
                                     },
