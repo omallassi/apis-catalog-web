@@ -37,7 +37,7 @@ class ListDomainsComponent extends Component {
                     <TableHead>
                         <TableRow>
                             <TableCell>Id</TableCell>
-                            <TableCell>Domain Name</TableCell>
+                            <TableCell>Domain / SubDomain Name</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>

@@ -13,6 +13,8 @@ The Web UI (at this stage, mostly providing read-only access) to [apis-catalog](
 
 HTTP backend is available here https://github.com/omallassi/apis-catalog
 
+## More Details
+available in the [wiki](https://github.com/omallassi/apis-catalog/wiki).
 
 
 ### Available Scripts
