@@ -43,9 +43,8 @@ class ListApiComponent extends Component {
     render() {    
         return (
             <Paper>
-                <Typography component="h2" variant="h6" color="primary" gutterBottom>Dashboard</Typography>
                 <Paper>
-                        <Typography component="h6" variant="h6" color="inherit" gutterBottom>Design Time Governance Metrics</Typography>
+                        <Typography variant="h6" color="primary">Design Time Governance Metrics</Typography>
                         <Grid container direction="row" alignItems="center" >
                             <Grid item>
                                 <Chart

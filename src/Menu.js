@@ -2,15 +2,9 @@ import React from 'react';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import ListSubheader from '@material-ui/core/ListSubheader';
 import { Route, BrowserRouter as Router } from 'react-router-dom';
-import { Link as RouterLink, Redirect } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 import DashboardIcon from '@material-ui/icons/Dashboard';
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import PeopleIcon from '@material-ui/icons/People';
-import BarChartIcon from '@material-ui/icons/BarChart';
-import LayersIcon from '@material-ui/icons/Layers';
-import AssignmentIcon from '@material-ui/icons/Assignment';
 import ListAltIcon from '@material-ui/icons/ListAlt';
 import FilterTiltShiftIcon from '@material-ui/icons/FilterTiltShift';
 import ComputerIcon from '@material-ui/icons/Computer';
@@ -18,15 +12,6 @@ import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import Paper from '@material-ui/core/Paper';
-import Divider from '@material-ui/core/Divider';
-import InboxIcon from '@material-ui/icons/Inbox';
-import DraftsIcon from '@material-ui/icons/Drafts';
-import Typography from '@material-ui/core/Typography';
-import { useHistory } from "react-router-dom";
-
-import ListApiComponent from "./component/apis/ListApiComponent";
-import ListDomainsComponent from "./component/domains/ListDomainsComponent"
-import ListEnvsComponent from "./component/envs/ListEnvsComponent"
 
 function  ListItemLink(props) {
   const {icon, primary, to} = props;
@@ -77,8 +62,8 @@ export default function ListRouter() {
         <Paper elevation={0}>
           <List aria-label="main mailbox folders">
             <ListItemLink to="/" primary="Dashboard" icon={<DashboardIcon />} />
-            <ListItemLink to="/domains" primary="Domains" icon={<FilterTiltShiftIcon />} />
             <ListItemLink to="/apis" primary="Apis" icon={<ListAltIcon />} />
+            <ListItemLink to="/domains" primary="Domains" icon={<FilterTiltShiftIcon />} />
             <ListItemLink to="/envs" primary="Environments" icon={<ComputerIcon />} />
           </List>
         </Paper>

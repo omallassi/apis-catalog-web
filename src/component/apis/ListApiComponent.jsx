@@ -88,8 +88,8 @@ class ListApiComponent extends Component {
                                     <TableCell>TBD</TableCell>
                                     <TableCell>TBD</TableCell>
                                     <TableCell>{row.spec_ids}</TableCell>
-                                    <TableCell align="right" onClick={() => this.editUser(row.id)}><CreateIcon /></TableCell>
-                                    <TableCell align="right" onClick={() => this.deleteUser(row.id)}><DeleteIcon /></TableCell>
+                                    {/* <TableCell align="right" onClick={() => this.editUser(row.id)}><CreateIcon /></TableCell>
+                                    <TableCell align="right" onClick={() => this.deleteUser(row.id)}><DeleteIcon /></TableCell> */}
                                 </TableRow>
                             ))}
                         </TableBody>
