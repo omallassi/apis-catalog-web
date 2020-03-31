@@ -21,6 +21,7 @@ class ListApiComponent extends Component {
         this.state = {
             pr_num: [],
             pr_ages: [],
+            endpoints_num: [],
         }
 
         this.getPullRequestNumber = this.getPullRequestNumber.bind(this);
@@ -35,6 +36,7 @@ class ListApiComponent extends Component {
         ApiService.getPullRequestNumber().then((res) => {
             this.setState({pr_num: res.data.pr_num});
             this.setState({pr_ages: res.data.pr_ages});
+            this.setState({endpoints_num: res.data.endpoints_num});
         });
     }
 
@@ -57,8 +59,8 @@ class ListApiComponent extends Component {
                                         title: "Opened Pull Requests #",
                                         // curveType: "function",
                                         // legend: { position: "bottom",},
-                                        curveType: 'function',
-                                        lineWidth: 4,
+                                        //curveType: 'function',
+                                        lineWidth: 3,
                                         intervals: { style: 'line' },
                                         hAxis: {
                                         title: 'Date',
@@ -80,8 +82,8 @@ class ListApiComponent extends Component {
                                 rows={this.state.pr_ages}
                                 options={{
                                     title: "Opened Pull Requests Stats",
-                                    curveType: 'function',
-                                    lineWidth: 4,
+                                    //curveType: 'function',
+                                    lineWidth: 3,
                                     intervals: { style: 'line' },
                                     hAxis: {
                                     title: 'Time',
@@ -99,54 +101,13 @@ class ListApiComponent extends Component {
                                 height={'400px'}
                                 chartType="LineChart"
                                 loader={<div>Loading Chart</div>}
-                                data={[
-                                    ['x', '# of endpoints'],
-                                    [0, 1],
-                                    [1, 1],
-                                    [2, 1],
-                                    [3, 5],
-                                    [4, 5],
-                                    [5, 5],
-                                    [6, 5],
-                                    [7, 10],
-                                    [8, 11],
-                                    [9, 11],
-                                    [10, 11],
-                                    [11, 12],
-                                ]}
+                                columns={['Date', '# of Operations']}
+                                rows={this.state.endpoints_num}
                                 options={{
-                                    hAxis: {
-                                    title: 'Time',
-                                    },
-                                    vAxis: {
-                                    title: '# of days',
-                                    },
-                                }}
-                                rootProps={{ 'data-testid': '1' }}
-                                />
-                            </Grid>
-                            <Grid item>
-                            <Chart
-                                width={'600px'}
-                                height={'400px'}
-                                chartType="LineChart"
-                                loader={<div>Loading Chart</div>}
-                                data={[
-                                    ['x', '# of deprecated APIs (before retirement'],
-                                    [0, 0],
-                                    [1, 0],
-                                    [2, 0],
-                                    [3, 0],
-                                    [4, 0],
-                                    [5, 0],
-                                    [6, 0],
-                                    [7, 0],
-                                    [8, 1],
-                                    [9, 1],
-                                    [10, 1],
-                                    [11, 0],
-                                ]}
-                                options={{
+                                    title: "Number of Operations",
+                                    //curveType: 'function',
+                                    lineWidth: 3,
+                                    intervals: { style: 'line' },
                                     hAxis: {
                                     title: 'Time',
                                     },
