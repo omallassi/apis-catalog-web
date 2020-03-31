@@ -120,11 +120,11 @@ class ListApiComponent extends Component {
                             </Grid>
                         </Grid>
                 </Paper>
-                <Paper>
+                {/* <Paper>
                     <Box component="span" m={1}>
                         <Typography component="h6" variant="h6" color="inherit" gutterBottom>Runtime Governance Metrics</Typography>
                     </Box>
-                </Paper>
+                </Paper> */}
             </Paper>
         );
     }

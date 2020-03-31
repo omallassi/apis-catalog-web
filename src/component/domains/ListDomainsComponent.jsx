@@ -38,6 +38,7 @@ class ListDomainsComponent extends Component {
                         <TableRow>
                             <TableCell>Id</TableCell>
                             <TableCell>Domain / SubDomain Name</TableCell>
+                            <TableCell>Description</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -45,6 +46,7 @@ class ListDomainsComponent extends Component {
                             <TableRow hover key = {row.id}>
                                 <TableCell>{row.id}</TableCell>
                                 <TableCell>{row.name}</TableCell>
+                                <TableCell>{row.description}</TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
