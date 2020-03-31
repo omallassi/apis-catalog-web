@@ -8,6 +8,8 @@ import TableRow from '@material-ui/core/TableRow';
 import Typography from '@material-ui/core/Typography';
 import CreateIcon from '@material-ui/icons/Create';
 import DeleteIcon from '@material-ui/icons/Delete';
+import Paper from '@material-ui/core/Paper';
+import Box from '@material-ui/core/Box';
 
 class ListEnvsComponent extends Component {
     constructor(props) {
@@ -31,7 +33,8 @@ class ListEnvsComponent extends Component {
 
     render() {
         return (
-            <div>
+            <Paper>
+                <Box component="span" m={1}>
                 <Typography component="h2" variant="h6" color="primary" gutterBottom>Envs List</Typography>
                 <Table>
                     <TableHead>
@@ -51,7 +54,8 @@ class ListEnvsComponent extends Component {
                         ))}
                     </TableBody>
                 </Table>
-            </div>
+            </Box>
+        </Paper>
         );
     }
 }
