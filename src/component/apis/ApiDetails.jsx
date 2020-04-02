@@ -7,13 +7,8 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import TableContainer from '@material-ui/core/TableContainer';
 import Typography from '@material-ui/core/Typography';
-import CreateIcon from '@material-ui/icons/Create';
-import DeleteIcon from '@material-ui/icons/Delete';
-import { Link, Divider } from '@material-ui/core';
 import Paper from '@material-ui/core/Paper';
-import { spacing } from '@material-ui/system';
 import Box from '@material-ui/core/Box';
-import { withStyles } from '@material-ui/core/styles';
 
 class ApiDetails extends Component {
 
@@ -42,7 +37,20 @@ class ApiDetails extends Component {
 
     listDeploymentsForApi(id) {
         ApiService.listDeploymentsForApi(id).then( (res) => {
-            this.setState( {deployments: res.data.deployments} );
+            let new_deployments = [];
+            let deployments = res.data.deployments;
+            let index = 0;
+            deployments.map( val => {
+                let item = {};
+                //get env object for current env
+                ApiService.listEnvForId(val.env).then( (res) => {
+                    let env_object = res.data;
+                    item = {'env': val.env, 'api': val.api, 'env_name': env_object.name};
+                    new_deployments[index] = item;
+                    index += 1;
+                    this.setState( {deployments: new_deployments} );
+                });
+            });
         });
     }
 
@@ -66,6 +74,8 @@ class ApiDetails extends Component {
                     <TableRow>
                         <TableCell>Id</TableCell>
                         <TableCell>Name</TableCell>
+                        <TableCell>Audience</TableCell>
+                        <TableCell>Env</TableCell>
                     </TableRow>
                     </TableHead>
                     <TableBody>
@@ -76,6 +86,8 @@ class ApiDetails extends Component {
                                         {row.id}
                                     </TableCell>
                                     <TableCell>{row.name}</TableCell>
+                                    <TableCell>TBD</TableCell>
+                                    <TableCell>TBD</TableCell>
                                 </TableRow>
                             ))
                         }
@@ -95,15 +107,14 @@ class ApiDetails extends Component {
                     </TableRow>
                     </TableHead>
                     <TableBody>
-                        {
-                            this.state.deployments.map ( row => (
-                                <TableRow hover key = {row.id}>
-                                    <TableCell component="th" scope="row">
-                                        {row.env}
-                                    </TableCell>
-                                    <TableCell>TBD</TableCell>
-                                    <TableCell>{row.api}</TableCell>
-                                </TableRow>
+                        {this.state.deployments.map ( row => (
+                            <TableRow hover key = {row.env}>
+                                <TableCell component="th" scope="row">
+                                    {row.env}
+                                </TableCell>
+                                <TableCell>{row.env_name}</TableCell>
+                                <TableCell>{row.api}</TableCell>
+                            </TableRow>
                             ))
                         }
                     </TableBody>
