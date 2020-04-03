@@ -103,7 +103,7 @@ class ListApiComponent extends Component {
                                 columns={['Date', '# of Operations']}
                                 rows={this.state.endpoints_num}
                                 options={{
-                                    title: "Number of Operations",
+                                    title: "Number of (REST) Operations",
                                     //curveType: 'function',
                                     lineWidth: 3,
                                     intervals: { style: 'line' },
