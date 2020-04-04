@@ -9,6 +9,10 @@ import TableContainer from '@material-ui/core/TableContainer';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
+import Avatar from '@material-ui/core/Avatar';
+import { deepOrange, deepPurple } from '@material-ui/core/colors';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
 
 class ApiDetails extends Component {
 
@@ -62,7 +66,7 @@ class ApiDetails extends Component {
     }
 
     render() {
-        //const classes = useStyles();
+        const { classes } = this.props;
 
         return (
             <Box component="span" m={1}>
@@ -75,7 +79,6 @@ class ApiDetails extends Component {
                         <TableCell>Id</TableCell>
                         <TableCell>Name</TableCell>
                         <TableCell>Audience</TableCell>
-                        <TableCell>Env</TableCell>
                     </TableRow>
                     </TableHead>
                     <TableBody>
@@ -86,8 +89,9 @@ class ApiDetails extends Component {
                                         {row.id}
                                     </TableCell>
                                     <TableCell>{row.name}</TableCell>
-                                    <TableCell>TBD</TableCell>
-                                    <TableCell>TBD</TableCell>
+                                    <TableCell>
+                                    <div className={classes.audience}>{"external-partner"}</div>
+                                    </TableCell>
                                 </TableRow>
                             ))
                         }
@@ -101,6 +105,7 @@ class ApiDetails extends Component {
                 <Table stickyHeader>
                     <TableHead>
                     <TableRow>
+                        <TableCell/>
                         <TableCell>Env Id</TableCell>
                         <TableCell>Name</TableCell>
                         <TableCell>Api Id</TableCell>
@@ -109,6 +114,9 @@ class ApiDetails extends Component {
                     <TableBody>
                         {this.state.deployments.map ( row => (
                             <TableRow hover key = {row.env}>
+                                <TableCell>
+                                <Avatar className={classes.purple}>xva</Avatar>
+                                </TableCell>
                                 <TableCell component="th" scope="row">
                                     {row.env}
                                 </TableCell>
@@ -126,9 +134,34 @@ class ApiDetails extends Component {
     }
 }
 
-const style = {
+const useStyles = theme => ({
+    root: {
+      ...theme.typography.button,
+      backgroundColor: theme.palette.background.paper,
+      padding: theme.spacing(1),
+    },
+    audience: {
+        color: '#fff',
+        padding: '.1em .5em .2em',
+        fontWeight: '500',
+        borderRadius: '.25em',
+        fontSize: '90%',
+        backgroundColor: '#93C47D',
+    },
     display: 'flex', 
-    justifyContent: 'center'
-}
+    justifyContent: 'center',
+    orange: {
+        //color: theme.palette.getContrastText(deepOrange[500]),
+        backgroundColor: deepOrange[500],
+      },
+      purple: {
+        //color: theme.palette.getContrastText(deepPurple[500]),
+        backgroundColor: deepPurple[500],
+      },
+    });
 
-export default ApiDetails;
+ApiDetails.propTypes = {
+    classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(useStyles)(ApiDetails);
