@@ -10,7 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
 import Avatar from '@material-ui/core/Avatar';
-import { deepOrange, lightBlue } from '@material-ui/core/colors';
+import { blueGrey, lightBlue } from '@material-ui/core/colors';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 
@@ -143,12 +143,12 @@ const useStyles = theme => ({
       padding: theme.spacing(1),
     },
     audience: {
-        color: theme.palette.getContrastText(deepOrange[400]),
-        padding: '.1em .5em .2em',
+        color: theme.palette.getContrastText(blueGrey[200]),
+        padding: '.2em .5em .2em .5em',
         fontWeight: '500',
         borderRadius: '.25em',
         fontSize: '90%',
-        backgroundColor: deepOrange[400],
+        backgroundColor: blueGrey[200],
     },
     avatar: {
         color: theme.palette.getContrastText(lightBlue[200]),
