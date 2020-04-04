@@ -10,7 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
 import Avatar from '@material-ui/core/Avatar';
-import { deepOrange, deepPurple } from '@material-ui/core/colors';
+import { deepOrange, lightBlue } from '@material-ui/core/colors';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 
@@ -49,7 +49,7 @@ class ApiDetails extends Component {
                 //get env object for current env
                 ApiService.listEnvForId(val.env).then( (res) => {
                     let env_object = res.data;
-                    item = {'env': val.env, 'api': val.api, 'env_name': env_object.name};
+                    item = {'env_avatar': val.env, 'env': val.env, 'api': val.api, 'env_name': env_object.name};
                     new_deployments[index] = item;
                     index += 1;
                     this.setState( {deployments: new_deployments} );
@@ -78,7 +78,7 @@ class ApiDetails extends Component {
                     <TableRow>
                         <TableCell>Id</TableCell>
                         <TableCell>Name</TableCell>
-                        <TableCell>Audience</TableCell>
+                        <TableCell>Audience (mocked)</TableCell>
                     </TableRow>
                     </TableHead>
                     <TableBody>
@@ -115,7 +115,7 @@ class ApiDetails extends Component {
                         {this.state.deployments.map ( row => (
                             <TableRow hover key = {row.env}>
                                 <TableCell>
-                                <Avatar className={classes.purple}>xva</Avatar>
+                                    <Avatar className={classes.avatar}>{row.env_avatar}</Avatar>
                                 </TableCell>
                                 <TableCell component="th" scope="row">
                                     {row.env}
@@ -135,28 +135,25 @@ class ApiDetails extends Component {
 }
 
 const useStyles = theme => ({
+    display: 'flex', 
+    justifyContent: 'center',
     root: {
       ...theme.typography.button,
       backgroundColor: theme.palette.background.paper,
       padding: theme.spacing(1),
     },
     audience: {
-        color: '#fff',
+        color: theme.palette.getContrastText(deepOrange[400]),
         padding: '.1em .5em .2em',
         fontWeight: '500',
         borderRadius: '.25em',
         fontSize: '90%',
-        backgroundColor: '#93C47D',
+        backgroundColor: deepOrange[400],
     },
-    display: 'flex', 
-    justifyContent: 'center',
-    orange: {
-        //color: theme.palette.getContrastText(deepOrange[500]),
-        backgroundColor: deepOrange[500],
-      },
-      purple: {
-        //color: theme.palette.getContrastText(deepPurple[500]),
-        backgroundColor: deepPurple[500],
+    avatar: {
+        color: theme.palette.getContrastText(lightBlue[200]),
+        backgroundColor: lightBlue[200],
+        fontSize: '90%',
       },
     });
 

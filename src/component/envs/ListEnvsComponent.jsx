@@ -10,6 +10,10 @@ import CreateIcon from '@material-ui/icons/Create';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
+import Avatar from '@material-ui/core/Avatar';
+import { lightBlue } from '@material-ui/core/colors';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
 
 class ListEnvsComponent extends Component {
     constructor(props) {
@@ -32,6 +36,8 @@ class ListEnvsComponent extends Component {
     }
 
     render() {
+        const { classes } = this.props;
+
         return (
             <Paper>
                 <Box component="span" m={1}>
@@ -39,6 +45,7 @@ class ListEnvsComponent extends Component {
                 <Table>
                     <TableHead>
                         <TableRow>
+                            <TableCell/>
                             <TableCell>Id</TableCell>
                             <TableCell>Env Name</TableCell>
                             <TableCell>Description</TableCell>
@@ -47,6 +54,7 @@ class ListEnvsComponent extends Component {
                     <TableBody>
                         {this.state.envs.map ( row => (
                             <TableRow hover key = {row.id}>
+                                <Avatar className={classes.avatar}>{row.id}</Avatar>
                                 <TableCell>{row.id}</TableCell>
                                 <TableCell>{row.name}</TableCell>
                                 <TableCell>{row.description}</TableCell>
@@ -60,9 +68,18 @@ class ListEnvsComponent extends Component {
     }
 }
 
-const style = {
+const useStyles = theme => ({
     display: 'flex', 
-    justifyContent: 'center'
-}
+    justifyContent: 'center',
+    avatar: {
+        color: theme.palette.getContrastText(lightBlue[200]),
+        backgroundColor: lightBlue[200],
+        fontSize: '90%',
+    },
+});
 
-export default ListEnvsComponent;
+ListEnvsComponent.propTypes = {
+    classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(useStyles)(ListEnvsComponent);

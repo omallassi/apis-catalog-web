@@ -17,6 +17,9 @@ HTTP backend is available here https://github.com/omallassi/apis-catalog
 available in the [wiki](https://github.com/omallassi/apis-catalog/wiki).
 
 
+### Before build
+update the `.env` file to point out to your html documentations (redoc, windershins whatever). For prodution, you need to create an `env.production`
+
 ### Available Scripts
 
 In the project directory, you can run:
