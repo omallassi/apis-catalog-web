@@ -13,6 +13,11 @@ import Avatar from '@material-ui/core/Avatar';
 import { blueGrey, lightBlue } from '@material-ui/core/colors';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
+import { TextField } from '@material-ui/core';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import Grid from '@material-ui/core/Grid';
 
 class ApiDetails extends Component {
 
@@ -69,66 +74,76 @@ class ApiDetails extends Component {
         const { classes } = this.props;
 
         return (
-            <Box component="span" m={1}>
-            <Paper>
-                <Typography component="h6" variant="h6" color="inherit" gutterBottom>Specification Details for API [{this.state.name}]</Typography>
-                <TableContainer>
-                <Table stickyHeader>
-                    <TableHead>
-                    <TableRow>
-                        <TableCell>Id</TableCell>
-                        <TableCell>Name</TableCell>
-                        <TableCell>Audience (mocked)</TableCell>
-                    </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {
-                            this.state.specs.map ( row => (
-                                <TableRow hover key = {row.id}>
-                                    <TableCell component="th" scope="row">
-                                        {row.id}
-                                    </TableCell>
-                                    <TableCell>{row.name}</TableCell>
-                                    <TableCell>
-                                    <div className={classes.audience}>{"external-partner"}</div>
-                                    </TableCell>
-                                </TableRow>
-                            ))
-                        }
-                    </TableBody>
-                </Table>
-                </TableContainer>
-            </Paper>
-            <Paper>
-                <Typography component="h6" variant="h6" color="inherit" gutterBottom>Deployments Details for API [{this.state.name}]</Typography>
-                <TableContainer>
-                <Table stickyHeader>
-                    <TableHead>
-                    <TableRow>
-                        <TableCell/>
-                        <TableCell>Env Id</TableCell>
-                        <TableCell>Name</TableCell>
-                        <TableCell>Api Id</TableCell>
-                    </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {this.state.deployments.map ( row => (
-                            <TableRow hover key = {row.env}>
-                                <TableCell>
-                                    <Avatar className={classes.avatar}>{row.env_avatar}</Avatar>
-                                </TableCell>
-                                <TableCell component="th" scope="row">
-                                    {row.env}
-                                </TableCell>
-                                <TableCell>{row.env_name}</TableCell>
-                                <TableCell>{row.api}</TableCell>
+            <Box component="span">
+                <Typography component="h6" variant="h6" color="primary" gutterBottom>API Details</Typography>
+                <Card variant="outlined">
+                <CardContent>
+                
+                    <Typography gutterBottom>API Name</Typography>
+                    <TextField id="sample" disabled="false" value={this.state.name}/>
+                
+                </CardContent>
+     
+                <CardContent>
+                    <Typography variant="body1" className={classes.root} color="inherit"  gutterBottom>Related Specifications</Typography>
+                    <TableContainer>
+                        <Table stickyHeader>
+                            <TableHead>
+                            <TableRow>
+                                <TableCell>Id</TableCell>
+                                <TableCell>Name</TableCell>
+                                <TableCell>Audience (mocked)</TableCell>
                             </TableRow>
-                            ))
-                        }
-                    </TableBody>
-                </Table>
-                </TableContainer>
-            </Paper>
+                            </TableHead>
+                            <TableBody>
+                                {
+                                    this.state.specs.map ( row => (
+                                        <TableRow hover key = {row.id}>
+                                            <TableCell component="th" scope="row">
+                                                {row.id}
+                                            </TableCell>
+                                            <TableCell>{row.name}</TableCell>
+                                            <TableCell>
+                                            <div className={classes.audience}>{"external-partner"}</div>
+                                            </TableCell>
+                                        </TableRow>
+                                    ))
+                                }
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
+                </CardContent>
+                <CardContent>
+                    <Typography variant="body1" className={classes.root} color="inherit" gutterBottom>Related Deployments</Typography>
+                    <TableContainer>
+                    <Table stickyHeader>
+                        <TableHead>
+                        <TableRow>
+                            <TableCell/>
+                            <TableCell>Env Id</TableCell>
+                            <TableCell>Name</TableCell>
+                            <TableCell>Api Id</TableCell>
+                        </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {this.state.deployments.map ( row => (
+                                <TableRow hover key = {row.env}>
+                                    <TableCell>
+                                        <Avatar className={classes.avatar}>{row.env_avatar}</Avatar>
+                                    </TableCell>
+                                    <TableCell component="th" scope="row">
+                                        {row.env}
+                                    </TableCell>
+                                    <TableCell>{row.env_name}</TableCell>
+                                    <TableCell>{row.api}</TableCell>
+                                </TableRow>
+                                ))
+                            }
+                        </TableBody>
+                    </Table>
+                    </TableContainer>
+                </CardContent>
+                </Card>
             </Box>  
         );
     }

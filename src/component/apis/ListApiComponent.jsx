@@ -7,13 +7,12 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import TableContainer from '@material-ui/core/TableContainer';
 import Typography from '@material-ui/core/Typography';
-import CreateIcon from '@material-ui/icons/Create';
-import DeleteIcon from '@material-ui/icons/Delete';
 import { Link } from '@material-ui/core';
 import ApiDetails from './ApiDetails';
-import Paper from '@material-ui/core/Paper';
 import Divider from '@material-ui/core/Divider';
 import Box from '@material-ui/core/Box';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
 
 class ListApiComponent extends Component {
     constructor(props) {
@@ -53,10 +52,10 @@ class ListApiComponent extends Component {
         const {classes} = this.props;
 
         return (
-            
-            <Paper>
-                <Box component="span" m={1}>
-                <Typography component="h2" variant="h6" color="primary" gutterBottom>APIs List</Typography>
+            <Box>
+            <Card variant="outlined">
+                <CardContent>
+                <Typography component="h2" variant="h6" color="primary">APIs List</Typography>
                 <TableContainer>
                     <Table stickyHeader>
                         <TableHead>
@@ -95,12 +94,14 @@ class ListApiComponent extends Component {
                         </TableBody>
                     </Table>
                 </TableContainer>
-                </Box>
+                </CardContent>
+                </Card>
                 <Divider />
                 { 
                     this.state.showDetails ?  <ApiDetails ref={this.apiDetails} api={this.state.selectedApi} api_name={this.state.selectedApiName}/> : null 
                 }
-            </Paper>
+            
+        </Box>
             
         );
     }

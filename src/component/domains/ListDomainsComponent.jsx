@@ -10,6 +10,8 @@ import CreateIcon from '@material-ui/icons/Create';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
 
 class ListDomainsComponent extends Component {
     constructor(props) {
@@ -33,8 +35,9 @@ class ListDomainsComponent extends Component {
 
     render() {
         return (
-            <Paper>
-                <Box component="span" m={1}>
+            <Box>
+            <Card variant="outlined">
+                <CardContent>
                 <Typography component="h2" variant="h6" color="primary" gutterBottom>Domains List</Typography>
                 <Table>
                     <TableHead>
@@ -54,8 +57,9 @@ class ListDomainsComponent extends Component {
                         ))}
                     </TableBody>
                 </Table>
-            </Box>
-        </Paper>
+                </CardContent>
+            </Card>
+        </Box>
         );
     }
 }

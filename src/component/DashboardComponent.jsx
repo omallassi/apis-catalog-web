@@ -12,6 +12,8 @@ import { Box } from '@material-ui/core';
 import Paper from '@material-ui/core/Paper';
 import Chart from "react-google-charts";
 import Grid from '@material-ui/core/Grid';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
 
 class ListApiComponent extends Component {
     data_points = [];
@@ -42,89 +44,95 @@ class ListApiComponent extends Component {
 
     render() {    
         return (
-            <Paper>
+            <Box component="span" m={1}>
                 <Paper>
+                    <Card>
+                    <CardContent>
                         <Typography variant="h6" color="primary">Design Time Governance Metrics</Typography>
-                        <Grid container direction="row" alignItems="center" >
-                            <Grid item>
-                                <Chart
-                                    width={'600px'}
-                                    height={'400px'}
-                                    chartType="LineChart"
-                                    loader={<div>Loading Chart</div>}
-                                    columns={['Date', 'Pull Requests #']}
-                                    rows={this.state.pr_num}
-                                    options={{
-                                        title: "Opened Pull Requests #",
-                                        // curveType: "function",
-                                        // legend: { position: "bottom",},
-                                        //curveType: 'function',
-                                        lineWidth: 3,
-                                        intervals: { style: 'line' },
-                                        hAxis: {
-                                        title: 'Date',
-                                        },
-                                        vAxis: {
-                                        title: '# of PRs',
-                                        },
-                                    }}
-                                    rootProps={{ 'data-testid': '1' }}
-                                    />
-                            </Grid>
-                            <Grid item>
+                        </CardContent>
+                    </Card>
+                    <Grid container direction="row" alignItems="center" >
+                        <Grid item>
                             <Chart
                                 width={'600px'}
                                 height={'400px'}
                                 chartType="LineChart"
                                 loader={<div>Loading Chart</div>}
-                                columns={['Date', 'min (days)', 'p50 (days)', 'max (days)', 'mean (days)']}
-                                rows={this.state.pr_ages}
+                                columns={['Date', 'Pull Requests #']}
+                                rows={this.state.pr_num}
                                 options={{
-                                    title: "Opened Pull Requests Stats",
+                                    title: "Opened Pull Requests #",
+                                    // curveType: "function",
+                                    // legend: { position: "bottom",},
                                     //curveType: 'function',
                                     lineWidth: 3,
                                     intervals: { style: 'line' },
                                     hAxis: {
-                                    title: 'Time',
+                                    title: 'Date',
                                     },
                                     vAxis: {
-                                    title: '# of days',
+                                    title: '# of PRs',
                                     },
                                 }}
                                 rootProps={{ 'data-testid': '1' }}
                                 />
-                            </Grid>
-                            <Grid item>
-                            <Chart
-                                width={'600px'}
-                                height={'400px'}
-                                chartType="LineChart"
-                                loader={<div>Loading Chart</div>}
-                                columns={['Date', '# of Operations']}
-                                rows={this.state.endpoints_num}
-                                options={{
-                                    title: "Number of (REST) Operations",
-                                    //curveType: 'function',
-                                    lineWidth: 3,
-                                    intervals: { style: 'line' },
-                                    hAxis: {
-                                    title: 'Time',
-                                    },
-                                    vAxis: {
-                                    title: '# of days',
-                                    },
-                                }}
-                                rootProps={{ 'data-testid': '1' }}
-                                />
-                            </Grid>
                         </Grid>
+                        <Grid item>
+                        <Chart
+                            width={'600px'}
+                            height={'400px'}
+                            chartType="LineChart"
+                            loader={<div>Loading Chart</div>}
+                            columns={['Date', 'min (days)', 'p50 (days)', 'max (days)', 'mean (days)']}
+                            rows={this.state.pr_ages}
+                            options={{
+                                title: "Opened Pull Requests Stats",
+                                //curveType: 'function',
+                                lineWidth: 3,
+                                intervals: { style: 'line' },
+                                hAxis: {
+                                title: 'Time',
+                                },
+                                vAxis: {
+                                title: '# of days',
+                                },
+                            }}
+                            rootProps={{ 'data-testid': '1' }}
+                            />
+                        </Grid>
+                        <Grid item>
+                        <Chart
+                            width={'600px'}
+                            height={'400px'}
+                            chartType="LineChart"
+                            loader={<div>Loading Chart</div>}
+                            columns={['Date', '# of Operations']}
+                            rows={this.state.endpoints_num}
+                            options={{
+                                title: "Number of (REST) Operations",
+                                //curveType: 'function',
+                                lineWidth: 3,
+                                intervals: { style: 'line' },
+                                hAxis: {
+                                title: 'Time',
+                                },
+                                vAxis: {
+                                title: '# of days',
+                                },
+                            }}
+                            rootProps={{ 'data-testid': '1' }}
+                            />
+                        </Grid>
+                    </Grid>
                 </Paper>
-                {/* <Paper>
-                    <Box component="span" m={1}>
-                        <Typography component="h6" variant="h6" color="inherit" gutterBottom>Runtime Governance Metrics</Typography>
-                    </Box>
-                </Paper> */}
-            </Paper>
+                <Paper>
+                <Card>
+                    <CardContent>
+                        <Typography variant="h6" color="primary">Runtime Governance Metrics (To Be Done)</Typography>
+                        </CardContent>
+                    </Card>
+                </Paper>
+            </Box>
         );
     }
 }

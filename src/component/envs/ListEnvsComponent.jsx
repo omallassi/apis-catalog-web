@@ -6,14 +6,14 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Typography from '@material-ui/core/Typography';
-import CreateIcon from '@material-ui/icons/Create';
-import DeleteIcon from '@material-ui/icons/Delete';
 import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
 import Avatar from '@material-ui/core/Avatar';
 import { lightBlue } from '@material-ui/core/colors';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
 
 class ListEnvsComponent extends Component {
     constructor(props) {
@@ -39,8 +39,9 @@ class ListEnvsComponent extends Component {
         const { classes } = this.props;
 
         return (
-            <Paper>
-                <Box component="span" m={1}>
+            <Box>
+            <Card variant="outlined">
+                <CardContent>
                 <Typography component="h2" variant="h6" color="primary" gutterBottom>Envs List</Typography>
                 <Table>
                     <TableHead>
@@ -62,8 +63,9 @@ class ListEnvsComponent extends Component {
                         ))}
                     </TableBody>
                 </Table>
-            </Box>
-        </Paper>
+                </CardContent>
+            </Card>
+        </Box>
         );
     }
 }
