@@ -18,6 +18,7 @@ import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Grid from '@material-ui/core/Grid';
+import { deepOrange } from '@material-ui/core/colors';
 
 class ApiDetails extends Component {
 
@@ -74,14 +75,35 @@ class ApiDetails extends Component {
         const { classes } = this.props;
 
         return (
-            <Box component="span">
+            <Box>
                 <Typography component="h6" variant="h6" color="primary" gutterBottom>API Details</Typography>
                 <Card variant="outlined">
                 <CardContent>
-                
-                    <Typography gutterBottom>API Name</Typography>
-                    <TextField id="sample" disabled="false" value={this.state.name}/>
-                
+                    <Grid container direction="row" justify="flex-start" alignItems="flex-start" spacing={1}>
+                        <Grid container xs="12" spacing="1">
+                            <Grid item xs={12} sm={2}>
+                                <TextField id="sample" className = "textfield" inputProps={{className: classes.status}} variant="outlined" value="deprecated" label="Status" fullWidth margin="normal"/>
+                            </Grid>
+                            <Grid item xs={12} sm={4}>
+                                <TextField id="sample" variant="outlined" value={this.state.api} label="ID" fullWidth margin="normal"/>
+                            </Grid>
+                            <Grid item xs={12} sm={3}>
+                                <TextField id="sample" variant="outlined" value={this.state.name} label="Name" fullWidth margin="normal"/>
+                            </Grid>
+                            <Grid item xs={12} sm={3}>
+                                <TextField id="sample" variant="outlined" value="mocked" label="Domain" fullWidth margin="normal"/>
+                            </Grid>
+                        <Grid container xs="12" spacing="1">
+                            <Grid item xs={12} sm={2}/>
+                            <Grid item xs={12} sm={5}>
+                                <TextField id="sample" variant="outlined" value="TBD" label="Product Manager" fullWidth margin="normal"/>
+                            </Grid>
+                            <Grid item xs={12} sm={5}>
+                                <TextField id="sample" variant="outlined" value="TBD" label="Architect" fullWidth margin="normal"/>
+                            </Grid>
+                        </Grid>
+                        </Grid>
+                    </Grid>
                 </CardContent>
      
                 <CardContent>
@@ -156,7 +178,13 @@ const useStyles = theme => ({
       ...theme.typography.button,
       backgroundColor: theme.palette.background.paper,
       padding: theme.spacing(1),
+      flexGrow: 1,
     },
+    paper: {
+        padding: theme.spacing(2),
+        textAlign: 'center',
+        color: theme.palette.text.secondary,
+      },
     audience: {
         color: theme.palette.getContrastText(blueGrey[200]),
         padding: '.2em .5em .2em .5em',
@@ -170,7 +198,16 @@ const useStyles = theme => ({
         backgroundColor: lightBlue[200],
         fontSize: '90%',
       },
-    });
+      status: {
+        color: deepOrange[500],
+        //padding: '.2em .5em .2em .5em',
+        //fontWeight: '500',
+        //borderRadius: '.25em',
+        //fontSize: '90%',
+        textTransform: 'uppercase',
+        //backgroundColor: deepOrange[500],
+    },
+});
 
 ApiDetails.propTypes = {
     classes: PropTypes.object.isRequired,
