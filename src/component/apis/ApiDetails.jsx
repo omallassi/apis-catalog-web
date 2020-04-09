@@ -11,6 +11,7 @@ import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
 import Avatar from '@material-ui/core/Avatar';
 import { blueGrey, lightBlue } from '@material-ui/core/colors';
+import { deepOrange, green } from '@material-ui/core/colors';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import { TextField } from '@material-ui/core';
@@ -18,7 +19,7 @@ import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Grid from '@material-ui/core/Grid';
-import { deepOrange } from '@material-ui/core/colors';
+
 
 class ApiDetails extends Component {
 
@@ -71,6 +72,15 @@ class ApiDetails extends Component {
         this.listDeploymentsForApi(api);
     }
 
+    statusClass(classes, status) {
+        if( status ==  "VALIDATED")
+            return classes.validated;
+        else if (status == "DEPRECATED")
+            return classes.deprecated;
+        else
+            return classes.unknown;
+    }
+
     render() {
         const { classes } = this.props;
 
@@ -82,7 +92,7 @@ class ApiDetails extends Component {
                     <Grid container direction="row" justify="flex-start" alignItems="flex-start" spacing={1}>
                         <Grid container xs="12" spacing="1">
                             <Grid item xs={12} sm={2}>
-                                <TextField id="sample" className = "textfield" inputProps={{className: classes.status}} variant="outlined" value="deprecated" label="Status" fullWidth margin="normal"/>
+                                <TextField id="status" className = "textfield" inputProps={{className: this.statusClass(classes, "DEPRECATED")}} variant="outlined" value="deprecated" label="Status (mocked)" fullWidth margin="normal"/>
                             </Grid>
                             <Grid item xs={12} sm={4}>
                                 <TextField id="sample" variant="outlined" value={this.state.api} label="ID" fullWidth margin="normal"/>
@@ -198,14 +208,13 @@ const useStyles = theme => ({
         backgroundColor: lightBlue[200],
         fontSize: '90%',
       },
-      status: {
+    deprecated: {
         color: deepOrange[500],
-        //padding: '.2em .5em .2em .5em',
-        //fontWeight: '500',
-        //borderRadius: '.25em',
-        //fontSize: '90%',
         textTransform: 'uppercase',
-        //backgroundColor: deepOrange[500],
+    },
+    validated: {
+        color: green[500],
+        textTransform: 'uppercase',
     },
 });
 

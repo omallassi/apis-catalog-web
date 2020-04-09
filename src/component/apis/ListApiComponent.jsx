@@ -13,9 +13,10 @@ import Divider from '@material-ui/core/Divider';
 import Box from '@material-ui/core/Box';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import { deepOrange } from '@material-ui/core/colors';
+import { deepOrange, green } from '@material-ui/core/colors';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
+
 
 class ListApiComponent extends Component {
     constructor(props) {
@@ -51,9 +52,17 @@ class ListApiComponent extends Component {
         }
     }
 
+    statusClass(classes, status) {
+        if( status ==  "VALIDATED")
+            return classes.validated;
+        else if (status == "DEPRECATED")
+            return classes.deprecated;
+        else
+            return classes.unknown;
+    }
+
     render() {
         const {classes} = this.props;
-
         return (
             <Box>
             <Card variant="outlined">
@@ -66,7 +75,7 @@ class ListApiComponent extends Component {
                                 <TableCell>Id</TableCell>
                                 <TableCell>Name</TableCell>
                                 <TableCell>Version</TableCell>
-                                <TableCell>Status (mocked)</TableCell>
+                                <TableCell>Status</TableCell>
                                 <TableCell>Domain Id</TableCell>
                                 <TableCell>Domain Name</TableCell>
                                 <TableCell>Product Manager</TableCell>
@@ -79,7 +88,7 @@ class ListApiComponent extends Component {
                                 <TableRow hover key = {row.id}>
                                     <TableCell component="th" scope="row">
                                         <Link component="button" variant="body2" onClick={() => {
-                                            this.displaySpecsForApi(row.id, row.name)
+                                            this.displaySpecsForApi(row.id, row.name, row.status)
                                         }}>
                                             {row.id}
                                         </Link>
@@ -87,7 +96,7 @@ class ListApiComponent extends Component {
                                     <TableCell>{row.name}</TableCell>
                                     <TableCell>TBD</TableCell>
                                     <TableCell>
-                                        <Typography className={classes.status}>deprecated</Typography>
+                                    <Typography className={this.statusClass(classes, row.status)}>{row.status}</Typography>
                                     </TableCell>
                                     <TableCell>{row.domain_id}</TableCell>
                                     <TableCell>{row.domain_name}</TableCell>
@@ -117,13 +126,21 @@ class ListApiComponent extends Component {
 const useStyles = theme => ({
     display: 'flex', 
     justifyContent: 'center',
-    status: {
+    deprecated: {
         color: theme.palette.getContrastText(deepOrange[500]),
         padding: '.2em .5em .2em .5em',
         fontWeight: '500',
         borderRadius: '.25em',
         fontSize: '90%',
         backgroundColor: deepOrange[500],
+    },
+    validated: {
+        color: theme.palette.getContrastText(green[300]),
+        padding: '.2em .5em .2em .5em',
+        fontWeight: '500',
+        borderRadius: '.25em',
+        fontSize: '90%',
+        backgroundColor: green[300],
     },
 });
 
