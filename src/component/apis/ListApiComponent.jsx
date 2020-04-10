@@ -8,7 +8,7 @@ import TableRow from '@material-ui/core/TableRow';
 import TableContainer from '@material-ui/core/TableContainer';
 import Typography from '@material-ui/core/Typography';
 import { Link } from '@material-ui/core';
-import ApiDetails from './ApiDetails';
+import ApiDetailsComponent from './ApiDetailsComponent';
 import Divider from '@material-ui/core/Divider';
 import Box from '@material-ui/core/Box';
 import Card from '@material-ui/core/Card';
@@ -88,7 +88,7 @@ class ListApiComponent extends Component {
                                 <TableRow hover key = {row.id}>
                                     <TableCell component="th" scope="row">
                                         <Link component="button" variant="body2" onClick={() => {
-                                            this.displaySpecsForApi(row.id, row.name, row.status)
+                                            this.displaySpecsForApi(row.id, row.name)
                                         }}>
                                             {row.id}
                                         </Link>
@@ -114,7 +114,7 @@ class ListApiComponent extends Component {
                 </Card>
                 <Divider />
                 { 
-                    this.state.showDetails ?  <ApiDetails ref={this.apiDetails} api={this.state.selectedApi} api_name={this.state.selectedApiName}/> : null 
+                    this.state.showDetails ?  <ApiDetailsComponent ref={this.apiDetails} api={this.state.selectedApi} api_name={this.state.selectedApiName}/> : null 
                 }
             
         </Box>

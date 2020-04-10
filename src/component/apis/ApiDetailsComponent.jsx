@@ -21,7 +21,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Grid from '@material-ui/core/Grid';
 
 
-class ApiDetails extends Component {
+class ApiDetailsComponent extends Component {
 
     constructor(props) {
         super(props)
@@ -218,8 +218,8 @@ const useStyles = theme => ({
     },
 });
 
-ApiDetails.propTypes = {
+ApiDetailsComponent.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(useStyles)(ApiDetails);
+export default withStyles(useStyles)(ApiDetailsComponent);
