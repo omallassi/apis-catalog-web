@@ -20,7 +20,7 @@ available in the [wiki](https://github.com/omallassi/apis-catalog/wiki).
 ### Before build
 update the `.env` file to point out to your html documentations (redoc, windershins whatever). For prodution, you need to create an `env.production`. 
 
-### Available Scripts
+### Available Build Scripts
 
 In the project directory, you can run:
 
@@ -34,4 +34,8 @@ You will also see any lint errors in the console.
 
 #### `npm run build`
 
-Runs the app in production mode.
+Compile the app in production mode. 
+
+### Deployment
+
+Please refer to [apis-catalog installation](https://github.com/omallassi/apis-catalog/wiki/installation). 
