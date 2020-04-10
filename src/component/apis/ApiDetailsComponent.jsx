@@ -25,7 +25,7 @@ class ApiDetailsComponent extends Component {
         super(props)
         this.state = {
             id: props.api,
-            api: {},
+            api: {"id":"","name":"","status":"","domain_id":"","domain_name":"","spec_ids":[]},
             specs: [],
             deployments: []
         }
@@ -81,9 +81,9 @@ class ApiDetailsComponent extends Component {
     }
 
     statusClass(classes, status) {
-        if( status ==  "VALIDATED")
+        if( status ===  "VALIDATED")
             return classes.validated;
-        else if (status == "DEPRECATED")
+        else if (status === "DEPRECATED")
             return classes.deprecated;
         else
             return classes.unknown;
@@ -98,26 +98,26 @@ class ApiDetailsComponent extends Component {
                 <Card variant="outlined">
                 <CardContent>
                     <Grid container direction="row" justify="flex-start" alignItems="flex-start" spacing={1}>
-                        <Grid container xs="12" spacing="1">
+                        <Grid container xs={12} spacing={1} item={true}>
                             <Grid item xs={12} sm={2}>
-                                <TextField id="status" className = "textfield" inputProps={{className: this.statusClass(classes, this.state.api.status)}} variant="outlined" value={this.state.api.status} label="Status (mocked)" fullWidth margin="normal"/>
+                                <TextField id="status" className = "textfield" inputProps={{className: this.statusClass(classes, this.state.api.status)}} variant="outlined" value={this.state.api.status} label="Status" fullWidth margin="normal"/>
                             </Grid>
                             <Grid item xs={12} sm={4}>
-                                <TextField id="sample" variant="outlined" value={this.state.id} label="ID" fullWidth margin="normal"/>
+                                <TextField id="id" variant="outlined" value={this.state.id} label="ID" fullWidth margin="normal"/>
                             </Grid>
                             <Grid item xs={12} sm={3}>
-                                <TextField id="sample" variant="outlined" value={this.state.api.name} label="Name" fullWidth margin="normal"/>
+                                <TextField id="name" variant="outlined" value={this.state.api.name} label="Name" fullWidth margin="normal"/>
                             </Grid>
                             <Grid item xs={12} sm={3}>
-                                <TextField id="sample" variant="outlined" value={this.state.api.domain_name} label="Domain" fullWidth margin="normal"/>
+                                <TextField id="domain" variant="outlined" value={this.state.api.domain_name} label="Domain" fullWidth margin="normal"/>
                             </Grid>
-                        <Grid container xs="12" spacing="1">
+                        <Grid container xs={12} spacing={1} item={true}>
                             <Grid item xs={12} sm={2}/>
                             <Grid item xs={12} sm={5}>
-                                <TextField id="sample" variant="outlined" value="TBD" label="Product Manager" fullWidth margin="normal"/>
+                                <TextField id="pm" variant="outlined" value="TBD" label="Product Manager" fullWidth margin="normal"/>
                             </Grid>
                             <Grid item xs={12} sm={5}>
-                                <TextField id="sample" variant="outlined" value="TBD" label="Architect" fullWidth margin="normal"/>
+                                <TextField id="arch"  variant="outlined" value="TBD" label="Architect" fullWidth margin="normal"/>
                             </Grid>
                         </Grid>
                         </Grid>

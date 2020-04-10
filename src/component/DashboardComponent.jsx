@@ -1,13 +1,6 @@
 import React, {Component} from 'react'
 import ApiService from "../service/ApiService";
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
 import Typography from '@material-ui/core/Typography';
-import CreateIcon from '@material-ui/icons/Create';
-import DeleteIcon from '@material-ui/icons/Delete';
 import { Box } from '@material-ui/core';
 import Paper from '@material-ui/core/Paper';
 import Chart from "react-google-charts";
@@ -34,7 +27,6 @@ class ListApiComponent extends Component {
     }
 
     getPullRequestNumber() {
-        const t = this;
         ApiService.getPullRequestNumber().then((res) => {
             this.setState({pr_num: res.data.pr_num});
             this.setState({pr_ages: res.data.pr_ages});
@@ -135,11 +127,6 @@ class ListApiComponent extends Component {
             </Box>
         );
     }
-}
-
-const style = {
-    display: 'flex', 
-    justifyContent: 'center'
 }
 
 export default ListApiComponent;

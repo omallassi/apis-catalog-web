@@ -53,9 +53,9 @@ class ListApiComponent extends Component {
     }
 
     statusClass(classes, status) {
-        if( status ==  "VALIDATED")
+        if( status ===  "VALIDATED")
             return classes.validated;
-        else if (status == "DEPRECATED")
+        else if (status === "DEPRECATED")
             return classes.deprecated;
         else
             return classes.unknown;

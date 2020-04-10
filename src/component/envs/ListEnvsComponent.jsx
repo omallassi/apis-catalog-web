@@ -6,7 +6,6 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Typography from '@material-ui/core/Typography';
-import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
 import Avatar from '@material-ui/core/Avatar';
 import { lightBlue } from '@material-ui/core/colors';
@@ -55,7 +54,7 @@ class ListEnvsComponent extends Component {
                     <TableBody>
                         {this.state.envs.map ( row => (
                             <TableRow hover key = {row.id}>
-                                <Avatar className={classes.avatar}>{row.id}</Avatar>
+                                <TableCell><Avatar className={classes.avatar}>{row.id}</Avatar></TableCell>
                                 <TableCell>{row.id}</TableCell>
                                 <TableCell>{row.name}</TableCell>
                                 <TableCell>{row.description}</TableCell>

@@ -2,8 +2,7 @@ import React from 'react';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import LaunchIcon from '@material-ui/icons/Launch';
-import { Route, BrowserRouter as Router, Redirect } from 'react-router-dom';
+import { Route, BrowserRouter as Router } from 'react-router-dom';
 import { Link as RouterLink } from 'react-router-dom';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import ListAltIcon from '@material-ui/icons/ListAlt';
@@ -67,11 +66,11 @@ export default function ListRouter() {
             <ListItemLink to="/domains" primary="Domains" icon={<FilterTiltShiftIcon />} />
             <ListItemLink to="/envs" primary="Environments" icon={<ComputerIcon />} />
             <li>
-              <a class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button" tabindex="0" role="button" aria-disabled="false" 
+              <a className="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button" tabIndex="0" role="button" aria-disabled="false" 
                 href={process.env.REACT_APP_API_DOC_URL} target="_blank">
-                <div class="MuiListItemIcon-root"><svg class="MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
+                <div className="MuiListItemIcon-root"><svg className="MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
                   <path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"></path></svg></div>
-                <div class="MuiListItemText-root"><span class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock">APIs Doc</span></div><span class="MuiTouchRipple-root"></span>
+                <div className="MuiListItemText-root"><span className="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock">APIs Doc</span></div><span className="MuiTouchRipple-root"></span>
               </a>
             </li>
           </List>

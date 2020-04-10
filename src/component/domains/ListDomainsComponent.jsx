@@ -6,9 +6,6 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Typography from '@material-ui/core/Typography';
-import CreateIcon from '@material-ui/icons/Create';
-import DeleteIcon from '@material-ui/icons/Delete';
-import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -62,11 +59,6 @@ class ListDomainsComponent extends Component {
         </Box>
         );
     }
-}
-
-const style = {
-    display: 'flex', 
-    justifyContent: 'center'
 }
 
 export default ListDomainsComponent;

@@ -5,7 +5,6 @@ import ListDomainsComponent from "./domains/ListDomainsComponent"
 import DashBoardComponent from "./DashboardComponent"
 
 import React from "react";
-import Dashboard from '../Dashboard';
 import ListEnvsComponent from './envs/ListEnvsComponent';
 
 const AppRouter = () => {
