@@ -46,9 +46,9 @@ class ListApiComponent extends Component {
     displaySpecsForApi(id, name) {
         this.setState({showDetails: true});        
         this.setState({selectedApi: id});
-        this.setState({selectedApiName: name});
+
         if (this.apiDetails.current !== null) {
-            this.apiDetails.current.updateSelectedApi(id, name);
+            this.apiDetails.current.updateSelectedApi(id);
         }
     }
 
@@ -88,7 +88,7 @@ class ListApiComponent extends Component {
                                 <TableRow hover key = {row.id}>
                                     <TableCell component="th" scope="row">
                                         <Link component="button" variant="body2" onClick={() => {
-                                            this.displaySpecsForApi(row.id, row.name)
+                                            this.displaySpecsForApi(row.id)
                                         }}>
                                             {row.id}
                                         </Link>
@@ -114,7 +114,7 @@ class ListApiComponent extends Component {
                 </Card>
                 <Divider />
                 { 
-                    this.state.showDetails ?  <ApiDetailsComponent ref={this.apiDetails} api={this.state.selectedApi} api_name={this.state.selectedApiName}/> : null 
+                    this.state.showDetails ?  <ApiDetailsComponent ref={this.apiDetails} api={this.state.selectedApi} /> : null 
                 }
             
         </Box>

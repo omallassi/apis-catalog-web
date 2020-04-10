@@ -7,7 +7,6 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import TableContainer from '@material-ui/core/TableContainer';
 import Typography from '@material-ui/core/Typography';
-import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
 import Avatar from '@material-ui/core/Avatar';
 import { blueGrey, lightBlue } from '@material-ui/core/colors';
@@ -16,7 +15,6 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import { TextField } from '@material-ui/core';
 import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Grid from '@material-ui/core/Grid';
 
@@ -26,8 +24,8 @@ class ApiDetailsComponent extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            api: props.api,
-            name: props.api_name,
+            id: props.api,
+            api: {},
             specs: [],
             deployments: []
         }
@@ -38,6 +36,10 @@ class ApiDetailsComponent extends Component {
     }
 
     componentDidMount() {
+        this.loadApiById(this.state.id);
+        this.loadApiById(this.state.id);
+        this.listSpecsForApi(this.state.id);
+        this.listDeploymentsForApi(this.state.id);
     }
 
     listSpecsForApi(id) {
@@ -65,9 +67,15 @@ class ApiDetailsComponent extends Component {
         });
     }
 
-    updateSelectedApi(api, name) {
-        this.setState( {api: api} );
-        this.setState( {name: name} );
+    loadApiById(id) {
+        ApiService.loadApiById(id).then( (res) => {
+            this.setState( {api: res.data} );
+        });
+    }
+
+    updateSelectedApi(api) {
+        this.setState( {id: api} );
+        this.loadApiById(api);
         this.listSpecsForApi(api);
         this.listDeploymentsForApi(api);
     }
@@ -92,16 +100,16 @@ class ApiDetailsComponent extends Component {
                     <Grid container direction="row" justify="flex-start" alignItems="flex-start" spacing={1}>
                         <Grid container xs="12" spacing="1">
                             <Grid item xs={12} sm={2}>
-                                <TextField id="status" className = "textfield" inputProps={{className: this.statusClass(classes, "DEPRECATED")}} variant="outlined" value="deprecated" label="Status (mocked)" fullWidth margin="normal"/>
+                                <TextField id="status" className = "textfield" inputProps={{className: this.statusClass(classes, this.state.api.status)}} variant="outlined" value={this.state.api.status} label="Status (mocked)" fullWidth margin="normal"/>
                             </Grid>
                             <Grid item xs={12} sm={4}>
-                                <TextField id="sample" variant="outlined" value={this.state.api} label="ID" fullWidth margin="normal"/>
+                                <TextField id="sample" variant="outlined" value={this.state.id} label="ID" fullWidth margin="normal"/>
                             </Grid>
                             <Grid item xs={12} sm={3}>
-                                <TextField id="sample" variant="outlined" value={this.state.name} label="Name" fullWidth margin="normal"/>
+                                <TextField id="sample" variant="outlined" value={this.state.api.name} label="Name" fullWidth margin="normal"/>
                             </Grid>
                             <Grid item xs={12} sm={3}>
-                                <TextField id="sample" variant="outlined" value="mocked" label="Domain" fullWidth margin="normal"/>
+                                <TextField id="sample" variant="outlined" value={this.state.api.domain_name} label="Domain" fullWidth margin="normal"/>
                             </Grid>
                         <Grid container xs="12" spacing="1">
                             <Grid item xs={12} sm={2}/>

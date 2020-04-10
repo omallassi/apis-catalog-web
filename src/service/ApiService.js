@@ -5,6 +5,11 @@ class ApiService {
         return axios.get('/v1/apis');
     }
 
+    loadApiById(selectedApi) {
+        console.info("Get Api for api [" + selectedApi + "]");
+        return axios.get('/v1/apis/' + selectedApi);
+    }
+
     listAllDomains() {
         return axios.get('/v1/domains');
     }
