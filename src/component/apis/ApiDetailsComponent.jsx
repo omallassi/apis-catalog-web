@@ -9,8 +9,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Avatar from '@material-ui/core/Avatar';
-import { blueGrey, lightBlue } from '@material-ui/core/colors';
-import { deepOrange, green } from '@material-ui/core/colors';
+import { deepOrange, green, blueGrey, lightBlue } from '@material-ui/core/colors';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import { TextField } from '@material-ui/core';
@@ -86,7 +85,7 @@ class ApiDetailsComponent extends Component {
         else if (status === "DEPRECATED")
             return classes.deprecated;
         else
-            return classes.unknown;
+            return classes.none;
     }
 
     render() {
@@ -222,6 +221,10 @@ const useStyles = theme => ({
     },
     validated: {
         color: green[500],
+        textTransform: 'uppercase',
+    },
+    none: {
+        color: blueGrey[600],
         textTransform: 'uppercase',
     },
 });

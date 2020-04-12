@@ -13,7 +13,7 @@ import Divider from '@material-ui/core/Divider';
 import Box from '@material-ui/core/Box';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import { deepOrange, green } from '@material-ui/core/colors';
+import { deepOrange, green, blueGrey } from '@material-ui/core/colors';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 
@@ -58,7 +58,7 @@ class ListApiComponent extends Component {
         else if (status === "DEPRECATED")
             return classes.deprecated;
         else
-            return classes.unknown;
+            return classes.none;
     }
 
     render() {
@@ -141,6 +141,14 @@ const useStyles = theme => ({
         borderRadius: '.25em',
         fontSize: '90%',
         backgroundColor: green[300],
+    },
+    none: {
+        color: theme.palette.getContrastText(blueGrey[600]),
+        padding: '.2em .5em .2em .5em',
+        fontWeight: '500',
+        borderRadius: '.25em',
+        fontSize: '90%',
+        backgroundColor: blueGrey[600],
     },
 });
 
