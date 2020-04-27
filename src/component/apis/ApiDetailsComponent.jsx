@@ -204,15 +204,19 @@ const useStyles = theme => ({
       },
     audience: {
         color: theme.palette.getContrastText(blueGrey[200]),
-        padding: '.2em .5em .2em .5em',
+        padding: '.3em .3em .3em .3em',
+        margin: 'auto',
+        textAlign: 'center',
+        verticalAlign: 'middle',
         fontWeight: '500',
         borderRadius: '.25em',
         fontSize: '90%',
         backgroundColor: blueGrey[200],
+        textTransform: 'uppercase'
     },
     avatar: {
-        color: theme.palette.getContrastText(lightBlue[200]),
-        backgroundColor: lightBlue[200],
+        color: theme.palette.getContrastText(blueGrey[200]),
+        backgroundColor: blueGrey[200],
         fontSize: '90%',
       },
     deprecated: {

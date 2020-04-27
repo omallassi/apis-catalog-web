@@ -7,6 +7,8 @@ import Chart from "react-google-charts";
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
+import SyncIcon from '@material-ui/icons/Sync';
+import IconButton from '@material-ui/core/IconButton';
 
 class ListApiComponent extends Component {
     data_points = [];
@@ -39,8 +41,19 @@ class ListApiComponent extends Component {
             <Box component="span" m={1}>
                 <Paper>
                     <Card>
-                    <CardContent>
-                        <Typography variant="h6" color="primary">Design Time Governance Metrics</Typography>
+                        <CardContent>
+                            <Grid container>
+                                <Grid item xs={11}>
+                                    <Typography variant="h6" color="primary">Design Time Governance Metrics</Typography>
+                                </Grid>
+                                <Grid item xs={1}>
+                                    <IconButton color="primary" aria-label="refresh" onClick={() => {
+                                                ApiService.refreshMetrics();
+                                            }}>
+                                        <SyncIcon></SyncIcon>
+                                    </IconButton>
+                                </Grid>
+                            </Grid>
                         </CardContent>
                     </Card>
                     <Grid container direction="row" alignItems="center" >

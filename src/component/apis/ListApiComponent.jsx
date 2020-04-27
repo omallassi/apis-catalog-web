@@ -75,6 +75,7 @@ class ListApiComponent extends Component {
                                 <TableCell>Id</TableCell>
                                 <TableCell>Name</TableCell>
                                 <TableCell>Version</TableCell>
+                                <TableCell>Layer (mocked)</TableCell>
                                 <TableCell>Status</TableCell>
                                 <TableCell>Domain Id</TableCell>
                                 <TableCell>Domain Name</TableCell>
@@ -95,6 +96,9 @@ class ListApiComponent extends Component {
                                     </TableCell>
                                     <TableCell>{row.name}</TableCell>
                                     <TableCell>TBD</TableCell>
+                                    <TableCell>
+                                        <Typography className={classes.layer}>Application</Typography>
+                                    </TableCell>
                                     <TableCell>
                                     <Typography className={this.statusClass(classes, row.status)}>{row.status}</Typography>
                                     </TableCell>
@@ -128,7 +132,10 @@ const useStyles = theme => ({
     justifyContent: 'center',
     deprecated: {
         color: theme.palette.getContrastText(deepOrange[500]),
-        padding: '.2em .5em .2em .5em',
+        padding: '.3em .3em .3em .3em',
+        margin: 'auto',
+        textAlign: 'center',
+        verticalAlign: 'middle',
         fontWeight: '500',
         borderRadius: '.25em',
         fontSize: '90%',
@@ -136,7 +143,10 @@ const useStyles = theme => ({
     },
     validated: {
         color: theme.palette.getContrastText(green[300]),
-        padding: '.2em .5em .2em .5em',
+        padding: '.3em .3em .3em .3em',
+        margin: 'auto',
+        textAlign: 'center',
+        verticalAlign: 'middle',
         fontWeight: '500',
         borderRadius: '.25em',
         fontSize: '90%',
@@ -144,11 +154,26 @@ const useStyles = theme => ({
     },
     none: {
         color: theme.palette.getContrastText(blueGrey[600]),
-        padding: '.2em .5em .2em .5em',
+        padding: '.3em .3em .3em .3em',
+        margin: 'auto',
+        textAlign: 'center',
+        verticalAlign: 'middle',
         fontWeight: '500',
         borderRadius: '.25em',
         fontSize: '90%',
         backgroundColor: blueGrey[600],
+    },
+    layer: {
+        color: theme.palette.getContrastText(blueGrey[200]),
+        padding: '.3em .3em .3em .3em',
+        margin: 'auto',
+        textAlign: 'center',
+        verticalAlign: 'middle',
+        fontWeight: '500',
+        borderRadius: '.25em',
+        fontSize: '90%',
+        backgroundColor: blueGrey[200],
+        textTransform: 'uppercase'
     },
 });
 

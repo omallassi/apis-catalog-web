@@ -36,6 +36,11 @@ class ApiService {
     getPullRequestNumber() {
         return axios.get('/v1/metrics');
     }
+
+    refreshMetrics() {
+        console.log("refreshing metrics");
+        return axios.post('/v1/metrics/refresh');
+    }
 }
 
 export default new ApiService();
