@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import ApiService from "../../service/ApiService";
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -23,7 +23,7 @@ class ListApiComponent extends Component {
         super(props)
         this.state = {
             apis: [],
-            showDetails: false, 
+            showDetails: false,
             selectedApi: 0
         }
 
@@ -39,13 +39,13 @@ class ListApiComponent extends Component {
 
     listAllApis() {
         ApiService.listAllApis().then((res) => {
-            this.setState({apis: res.data.apis})
+            this.setState({ apis: res.data.apis })
         });
     }
 
     displaySpecsForApi(id, name) {
-        this.setState({showDetails: true});        
-        this.setState({selectedApi: id});
+        this.setState({ showDetails: true });
+        this.setState({ selectedApi: id });
 
         if (this.apiDetails.current !== null) {
             this.apiDetails.current.updateSelectedApi(id);
@@ -53,7 +53,7 @@ class ListApiComponent extends Component {
     }
 
     statusClass(classes, status) {
-        if( status ===  "VALIDATED")
+        if (status === "VALIDATED")
             return classes.validated;
         else if (status === "DEPRECATED")
             return classes.deprecated;
@@ -62,73 +62,70 @@ class ListApiComponent extends Component {
     }
 
     render() {
-        const {classes} = this.props;
+        const { classes } = this.props;
         return (
             <Box>
-            <Card variant="outlined">
-                <CardContent>
-                <Typography component="h2" variant="h6"  color="primary">APIs List</Typography>
-                <TableContainer>
-                    <Table stickyHeader>
-                        <TableHead>
-                            <TableRow>
-                                <TableCell>Id</TableCell>
-                                <TableCell>Name</TableCell>
-                                <TableCell>Version</TableCell>
-                                <TableCell>Layer (mocked)</TableCell>
-                                <TableCell>Status</TableCell>
-                                <TableCell>Domain Id</TableCell>
-                                <TableCell>Domain Name</TableCell>
-                                <TableCell>Product Manager</TableCell>
-                                <TableCell>Architect</TableCell>
-                                <TableCell>Spec Ids</TableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {this.state.apis.map ( row => (
-                                <TableRow hover key = {row.id}>
-                                    <TableCell component="th" scope="row">
-                                        <Link component="button" variant="body2" onClick={() => {
-                                            this.displaySpecsForApi(row.id)
-                                        }}>
-                                            {row.id}
-                                        </Link>
-                                    </TableCell>
-                                    <TableCell>{row.name}</TableCell>
-                                    <TableCell>TBD</TableCell>
-                                    <TableCell>
-                                        <Typography className={classes.layer}>Application</Typography>
-                                    </TableCell>
-                                    <TableCell>
-                                    <Typography className={this.statusClass(classes, row.status)}>{row.status}</Typography>
-                                    </TableCell>
-                                    <TableCell>{row.domain_id}</TableCell>
-                                    <TableCell>{row.domain_name}</TableCell>
-                                    <TableCell>TBD</TableCell>
-                                    <TableCell>TBD</TableCell>
-                                    <TableCell>{row.spec_ids}</TableCell>
-                                    {/* <TableCell align="right" onClick={() => this.editUser(row.id)}><CreateIcon /></TableCell>
+                <Card variant="outlined">
+                    <CardContent>
+                        <Typography component="h2" variant="h6" color="primary">APIs List</Typography>
+                        <TableContainer>
+                            <Table stickyHeader>
+                                <TableHead>
+                                    <TableRow>
+                                        <TableCell>Name</TableCell>
+                                        <TableCell>Version</TableCell>
+                                        <TableCell>Layer (mocked)</TableCell>
+                                        <TableCell>Status</TableCell>
+                                        {/* <TableCell>Domain Id</TableCell> */}
+                                        <TableCell>Domain Name</TableCell>
+                                        <TableCell>Product Manager</TableCell>
+                                        <TableCell>Architect</TableCell>
+                                        <TableCell>Spec Ids</TableCell>
+                                    </TableRow>
+                                </TableHead>
+                                <TableBody>
+                                    {this.state.apis.map(row => (
+                                        <TableRow hover key={row.id}>
+                                            <TableCell component="th" scope="row">
+                                                <Link component="button" variant="body2" onClick={() => {
+                                                    this.displaySpecsForApi(row.id)
+                                                }}>
+                                                    {row.name}
+                                                </Link>
+                                            </TableCell>
+                                            <TableCell>TBD</TableCell>
+                                            <TableCell>
+                                                <Typography className={classes.layer}>Application</Typography>
+                                            </TableCell>
+                                            <TableCell>
+                                                <Typography className={this.statusClass(classes, row.status)}>{row.status}</Typography>
+                                            </TableCell>
+                                            {/* <TableCell>{row.domain_id}</TableCell> */}
+                                            <TableCell>{row.domain_name}</TableCell>
+                                            <TableCell>TBD</TableCell>
+                                            <TableCell>TBD</TableCell>
+                                            <TableCell>{row.spec_ids}</TableCell>
+                                            {/* <TableCell align="right" onClick={() => this.editUser(row.id)}><CreateIcon /></TableCell>
                                     <TableCell align="right" onClick={() => this.deleteUser(row.id)}><DeleteIcon /></TableCell> */}
-                                </TableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
-                </CardContent>
+                                        </TableRow>
+                                    ))}
+                                </TableBody>
+                            </Table>
+                        </TableContainer>
+                    </CardContent>
                 </Card>
                 <Divider />
-                { 
-                    this.state.showDetails ?  <ApiDetailsComponent ref={this.apiDetails} api={this.state.selectedApi} /> : null 
+                {
+                    this.state.showDetails ? <ApiDetailsComponent ref={this.apiDetails} api={this.state.selectedApi} /> : null
                 }
-            
-        </Box>
-            
+            </Box>
+
         );
     }
 }
 
 const useStyles = theme => ({
-    display: 'flex', 
+    display: 'flex',
     justifyContent: 'center',
     deprecated: {
         color: theme.palette.getContrastText(deepOrange[500]),

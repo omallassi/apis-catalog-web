@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import ApiService from "../service/ApiService";
 import Typography from '@material-ui/core/Typography';
 import { Box } from '@material-ui/core';
@@ -30,13 +30,13 @@ class ListApiComponent extends Component {
 
     getPullRequestNumber() {
         ApiService.getPullRequestNumber().then((res) => {
-            this.setState({pr_num: res.data.pr_num});
-            this.setState({pr_ages: res.data.pr_ages});
-            this.setState({endpoints_num: res.data.endpoints_num});
+            this.setState({ pr_num: res.data.pr_num });
+            this.setState({ pr_ages: res.data.pr_ages });
+            this.setState({ endpoints_num: res.data.endpoints_num });
         });
     }
 
-    render() {    
+    render() {
         return (
             <Box component="span" m={1}>
                 <Paper>
@@ -48,8 +48,8 @@ class ListApiComponent extends Component {
                                 </Grid>
                                 <Grid item xs={1}>
                                     <IconButton color="primary" aria-label="refresh" onClick={() => {
-                                                ApiService.refreshMetrics();
-                                            }}>
+                                        ApiService.refreshMetrics();
+                                    }}>
                                         <SyncIcon></SyncIcon>
                                     </IconButton>
                                 </Grid>
@@ -57,9 +57,8 @@ class ListApiComponent extends Component {
                         </CardContent>
                     </Card>
                     <Grid container direction="row" alignItems="center" >
-                        <Grid item>
+                        <Grid item xs={12}>
                             <Chart
-                                width={'600px'}
                                 height={'400px'}
                                 chartType="LineChart"
                                 loader={<div>Loading Chart</div>}
@@ -73,71 +72,69 @@ class ListApiComponent extends Component {
                                     lineWidth: 3,
                                     intervals: { style: 'line' },
                                     hAxis: {
-                                    title: 'Date',
+                                        title: 'Date',
                                     },
                                     vAxis: {
-                                    title: '# of PRs',
+                                        title: '# of PRs',
                                     },
                                 }}
                                 rootProps={{ 'data-testid': '1' }}
-                                />
-                        </Grid>
-                        <Grid item>
-                        <Chart
-                            width={'600px'}
-                            height={'400px'}
-                            chartType="LineChart"
-                            loader={<div>Loading Chart</div>}
-                            columns={['Date', 'min (days)', 'p50 (days)', 'max (days)', 'mean (days)']}
-                            rows={this.state.pr_ages}
-                            options={{
-                                title: "Opened Pull Requests Stats",
-                                //curveType: 'function',
-                                lineWidth: 3,
-                                intervals: { style: 'line' },
-                                hAxis: {
-                                title: 'Time',
-                                },
-                                vAxis: {
-                                title: '# of days',
-                                },
-                            }}
-                            rootProps={{ 'data-testid': '1' }}
                             />
                         </Grid>
-                        <Grid item>
-                        <Chart
-                            width={'600px'}
-                            height={'400px'}
-                            chartType="LineChart"
-                            loader={<div>Loading Chart</div>}
-                            columns={['Date', '# of Operations']}
-                            rows={this.state.endpoints_num}
-                            options={{
-                                title: "Number of (REST) Operations",
-                                //curveType: 'function',
-                                lineWidth: 3,
-                                intervals: { style: 'line' },
-                                hAxis: {
-                                title: 'Time',
-                                },
-                                vAxis: {
-                                title: '# of days',
-                                },
-                            }}
-                            rootProps={{ 'data-testid': '1' }}
+                        <Grid item xs={12}>
+                            <Chart
+                                height={'400px'}
+                                chartType="LineChart"
+                                loader={<div>Loading Chart</div>}
+                                columns={['Date', 'min (days)', 'p50 (days)', 'max (days)', 'mean (days)']}
+                                rows={this.state.pr_ages}
+                                options={{
+                                    title: "Opened Pull Requests Stats",
+                                    //curveType: 'function',
+                                    lineWidth: 3,
+                                    intervals: { style: 'line' },
+                                    hAxis: {
+                                        title: 'Time',
+                                    },
+                                    vAxis: {
+                                        title: '# of days',
+                                    },
+                                }}
+                                rootProps={{ 'data-testid': '1' }}
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <Chart
+                                height={'400px'}
+                                chartType="LineChart"
+                                loader={<div>Loading Chart</div>}
+                                columns={['Date', '# of Endpoints']}
+                                rows={this.state.endpoints_num}
+                                options={{
+                                    title: "Number of (REST) Operations",
+                                    //curveType: 'function',
+                                    lineWidth: 3,
+                                    intervals: { style: 'line' },
+                                    hAxis: {
+                                        title: 'Time',
+                                    },
+                                    vAxis: {
+                                        title: '# of days',
+                                    },
+                                }}
+                                rootProps={{ 'data-testid': '1' }}
                             />
                         </Grid>
                     </Grid>
                 </Paper>
                 <Paper>
-                <Card>
-                    <CardContent>
-                        <Typography variant="h6" color="primary">Runtime Governance Metrics (To Be Done)</Typography>
+                    <Card>
+                        <CardContent>
+                            <Typography variant="h6" color="primary">Runtime Governance Metrics (To Be Done)</Typography>
                         </CardContent>
                     </Card>
                 </Paper>
-            </Box>
+            </Box >
         );
     }
 }

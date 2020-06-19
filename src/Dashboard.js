@@ -125,7 +125,7 @@ export default function Dashboard() {
             <MenuIcon />
           </IconButton>
           <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-              APIs Catalog
+            APIs Catalog
           </Typography>
           <img src="logo.png" alt="logo" className={classes.logo} />
         </Toolbar>
@@ -143,20 +143,18 @@ export default function Dashboard() {
           </IconButton>
         </div>
         <Divider />
-        <ListRouter/>
+        <ListRouter />
       </Drawer>
 
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
-        <Container maxWidth="lg" className={classes.container}>
-          <Grid container spacing={3}>
-            <Grid item xs={12}>
-              <Paper className={classes.paper}>
-                <AppRouter/>
-              </Paper>
-            </Grid>
+        <Grid container spacing={3}>
+          <Grid item xs={12}>
+            <Paper className={classes.paper}>
+              <AppRouter />
+            </Paper>
           </Grid>
-        </Container>
+        </Grid>
       </main>
     </div>
   );
