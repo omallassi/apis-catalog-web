@@ -108,7 +108,7 @@ class ListApiComponent extends Component {
                                 height={'400px'}
                                 chartType="LineChart"
                                 loader={<div>Loading Chart</div>}
-                                columns={['Date', '# of Endpoints']}
+                                columns={['Date', '# of (REST) Operations']}
                                 rows={this.state.endpoints_num}
                                 options={{
                                     title: "Number of (REST) Operations",
@@ -119,7 +119,7 @@ class ListApiComponent extends Component {
                                         title: 'Time',
                                     },
                                     vAxis: {
-                                        title: '# of days',
+                                        title: '# of operations',
                                     },
                                 }}
                                 rootProps={{ 'data-testid': '1' }}
