@@ -175,8 +175,11 @@ class ApiDetailsComponent extends Component {
                                     <TableHead>
                                         <TableRow>
                                             <TableCell>Id</TableCell>
+                                            <TableCell>Title</TableCell>
+                                            <TableCell>Audience</TableCell>
+                                            <TableCell>Version</TableCell>
+                                            <TableCell>Description</TableCell>
                                             <TableCell>Name</TableCell>
-                                            <TableCell>Audience (mocked)</TableCell>
                                         </TableRow>
                                     </TableHead>
                                     <TableBody>
@@ -186,10 +189,13 @@ class ApiDetailsComponent extends Component {
                                                     <TableCell component="th" scope="row">
                                                         {row.id}
                                                     </TableCell>
-                                                    <TableCell>{row.name}</TableCell>
+                                                    <TableCell>{row.title}</TableCell>
                                                     <TableCell>
-                                                        <div className={classes.audience}>{"external-partner"}</div>
+                                                        <div className={classes.audience}>{row.audience}</div>
                                                     </TableCell>
+                                                    <TableCell>{row.version}</TableCell>
+                                                    <TableCell>{row.description}</TableCell>
+                                                    <TableCell>{row.name}</TableCell>
                                                 </TableRow>
                                             ))
                                         }
