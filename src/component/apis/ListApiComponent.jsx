@@ -75,7 +75,7 @@ class ListApiComponent extends Component {
                                         <TableCell>Name</TableCell>
                                         <TableCell>Domain Name</TableCell>
                                         <TableCell>Version</TableCell>
-                                        <TableCell>Layer (mocked)</TableCell>
+                                        <TableCell>Tier</TableCell>
                                         <TableCell>Status</TableCell>
                                         {/* <TableCell>Domain Id</TableCell> */}
                                         <TableCell>Product Manager</TableCell>
@@ -96,7 +96,7 @@ class ListApiComponent extends Component {
                                             <TableCell>{row.domain_name}</TableCell>
                                             <TableCell>TBD</TableCell>
                                             <TableCell>
-                                                <Typography className={classes.layer}>Application</Typography>
+                                                <Typography className={classes.layer}>{row.tier}</Typography>
                                             </TableCell>
                                             <TableCell>
                                                 <Typography className={this.statusClass(classes, row.status)}>{row.status}</Typography>
