@@ -13,7 +13,7 @@ import Divider from '@material-ui/core/Divider';
 import Box from '@material-ui/core/Box';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import { deepOrange, green, blueGrey } from '@material-ui/core/colors';
+import { deepOrange, green, blue, grey } from '@material-ui/core/colors';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 
@@ -73,11 +73,11 @@ class ListApiComponent extends Component {
                                 <TableHead>
                                     <TableRow>
                                         <TableCell>Name</TableCell>
+                                        <TableCell>Domain Name</TableCell>
                                         <TableCell>Version</TableCell>
                                         <TableCell>Layer (mocked)</TableCell>
                                         <TableCell>Status</TableCell>
                                         {/* <TableCell>Domain Id</TableCell> */}
-                                        <TableCell>Domain Name</TableCell>
                                         <TableCell>Product Manager</TableCell>
                                         <TableCell>Architect</TableCell>
                                         <TableCell>Spec Ids</TableCell>
@@ -93,6 +93,7 @@ class ListApiComponent extends Component {
                                                     {row.name}
                                                 </Link>
                                             </TableCell>
+                                            <TableCell>{row.domain_name}</TableCell>
                                             <TableCell>TBD</TableCell>
                                             <TableCell>
                                                 <Typography className={classes.layer}>Application</Typography>
@@ -101,7 +102,6 @@ class ListApiComponent extends Component {
                                                 <Typography className={this.statusClass(classes, row.status)}>{row.status}</Typography>
                                             </TableCell>
                                             {/* <TableCell>{row.domain_id}</TableCell> */}
-                                            <TableCell>{row.domain_name}</TableCell>
                                             <TableCell>TBD</TableCell>
                                             <TableCell>TBD</TableCell>
                                             <TableCell>{row.spec_ids}</TableCell>
@@ -150,7 +150,7 @@ const useStyles = theme => ({
         backgroundColor: green[300],
     },
     none: {
-        color: theme.palette.getContrastText(blueGrey[600]),
+        color: theme.palette.getContrastText(grey[900]),
         padding: '.3em .3em .3em .3em',
         margin: 'auto',
         textAlign: 'center',
@@ -158,10 +158,10 @@ const useStyles = theme => ({
         fontWeight: '500',
         borderRadius: '.25em',
         fontSize: '90%',
-        backgroundColor: blueGrey[600],
+        backgroundColor: grey[900],
     },
     layer: {
-        color: theme.palette.getContrastText(blueGrey[200]),
+        color: theme.palette.getContrastText(blue[700]),
         padding: '.3em .3em .3em .3em',
         margin: 'auto',
         textAlign: 'center',
@@ -169,7 +169,7 @@ const useStyles = theme => ({
         fontWeight: '500',
         borderRadius: '.25em',
         fontSize: '90%',
-        backgroundColor: blueGrey[200],
+        backgroundColor: blue[700],
         textTransform: 'uppercase'
     },
 });

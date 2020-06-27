@@ -9,7 +9,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Avatar from '@material-ui/core/Avatar';
-import { deepOrange, green, blueGrey } from '@material-ui/core/colors';
+import { deepOrange, green, blueGrey, blue } from '@material-ui/core/colors';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import { TextField } from '@material-ui/core';
@@ -195,7 +195,15 @@ class ApiDetailsComponent extends Component {
                                                     </TableCell>
                                                     <TableCell>{row.version}</TableCell>
                                                     <TableCell>{row.description}</TableCell>
-                                                    <TableCell>{row.name}</TableCell>
+                                                    <TableCell>
+                                                        <a className="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button" tabIndex="0" role="button" aria-disabled="false"
+                                                            href={process.env.REACT_APP_STASH_BASE_URL + "/" + row.name}
+                                                            target="_blank">
+                                                            <div className="MuiListItemIcon-root"><svg className="MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
+                                                                <path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"></path></svg></div>
+                                                            <div className="MuiListItemText-root"><span className="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock">{row.name}</span></div><span className="MuiTouchRipple-root"></span>
+                                                        </a>
+                                                    </TableCell>
                                                 </TableRow>
                                             ))
                                         }
@@ -254,7 +262,7 @@ const useStyles = theme => ({
         color: theme.palette.text.secondary,
     },
     audience: {
-        color: theme.palette.getContrastText(blueGrey[200]),
+        color: theme.palette.getContrastText(blue[700]),
         padding: '.3em .3em .3em .3em',
         margin: 'auto',
         textAlign: 'center',
@@ -262,12 +270,12 @@ const useStyles = theme => ({
         fontWeight: '500',
         borderRadius: '.25em',
         fontSize: '90%',
-        backgroundColor: blueGrey[200],
+        backgroundColor: blue[700],
         textTransform: 'uppercase'
     },
     avatar: {
-        color: theme.palette.getContrastText(blueGrey[200]),
-        backgroundColor: blueGrey[200],
+        color: theme.palette.getContrastText(blue[700]),
+        backgroundColor: blue[700],
         fontSize: '90%',
     },
     deprecated: {

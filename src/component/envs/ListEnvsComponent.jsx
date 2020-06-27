@@ -9,7 +9,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Avatar from '@material-ui/core/Avatar';
-import { blueGrey } from '@material-ui/core/colors';
+import { blue } from '@material-ui/core/colors';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -76,8 +76,8 @@ const useStyles = theme => ({
     display: 'flex',
     justifyContent: 'center',
     avatar: {
-        color: theme.palette.getContrastText(blueGrey[200]),
-        backgroundColor: blueGrey[200],
+        color: theme.palette.getContrastText(blue[700]),
+        backgroundColor: blue[700],
         fontSize: '90%',
     },
 });
