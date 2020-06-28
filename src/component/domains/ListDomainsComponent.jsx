@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import ApiService from "../../service/ApiService";
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -26,37 +26,37 @@ class ListDomainsComponent extends Component {
 
     listAllDomains() {
         ApiService.listAllDomains().then((res) => {
-            this.setState({domains: res.data.domains})
+            this.setState({ domains: res.data.domains })
         });
     }
 
     render() {
         return (
             <Box>
-            <Card variant="outlined">
-                <CardContent>
-                <Typography component="h2" variant="h6" color="primary" gutterBottom>Domains List</Typography>
-                <Table>
-                    <TableHead>
-                        <TableRow>
-                            <TableCell>Id</TableCell>
-                            <TableCell>Domain / SubDomain Name</TableCell>
-                            <TableCell>Description</TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {this.state.domains.map ( row => (
-                            <TableRow hover key = {row.id}>
-                                <TableCell>{row.id}</TableCell>
-                                <TableCell>{row.name}</TableCell>
-                                <TableCell>{row.description}</TableCell>
-                            </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
-                </CardContent>
-            </Card>
-        </Box>
+                <Card variant="outlined">
+                    <CardContent>
+                        <Typography component="h2" variant="h6" color="primary" gutterBottom>Domains List</Typography>
+                        <Table>
+                            <TableHead>
+                                <TableRow>
+                                    <TableCell>Domain / SubDomain Name</TableCell>
+                                    <TableCell>Id</TableCell>
+                                    <TableCell>Description</TableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                {this.state.domains.map(row => (
+                                    <TableRow hover key={row.id}>
+                                        <TableCell>{row.name}</TableCell>
+                                        <TableCell>{row.id}</TableCell>
+                                        <TableCell>{row.description}</TableCell>
+                                    </TableRow>
+                                ))}
+                            </TableBody>
+                        </Table>
+                    </CardContent>
+                </Card>
+            </Box>
         );
     }
 }

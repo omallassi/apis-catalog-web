@@ -48,8 +48,8 @@ class ListEnvsComponent extends Component {
                                 <TableHead>
                                     <TableRow>
                                         <TableCell />
-                                        <TableCell>Id</TableCell>
                                         <TableCell>Env Name</TableCell>
+                                        <TableCell>Id</TableCell>
                                         <TableCell>Description</TableCell>
                                     </TableRow>
                                 </TableHead>
@@ -57,8 +57,8 @@ class ListEnvsComponent extends Component {
                                     {this.state.envs.map(row => (
                                         <TableRow hover key={row.id}>
                                             <TableCell><Avatar className={classes.avatar}>{row.id}</Avatar></TableCell>
-                                            <TableCell>{row.id}</TableCell>
                                             <TableCell>{row.name}</TableCell>
+                                            <TableCell>{row.id}</TableCell>
                                             <TableCell>{row.description}</TableCell>
                                         </TableRow>
                                     ))}
