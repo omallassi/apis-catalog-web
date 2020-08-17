@@ -9,6 +9,12 @@ The Web UI (at this stage, mostly providing read-only access) to [apis-catalog](
 
 ![screenshot](img/dashboard.png)
 
+The dashboard provides
+
+* metrics w.r.t pull requests: # of pull requests, metrics regarding how long pull requests stay opened..
+* metrics w.r.t. the catalog: # of operations
+* metrics w.r.t. zally: # and types of zally ignore
+
 ![screenshot](img/screen.png)
 
 HTTP backend is available here https://github.com/omallassi/apis-catalog
