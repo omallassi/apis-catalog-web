@@ -55,6 +55,7 @@ class ListApiComponent extends Component {
             endpoints_num: [],
             zally_violations: [],
             zally_violations_columns: [],
+            value: 0,
         }
 
         this.getPullRequestNumber = this.getPullRequestNumber.bind(this);
@@ -246,7 +247,7 @@ class ListApiComponent extends Component {
                                             columns={this.state.zally_violations_columns}
                                             rows={this.state.zally_violations}
                                             options={{
-                                                title: "Number of Zally Violations",
+                                                title: "Number of zally-ignore",
                                                 //curveType: 'function',
                                                 lineWidth: 3,
                                                 intervals: { style: 'line' },
@@ -254,7 +255,7 @@ class ListApiComponent extends Component {
                                                     title: 'Time',
                                                 },
                                                 vAxis: {
-                                                    title: '# of violations',
+                                                    title: '# of zally-ignore',
                                                 },
                                             }}
                                             rootProps={{ 'data-testid': '1' }}
