@@ -33,7 +33,7 @@ class ApiService {
         return axios.get('/v1/envs/' + envId);
     }
 
-    getPullRequestNumber() {
+    getStats() {
         return axios.get('/v1/metrics');
     }
 
