@@ -20,7 +20,7 @@ The dashboard provides
 HTTP backend is available here https://github.com/omallassi/apis-catalog
 
 ## More Details
-available in the [wiki](https://github.com/omallassi/apis-catalog/wiki).
+All details are available and centralized in the [wiki](https://github.com/omallassi/apis-catalog/wiki).
 
 
 ### Before build
