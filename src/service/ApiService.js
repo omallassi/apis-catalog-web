@@ -14,6 +14,10 @@ class ApiService {
         return axios.get('/v1/domains');
     }
 
+    getDomainsMetrics() {
+        return axios.get('/v1/domains/stats');
+    }
+
     listAllEnvs() {
         return axios.get('/v1/envs');
     }

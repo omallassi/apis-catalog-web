@@ -16,6 +16,7 @@ class ListDomainsComponent extends Component {
         super(props)
         this.state = {
             domains: [],
+            stats: []
         }
 
         this.listAllDomains = this.listAllDomains.bind(this);
@@ -28,6 +29,33 @@ class ListDomainsComponent extends Component {
     listAllDomains() {
         ApiService.listAllDomains().then((res) => {
             this.setState({ domains: res.data.domains })
+        });
+        //
+        ApiService.getDomainsMetrics().then((res) => {
+            var response = res.data;
+            var data_table = [['Name', 'Parent', 'Resources Number (num)']]
+
+            var max = 2;
+            for (var index in response) {
+                console.log(data_table.length);
+                console.log([response[index].name, response[index].parent, response[index].value]);
+
+                data_table[data_table.length] = [response[index].name, response[index].parent, response[index].value];
+            }
+
+            console.log(data_table);
+
+            //we should map it to
+            //[
+            //    ['Location','Parent','Resources Number (num)'],
+            //    ['All', null, 0],
+            //    ['iam', 'All', 0],
+            //    ['xva-management', 'All', 0],
+            //    ['authn', 'iam', 11],
+            //    ['authz', 'iam', 52],
+            //]
+
+            this.setState({ stats: data_table })
         });
     }
 
@@ -43,34 +71,7 @@ class ListDomainsComponent extends Component {
                         <Chart
                             chartType="TreeMap"
                             loader={<div>Loading Chart</div>}
-                            data={[
-                                [
-                                    'Location',
-                                    'Parent',
-                                    'Market trade volume (size)',
-                                ],
-                                ['All', null, 0],
-                                ['iam', 'All', 0],
-                                ['xva-management', 'All', 0],
-                                ['domain2', 'All', 0],
-                                ['domain3', 'All', 0],
-                                ['domain1', 'All', 0],
-                                ['authn', 'iam', 11],
-                                ['authz', 'iam', 52],
-                                ['France', 'xva-management', 42],
-                                ['Germany', 'xva-management', 31],
-                                ['Sweden', 'xva-management', 22],
-                                ['Italy', 'xva-management', 17],
-                                ['UK', 'xva-management', 21],
-                                ['domain2.1', 'domain2', 36],
-                                ['domain2.2', 'domain2', 20],
-                                ['domain2.1.1', 'domain2.2', 40],
-                                ['Egypt', 'domain1', 21],
-                                ['S. Africa', 'domain1', 30],
-                                ['Sudan', 'domain1', 12],
-                                ['Congo', 'domain1', 10],
-                                ['Zaire', 'domain1', 8],
-                            ]}
+                            data={this.state.stats}
                             options={{
                                 highlightOnMouseOver: true,
                                 minHighlightColor: '#8c6bb1',
