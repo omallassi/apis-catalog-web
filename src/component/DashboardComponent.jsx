@@ -230,6 +230,7 @@ class ListApiComponent extends Component {
                             </Grid>
                         </TabPanel>
                         <TabPanel value={this.state.value} index={1}>
+                            <Typography variant="body1" gutterBottom>A Resource correspond to a Path in OpenAPI specification and can thus, support muliple operations (ie. GET, POST etc...)</Typography>
                             <Grid container direction="row" alignItems="center" >
                                 <Grid item xs={12}>
                                     <Chart
@@ -239,7 +240,7 @@ class ListApiComponent extends Component {
                                         columns={['Date', '# of (REST) Operations']}
                                         rows={this.state.endpoints_num}
                                         options={{
-                                            title: "Number of (REST) Operations",
+                                            title: "Number of (REST) Resources",
                                             //curveType: 'function',
                                             lineWidth: 3,
                                             explorer: {
@@ -265,7 +266,7 @@ class ListApiComponent extends Component {
                                         columns={this.state.endpoints_audience_num_columns} //TODO
                                         rows={this.state.endpoints_audience_num} //TODO
                                         options={{
-                                            title: "Number of Endpoints per Audience",
+                                            title: "Number of Resources per Audience",
                                             //curveType: 'function',
                                             lineWidth: 3,
                                             explorer: {
@@ -286,6 +287,7 @@ class ListApiComponent extends Component {
                             </Grid>
                         </TabPanel>
                         <TabPanel value={this.state.value} index={2}>
+                            <Typography variant="body1" gutterBottom>A Resource correspond to a Path in OpenAPI specification and can thus, support muliple operations (ie. GET, POST etc...)</Typography>
                             <Grid container direction="row" alignItems="center" >
                                 <Grid item xs={12}>
                                     <Chart
@@ -295,7 +297,7 @@ class ListApiComponent extends Component {
                                         columns={this.state.zally_violations_columns}
                                         rows={this.state.zally_violations}
                                         options={{
-                                            title: "Number of zally-ignore",
+                                            title: "Number of Resources with zally-ignore",
                                             //curveType: 'function',
                                             lineWidth: 3,
                                             explorer: {
