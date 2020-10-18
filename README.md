@@ -10,7 +10,7 @@ The Web UI (at this stage, mostly providing read-only access) to [apis-catalog](
 ![screenshot](img/dashboard.png)
 ![screenshot](img/screen-treemap.png)
 
-The dashboard provides
+The [dashboard provides](https://github.com/omallassi/apis-catalog/wiki/stats-overview)
 
 * metrics w.r.t pull requests: # of pull requests, metrics regarding how long pull requests stay opened..
 * metrics w.r.t. the catalog: # of operations, # of resources per domains
