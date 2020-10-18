@@ -65,69 +65,30 @@ class ListDomainsComponent extends Component {
                     <CardContent>
                         <Typography component="h2" variant="h6" color="primary" gutterBottom>Domains Statistics</Typography>
                         <Typography variant="body1" gutterBottom>
-                            The following diagram displays volume of endpoints per doamin and subdomains.
+                            The following diagram displays volume of resources per domain and subdomains.
                         </Typography>
                         <Chart
                             chartType="TreeMap"
                             loader={<div>Loading Chart</div>}
                             data={this.state.stats}
-                            // data={[
-                            //     [
-                            //         'Location',
-                            //         'Parent',
-                            //         'Market trade volume (size)',
-                            //         'Market increase/decrease (color)',
-                            //     ],
-                            //     ['Global', null, 0, 0],
-                            //     ['America', 'Global', 0, 0],
-                            //     ['Europe', 'Global', 0, 0],
-                            //     ['Asia', 'Global', 0, 0],
-                            //     ['Australia', 'Global', 0, 0],
-                            //     ['Africa', 'Global', 0, 0],
-                            //     ['Brazil', 'America', 11, 10],
-                            //     ['USA', 'America', 52, 31],
-                            //     ['Mexico', 'America', 24, 12],
-                            //     ['Canada', 'America', 16, -23],
-                            //     ['France', 'Europe', 42, -11],
-                            //     ['Germany', 'Europe', 31, -2],
-                            //     ['Sweden', 'Europe', 22, -13],
-                            //     ['Italy', 'Europe', 17, 4],
-                            //     ['UK', 'Europe', 21, -5],
-                            //     ['China', 'Asia', 36, 4],
-                            //     ['Japan', 'Asia', 20, -12],
-                            //     ['India', 'Asia', 40, 63],
-                            //     ['Laos', 'Asia', 4, 34],
-                            //     ['Mongolia', 'Asia', 1, -5],
-                            //     ['Iran', 'Asia', 18, 13],
-                            //     ['Pakistan', 'Asia', 11, -52],
-                            //     ['Egypt', 'Africa', 21, 0],
-                            //     ['S. Africa', 'Africa', 30, 43],
-                            //     ['Sudan', 'Africa', 12, 2],
-                            //     ['Congo', 'Africa', 10, 12],
-                            //     ['Zaire', 'Africa', 8, 10],
-                            // ]}
                             options={{
                                 highlightOnMouseOver: true,
                                 maxDepth: 1,
                                 maxPostDepth: 2,
-                                minHighlightColor: '#8c6bb1',
-                                midHighlightColor: '#9ebcda',
-                                maxHighlightColor: '#edf8fb',
-                                minColor: '#009688',
-                                midColor: '#f7f7f7',
-                                maxColor: '#ee8100',
+                                minHighlightColor: '#ABB2B9',
+                                midHighlightColor: '#7F8C8D',
+                                maxHighlightColor: '#283747',
+                                minColor: '#AED6F1',
+                                midColor: '#3498DB',
+                                maxColor: '#1B4F72',
                                 headerHeight: 15,
                                 height: 600,
                                 // fontColor: 'black',
                                 showScale: true,
                                 generateTooltip: (row, size, value) => {
                                     return (
-                                        '<div style="background:#fd9; padding:10px; border-style:solid"> row: ' +
-                                        row +
-                                        ' size: ' +
+                                        '<div style="background:#fd9; padding:10px; border-style:solid"> # of resources: ' +
                                         size +
-                                        ' val: ' +
-                                        value +
                                         '</div>'
                                     )
                                 },
