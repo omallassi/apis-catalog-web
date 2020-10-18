@@ -87,7 +87,7 @@ class ListDomainsComponent extends Component {
                                 showScale: true,
                                 generateTooltip: (row, size, value) => {
                                     return (
-                                        '<div style="background:#fd9; padding:10px; border-style:solid"> # of resources: ' +
+                                        '<div style="background:#F5B041; border-radius: 8px; padding:8px"> # of resources: ' +
                                         size +
                                         '</div>'
                                     )
