@@ -9,12 +9,20 @@ import CardContent from '@material-ui/core/CardContent';
 import SyncIcon from '@material-ui/icons/Sync';
 import IconButton from '@material-ui/core/IconButton';
 
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
 import AssessmentIcon from '@material-ui/icons/Assessment';
 import AssignmentLateIcon from '@material-ui/icons/AssignmentLate';
 import AssignmentIcon from '@material-ui/icons/Assignment';
+import ArrowDropDownCircleTwoToneIcon from '@material-ui/icons/ArrowDropDownCircleTwoTone';
 
 
 function TabPanel(props) {
@@ -43,7 +51,8 @@ TabPanel.propTypes = {
     value: PropTypes.any.isRequired,
 };
 
-class ListApiComponent extends Component {
+class DashboardComponent extends Component {
+
     data_points = [];
 
     constructor(props) {
@@ -51,6 +60,7 @@ class ListApiComponent extends Component {
         this.state = {
             pr_num: [],
             pr_ages: [],
+            oldest_pr: [],
             endpoints_num: [],
             endpoints_audience_num: [],
             endpoints_audience_num_columns: [],
@@ -60,10 +70,12 @@ class ListApiComponent extends Component {
         }
 
         this.getStats = this.getStats.bind(this);
+        this.getOldestPr = this.getOldestPr.bind(this);
     }
 
     componentDidMount() {
         this.getStats();
+        this.getOldestPr();
     }
 
     createDataTable(origin_data) {
@@ -136,6 +148,12 @@ class ListApiComponent extends Component {
         });
     }
 
+    getOldestPr() {
+        ApiService.getOldestPr().then((res) => {
+            this.setState({ oldest_pr: res.data });
+        })
+    }
+
     a11yProps(index) {
         return {
             id: `full-width-tab-${index}`,
@@ -172,8 +190,13 @@ class ListApiComponent extends Component {
                             <Tab label="Zally Violations" icon={<AssignmentLateIcon />} {...this.a11yProps(1)} />
                         </Tabs>
                         <TabPanel value={this.state.value} index={0}>
-                            <Grid container direction="row" alignItems="center" >
+                            <Grid container direction="row" alignItems="center" spacing={10}>
                                 <Grid item xs={12}>
+
+                                    <Typography variant="body1" gutterBottom className={this.props.classes.wrapIcon}>
+                                        <ArrowDropDownCircleTwoToneIcon className={this.props.classes.linkIcon} style={{ fill: "#6573c3" }} />
+                                        The following chart displays the # of opened Pull-Request
+                                    </Typography>
                                     <Chart
                                         height={'400px'}
                                         chartType="LineChart"
@@ -202,6 +225,10 @@ class ListApiComponent extends Component {
                                     />
                                 </Grid>
                                 <Grid item xs={12}>
+                                    <Typography variant="body1" gutterBottom className={this.props.classes.wrapIcon}>
+                                        <ArrowDropDownCircleTwoToneIcon className={this.props.classes.linkIcon} style={{ fill: "#6573c3" }} />
+                                        The following chart displays some statistics around pull-requests
+                                    </Typography>
                                     <Chart
                                         height={'400px'}
                                         chartType="LineChart"
@@ -227,12 +254,43 @@ class ListApiComponent extends Component {
                                         rootProps={{ 'data-testid': '1' }}
                                     />
                                 </Grid>
+                                <Grid item xs={12} >
+                                    <Typography variant="body1" gutterBottom className={this.props.classes.wrapIcon}>
+                                        <ArrowDropDownCircleTwoToneIcon className={this.props.classes.linkIcon} style={{ fill: "#6573c3" }} />
+                                        The following table displays the oldest pull-requests
+                                    </Typography>
+
+                                    <Table>
+                                        <TableHead>
+                                            <TableRow>
+                                                <TableCell>Pull Request Id</TableCell>
+                                                <TableCell>Pull Request Title</TableCell>
+                                                <TableCell>Author Name</TableCell>
+                                                <TableCell>Author Email</TableCell>
+                                            </TableRow>
+                                        </TableHead>
+                                        <TableBody>
+                                            {this.state.oldest_pr.map(row => (
+                                                <TableRow hover key={row.id}>
+                                                    <TableCell>{row.id}</TableCell>
+                                                    <TableCell>{row.title}</TableCell>
+                                                    <TableCell>{row.author.user.displayName}</TableCell>
+                                                    <TableCell>{row.author.user.emailAddress}</TableCell>
+                                                </TableRow>
+                                            ))}
+                                        </TableBody>
+                                    </Table>
+                                </Grid>
                             </Grid>
                         </TabPanel>
                         <TabPanel value={this.state.value} index={1}>
                             <Typography variant="body1" gutterBottom>A Resource correspond to a Path in OpenAPI specification and can thus, support muliple operations (ie. GET, POST etc...)</Typography>
-                            <Grid container direction="row" alignItems="center" >
+                            <Grid container direction="row" alignItems="center" spacing={10}>
                                 <Grid item xs={12}>
+                                    <Typography variant="body1" gutterBottom className={this.props.classes.wrapIcon}>
+                                        <ArrowDropDownCircleTwoToneIcon className={this.props.classes.linkIcon} style={{ fill: "#6573c3" }} />
+                                        The following chart displays the evolution of (REST) resources
+                                    </Typography>
                                     <Chart
                                         height={'400px'}
                                         chartType="LineChart"
@@ -259,6 +317,10 @@ class ListApiComponent extends Component {
                                     />
                                 </Grid>
                                 <Grid item xs={12}>
+                                    <Typography variant="body1" gutterBottom className={this.props.classes.wrapIcon}>
+                                        <ArrowDropDownCircleTwoToneIcon className={this.props.classes.linkIcon} style={{ fill: "#6573c3" }} />
+                                        The following chart displays the evolution of (REST) resources per x-audience
+                                    </Typography>
                                     <Chart
                                         height={'400px'}
                                         chartType="LineChart"
@@ -288,8 +350,12 @@ class ListApiComponent extends Component {
                         </TabPanel>
                         <TabPanel value={this.state.value} index={2}>
                             <Typography variant="body1" gutterBottom>A Resource correspond to a Path in OpenAPI specification and can thus, support muliple operations (ie. GET, POST etc...)</Typography>
-                            <Grid container direction="row" alignItems="center" >
+                            <Grid container direction="row" alignItems="center" spacing={10}>
                                 <Grid item xs={12}>
+                                    <Typography variant="body1" gutterBottom className={this.props.classes.wrapIcon}>
+                                        <ArrowDropDownCircleTwoToneIcon className={this.props.classes.linkIcon} style={{ fill: "#6573c3" }} />
+                                        The following chart displays the evolution of x-zally-ignore
+                                    </Typography>
                                     <Chart
                                         height={'400px'}
                                         chartType="LineChart"
@@ -330,4 +396,16 @@ class ListApiComponent extends Component {
     }
 }
 
-export default ListApiComponent;
+
+const useStyles = theme => ({
+    wrapIcon: {
+        verticalAlign: 'middle',
+        display: 'inline-flex'
+    }
+});
+
+DashboardComponent.propTypes = {
+    classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(useStyles)(DashboardComponent);
