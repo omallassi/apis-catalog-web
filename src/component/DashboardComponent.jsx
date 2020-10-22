@@ -257,7 +257,7 @@ class DashboardComponent extends Component {
                                 <Grid item xs={12} >
                                     <Typography variant="body1" gutterBottom className={this.props.classes.wrapIcon}>
                                         <ArrowDropDownCircleTwoToneIcon className={this.props.classes.linkIcon} style={{ fill: "#6573c3" }} />
-                                        The following table displays the oldest pull-requests
+                                        The following table displays the oldest opened pull-requests
                                     </Typography>
 
                                     <Table>
