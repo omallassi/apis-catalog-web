@@ -198,7 +198,6 @@ class DashboardComponent extends Component {
                         <TabPanel value={this.state.value} index={0}>
                             <Grid container direction="row" alignItems="center" spacing={10}>
                                 <Grid item xs={12}>
-
                                     <Typography variant="body1" gutterBottom className={this.props.classes.wrapIcon}>
                                         <BlurLinearTwoToneIcon className={this.props.classes.linkIcon} style={{ fill: "#6573c3" }} />
                                         The following chart displays the # of opened Pull-Request
@@ -226,36 +225,6 @@ class DashboardComponent extends Component {
                                             vAxis: {
                                                 title: '# of PRs',
                                             }
-                                        }}
-                                        rootProps={{ 'data-testid': '1' }}
-                                    />
-                                </Grid>
-                                <Grid item xs={12}>
-                                    <Typography variant="body1" gutterBottom className={this.props.classes.wrapIcon}>
-                                        <BlurLinearTwoToneIcon className={this.props.classes.linkIcon} style={{ fill: "#6573c3" }} />
-                                        The following chart displays some statistics around pull-requests
-                                    </Typography>
-                                    <Chart
-                                        height={'400px'}
-                                        chartType="LineChart"
-                                        loader={<div>Loading Chart</div>}
-                                        columns={['Date', 'min (days)', 'p50 (days)', 'max (days)', 'mean (days)']}
-                                        rows={this.state.pr_ages}
-                                        options={{
-                                            title: "Opened Pull Requests Stats",
-                                            //curveType: 'function',
-                                            lineWidth: 3,
-                                            explorer: {
-                                                actions: ['dragToZoom', 'rightClickToReset'],
-                                                keepInBounds: true
-                                            },
-                                            intervals: { style: 'line' },
-                                            hAxis: {
-                                                title: 'Time',
-                                            },
-                                            vAxis: {
-                                                title: '# of days',
-                                            },
                                         }}
                                         rootProps={{ 'data-testid': '1' }}
                                     />
@@ -288,6 +257,36 @@ class DashboardComponent extends Component {
                                             ))}
                                         </TableBody>
                                     </Table>
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <Typography variant="body1" gutterBottom className={this.props.classes.wrapIcon}>
+                                        <BlurLinearTwoToneIcon className={this.props.classes.linkIcon} style={{ fill: "#6573c3" }} />
+                                        The following chart displays some statistics around pull-requests
+                                    </Typography>
+                                    <Chart
+                                        height={'400px'}
+                                        chartType="LineChart"
+                                        loader={<div>Loading Chart</div>}
+                                        columns={['Date', 'min (days)', 'p50 (days)', 'max (days)', 'mean (days)']}
+                                        rows={this.state.pr_ages}
+                                        options={{
+                                            title: "Opened Pull Requests Stats",
+                                            //curveType: 'function',
+                                            lineWidth: 3,
+                                            explorer: {
+                                                actions: ['dragToZoom', 'rightClickToReset'],
+                                                keepInBounds: true
+                                            },
+                                            intervals: { style: 'line' },
+                                            hAxis: {
+                                                title: 'Time',
+                                            },
+                                            vAxis: {
+                                                title: '# of days',
+                                            },
+                                        }}
+                                        rootProps={{ 'data-testid': '1' }}
+                                    />
                                 </Grid>
                             </Grid>
                         </TabPanel>
