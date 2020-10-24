@@ -22,7 +22,7 @@ import { withStyles } from '@material-ui/core/styles';
 import AssessmentIcon from '@material-ui/icons/Assessment';
 import AssignmentLateIcon from '@material-ui/icons/AssignmentLate';
 import AssignmentIcon from '@material-ui/icons/Assignment';
-import ArrowDropDownCircleTwoToneIcon from '@material-ui/icons/ArrowDropDownCircleTwoTone';
+import BlurLinearTwoToneIcon from '@material-ui/icons/BlurLinearTwoTone';
 
 
 function TabPanel(props) {
@@ -154,6 +154,12 @@ class DashboardComponent extends Component {
         })
     }
 
+    getCreationDate(creationEpoc) {
+        var d = new Date(creationEpoc); // The 0 there is the key, which sets the date to the epoch
+
+        return "" + d
+    }
+
     a11yProps(index) {
         return {
             id: `full-width-tab-${index}`,
@@ -194,7 +200,7 @@ class DashboardComponent extends Component {
                                 <Grid item xs={12}>
 
                                     <Typography variant="body1" gutterBottom className={this.props.classes.wrapIcon}>
-                                        <ArrowDropDownCircleTwoToneIcon className={this.props.classes.linkIcon} style={{ fill: "#6573c3" }} />
+                                        <BlurLinearTwoToneIcon className={this.props.classes.linkIcon} style={{ fill: "#6573c3" }} />
                                         The following chart displays the # of opened Pull-Request
                                     </Typography>
                                     <Chart
@@ -226,7 +232,7 @@ class DashboardComponent extends Component {
                                 </Grid>
                                 <Grid item xs={12}>
                                     <Typography variant="body1" gutterBottom className={this.props.classes.wrapIcon}>
-                                        <ArrowDropDownCircleTwoToneIcon className={this.props.classes.linkIcon} style={{ fill: "#6573c3" }} />
+                                        <BlurLinearTwoToneIcon className={this.props.classes.linkIcon} style={{ fill: "#6573c3" }} />
                                         The following chart displays some statistics around pull-requests
                                     </Typography>
                                     <Chart
@@ -256,7 +262,7 @@ class DashboardComponent extends Component {
                                 </Grid>
                                 <Grid item xs={12} >
                                     <Typography variant="body1" gutterBottom className={this.props.classes.wrapIcon}>
-                                        <ArrowDropDownCircleTwoToneIcon className={this.props.classes.linkIcon} style={{ fill: "#6573c3" }} />
+                                        <BlurLinearTwoToneIcon className={this.props.classes.linkIcon} style={{ fill: "#6573c3" }} />
                                         The following table displays the oldest opened pull-requests
                                     </Typography>
 
@@ -265,6 +271,7 @@ class DashboardComponent extends Component {
                                             <TableRow>
                                                 <TableCell>Pull Request Id</TableCell>
                                                 <TableCell>Pull Request Title</TableCell>
+                                                <TableCell>Creation Date</TableCell>
                                                 <TableCell>Author Name</TableCell>
                                                 <TableCell>Author Email</TableCell>
                                             </TableRow>
@@ -274,6 +281,7 @@ class DashboardComponent extends Component {
                                                 <TableRow hover key={row.id}>
                                                     <TableCell>{row.id}</TableCell>
                                                     <TableCell>{row.title}</TableCell>
+                                                    <TableCell>{this.getCreationDate(row.createdDate)}</TableCell>
                                                     <TableCell>{row.author.user.displayName}</TableCell>
                                                     <TableCell>{row.author.user.emailAddress}</TableCell>
                                                 </TableRow>
@@ -288,7 +296,7 @@ class DashboardComponent extends Component {
                             <Grid container direction="row" alignItems="center" spacing={10}>
                                 <Grid item xs={12}>
                                     <Typography variant="body1" gutterBottom className={this.props.classes.wrapIcon}>
-                                        <ArrowDropDownCircleTwoToneIcon className={this.props.classes.linkIcon} style={{ fill: "#6573c3" }} />
+                                        <BlurLinearTwoToneIcon className={this.props.classes.linkIcon} style={{ fill: "#6573c3" }} />
                                         The following chart displays the evolution of (REST) resources
                                     </Typography>
                                     <Chart
@@ -318,7 +326,7 @@ class DashboardComponent extends Component {
                                 </Grid>
                                 <Grid item xs={12}>
                                     <Typography variant="body1" gutterBottom className={this.props.classes.wrapIcon}>
-                                        <ArrowDropDownCircleTwoToneIcon className={this.props.classes.linkIcon} style={{ fill: "#6573c3" }} />
+                                        <BlurLinearTwoToneIcon className={this.props.classes.linkIcon} style={{ fill: "#6573c3" }} />
                                         The following chart displays the evolution of (REST) resources per x-audience
                                     </Typography>
                                     <Chart
@@ -353,7 +361,7 @@ class DashboardComponent extends Component {
                             <Grid container direction="row" alignItems="center" spacing={10}>
                                 <Grid item xs={12}>
                                     <Typography variant="body1" gutterBottom className={this.props.classes.wrapIcon}>
-                                        <ArrowDropDownCircleTwoToneIcon className={this.props.classes.linkIcon} style={{ fill: "#6573c3" }} />
+                                        <BlurLinearTwoToneIcon className={this.props.classes.linkIcon} style={{ fill: "#6573c3" }} />
                                         The following chart displays the evolution of x-zally-ignore
                                     </Typography>
                                     <Chart
