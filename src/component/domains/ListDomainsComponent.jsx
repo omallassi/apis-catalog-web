@@ -65,7 +65,7 @@ class ListDomainsComponent extends Component {
                     <CardContent>
                         <Typography component="h2" variant="h6" color="primary" gutterBottom>Domains Statistics</Typography>
                         <Typography variant="body1" gutterBottom>
-                            The following diagram displays volume of resources per domain and subdomains.
+                            The following diagram displays volume of resources per domain and subdomains, based on the Open API Specifications.
                         </Typography>
                         <Chart
                             chartType="TreeMap"

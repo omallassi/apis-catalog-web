@@ -229,35 +229,6 @@ class DashboardComponent extends Component {
                                         rootProps={{ 'data-testid': '1' }}
                                     />
                                 </Grid>
-                                <Grid item xs={12} >
-                                    <Typography variant="body1" gutterBottom className={this.props.classes.wrapIcon}>
-                                        <BlurLinearTwoToneIcon className={this.props.classes.linkIcon} style={{ fill: "#6573c3" }} />
-                                        The following table displays the oldest opened pull-requests
-                                    </Typography>
-
-                                    <Table>
-                                        <TableHead>
-                                            <TableRow>
-                                                <TableCell>Pull Request Id</TableCell>
-                                                <TableCell>Pull Request Title</TableCell>
-                                                <TableCell>Creation Date</TableCell>
-                                                <TableCell>Author Name</TableCell>
-                                                <TableCell>Author Email</TableCell>
-                                            </TableRow>
-                                        </TableHead>
-                                        <TableBody>
-                                            {this.state.oldest_pr.map(row => (
-                                                <TableRow hover key={row.id}>
-                                                    <TableCell>{row.id}</TableCell>
-                                                    <TableCell>{row.title}</TableCell>
-                                                    <TableCell>{this.getCreationDate(row.createdDate)}</TableCell>
-                                                    <TableCell>{row.author.user.displayName}</TableCell>
-                                                    <TableCell>{row.author.user.emailAddress}</TableCell>
-                                                </TableRow>
-                                            ))}
-                                        </TableBody>
-                                    </Table>
-                                </Grid>
                                 <Grid item xs={12}>
                                     <Typography variant="body1" gutterBottom className={this.props.classes.wrapIcon}>
                                         <BlurLinearTwoToneIcon className={this.props.classes.linkIcon} style={{ fill: "#6573c3" }} />
@@ -287,6 +258,40 @@ class DashboardComponent extends Component {
                                         }}
                                         rootProps={{ 'data-testid': '1' }}
                                     />
+                                </Grid>
+                                <Grid item xs={12} >
+                                    <Typography variant="body1" gutterBottom className={this.props.classes.wrapIcon}>
+                                        <BlurLinearTwoToneIcon className={this.props.classes.linkIcon} style={{ fill: "#6573c3" }} />
+                                        The following table displays the oldest opened pull-requests
+                                    </Typography>
+
+                                    <Table>
+                                        <TableHead>
+                                            <TableRow>
+                                                <TableCell>Pull Request Id</TableCell>
+                                                <TableCell>Pull Request Title</TableCell>
+                                                <TableCell>Creation Date</TableCell>
+                                                <TableCell>Author Name</TableCell>
+                                                <TableCell>Author Email</TableCell>
+                                            </TableRow>
+                                        </TableHead>
+                                        <TableBody>
+                                            {this.state.oldest_pr.map(row => (
+                                                <TableRow hover key={row.id}>
+                                                    <TableCell>
+                                                        <a className="body" tabIndex="0" aria-disabled="false"
+                                                            href={process.env.REACT_APP_STASH_BASE_URL + "/pull-requests/" + row.id + "/overview"} target="_blank">
+                                                            {row.id}
+                                                        </a>
+                                                    </TableCell>
+                                                    <TableCell>{row.title}</TableCell>
+                                                    <TableCell>{this.getCreationDate(row.createdDate)}</TableCell>
+                                                    <TableCell>{row.author.user.displayName}</TableCell>
+                                                    <TableCell>{row.author.user.emailAddress}</TableCell>
+                                                </TableRow>
+                                            ))}
+                                        </TableBody>
+                                    </Table>
                                 </Grid>
                             </Grid>
                         </TabPanel>
