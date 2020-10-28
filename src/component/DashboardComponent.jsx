@@ -279,11 +279,17 @@ class DashboardComponent extends Component {
                                             {this.state.oldest_pr.map(row => (
                                                 <TableRow hover key={row.id}>
                                                     <TableCell>
-                                                        <a className="body" tabIndex="0" aria-disabled="false"
+                                                        <a className="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button" tabIndex="0" role="button" aria-disabled="false"
                                                             href={process.env.REACT_APP_STASH_BASE_URL + "/pull-requests/" + row.id + "/overview"} target="_blank">
-                                                            {row.id}
-                                                        </a>
-                                                    </TableCell>
+                                                            <div className="MuiListItemIcon-root">
+                                                                <svg className="MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
+                                                                    <path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"></path>
+                                                                </svg>
+                                                            </div>
+                                                            <div className="MuiListItemText-root">
+                                                                <span className="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock">{row.id}</span>
+                                                            </div>
+                                                        </a></TableCell>
                                                     <TableCell>{row.title}</TableCell>
                                                     <TableCell>{this.getCreationDate(row.createdDate)}</TableCell>
                                                     <TableCell>{row.author.user.displayName}</TableCell>
