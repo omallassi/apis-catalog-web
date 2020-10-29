@@ -14,6 +14,15 @@ class ApiService {
         return axios.get('/v1/domains');
     }
 
+    createDomain(domain) {
+        console.info("Creating Domain [" + domain + "]");
+        return axios.post('/v1/domains', domain);
+    }
+    deleteDomain(id) {
+        console.info("Deleting Domain [" + id + "]");
+        return axios.delete('/v1/domains/' + id);
+    }
+
     getDomainsMetrics() {
         return axios.get('/v1/domains/stats');
     }

@@ -24,6 +24,8 @@ import AssignmentLateIcon from '@material-ui/icons/AssignmentLate';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import BlurLinearTwoToneIcon from '@material-ui/icons/BlurLinearTwoTone';
 
+import { blue } from '@material-ui/core/colors';
+
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -268,11 +270,11 @@ class DashboardComponent extends Component {
                                     <Table>
                                         <TableHead>
                                             <TableRow>
-                                                <TableCell>Pull Request Id</TableCell>
-                                                <TableCell>Pull Request Title</TableCell>
-                                                <TableCell>Creation Date</TableCell>
-                                                <TableCell>Author Name</TableCell>
-                                                <TableCell>Author Email</TableCell>
+                                                <TableCell className={this.props.classes.head}>Pull Request Id</TableCell>
+                                                <TableCell className={this.props.classes.head}>Pull Request Title</TableCell>
+                                                <TableCell className={this.props.classes.head}>Creation Date</TableCell>
+                                                <TableCell className={this.props.classes.head}>Author Name</TableCell>
+                                                <TableCell className={this.props.classes.head}>Author Email</TableCell>
                                             </TableRow>
                                         </TableHead>
                                         <TableBody>
@@ -419,7 +421,11 @@ const useStyles = theme => ({
     wrapIcon: {
         verticalAlign: 'middle',
         display: 'inline-flex'
-    }
+    },
+    head: {
+        backgroundColor: blue[700],
+        color: theme.palette.getContrastText(blue[700])
+    },
 });
 
 DashboardComponent.propTypes = {

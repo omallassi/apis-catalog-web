@@ -47,10 +47,10 @@ class ListEnvsComponent extends Component {
                             <Table>
                                 <TableHead>
                                     <TableRow>
-                                        <TableCell />
-                                        <TableCell>Env Name</TableCell>
-                                        <TableCell>Id</TableCell>
-                                        <TableCell>Description</TableCell>
+                                        <TableCell className={this.props.classes.head} />
+                                        <TableCell className={this.props.classes.head}>Env Name</TableCell>
+                                        <TableCell className={this.props.classes.head}>Id</TableCell>
+                                        <TableCell className={this.props.classes.head}>Description</TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
@@ -79,6 +79,10 @@ const useStyles = theme => ({
         color: theme.palette.getContrastText(blue[700]),
         backgroundColor: blue[700],
         fontSize: '90%',
+    },
+    head: {
+        backgroundColor: blue[700],
+        color: theme.palette.getContrastText(blue[700])
     },
 });
 

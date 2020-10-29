@@ -174,12 +174,12 @@ class ApiDetailsComponent extends Component {
                                 <Table stickyHeader>
                                     <TableHead>
                                         <TableRow>
-                                            <TableCell>Id</TableCell>
-                                            <TableCell>Title</TableCell>
-                                            <TableCell>Audience</TableCell>
-                                            <TableCell>Version</TableCell>
-                                            <TableCell>Description</TableCell>
-                                            <TableCell>Name</TableCell>
+                                            <TableCell className={this.props.classes.head}>Id</TableCell>
+                                            <TableCell className={this.props.classes.head}>Title</TableCell>
+                                            <TableCell className={this.props.classes.head}>Audience</TableCell>
+                                            <TableCell className={this.props.classes.head}>Version</TableCell>
+                                            <TableCell className={this.props.classes.head}>Description</TableCell>
+                                            <TableCell className={this.props.classes.head}>Name</TableCell>
                                         </TableRow>
                                     </TableHead>
                                     <TableBody>
@@ -216,10 +216,10 @@ class ApiDetailsComponent extends Component {
                                 <Table stickyHeader>
                                     <TableHead>
                                         <TableRow>
-                                            <TableCell />
-                                            <TableCell>Env Id</TableCell>
-                                            <TableCell>Name</TableCell>
-                                            <TableCell>Api Id</TableCell>
+                                            <TableCell className={this.props.classes.head} />
+                                            <TableCell className={this.props.classes.head}>Env Id</TableCell>
+                                            <TableCell className={this.props.classes.head}>Name</TableCell>
+                                            <TableCell className={this.props.classes.head}>Api Id</TableCell>
                                         </TableRow>
                                     </TableHead>
                                     <TableBody>
@@ -289,6 +289,10 @@ const useStyles = theme => ({
     none: {
         color: blueGrey[600],
         textTransform: 'uppercase',
+    },
+    head: {
+        backgroundColor: blue[700],
+        color: theme.palette.getContrastText(blue[700])
     },
 });
 

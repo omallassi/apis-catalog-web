@@ -72,15 +72,15 @@ class ListApiComponent extends Component {
                             <Table stickyHeader>
                                 <TableHead>
                                     <TableRow>
-                                        <TableCell>Name</TableCell>
-                                        <TableCell>Domain Name</TableCell>
-                                        <TableCell>Version</TableCell>
-                                        <TableCell>Tier</TableCell>
-                                        <TableCell>Status</TableCell>
+                                        <TableCell className={this.props.classes.head}>Name</TableCell>
+                                        <TableCell className={this.props.classes.head}>Domain Name</TableCell>
+                                        <TableCell className={this.props.classes.head}>Version</TableCell>
+                                        <TableCell className={this.props.classes.head}>Tier</TableCell>
+                                        <TableCell className={this.props.classes.head}>Status</TableCell>
                                         {/* <TableCell>Domain Id</TableCell> */}
-                                        <TableCell>Product Manager</TableCell>
-                                        <TableCell>Architect</TableCell>
-                                        <TableCell>Spec Ids</TableCell>
+                                        <TableCell className={this.props.classes.head}>Product Manager</TableCell>
+                                        <TableCell className={this.props.classes.head}>Architect</TableCell>
+                                        <TableCell className={this.props.classes.head}>Spec Ids</TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
@@ -171,6 +171,10 @@ const useStyles = theme => ({
         fontSize: '90%',
         backgroundColor: blue[700],
         textTransform: 'uppercase'
+    },
+    head: {
+        backgroundColor: blue[700],
+        color: theme.palette.getContrastText(blue[700])
     },
 });
 
