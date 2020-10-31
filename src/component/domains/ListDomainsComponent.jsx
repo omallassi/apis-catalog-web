@@ -39,7 +39,7 @@ class ListDomainsComponent extends Component {
             stats: [],
             showDomainEditor: false,
             domainEditorError: "",
-            domain: { name: "", description: "" }
+            domain: { name: "", description: "", owner: "" }
         }
 
         this.listAllDomains = this.listAllDomains.bind(this);
@@ -98,7 +98,12 @@ class ListDomainsComponent extends Component {
 
     createDomain = (event) => {
         event.preventDefault();
-        ApiService.createDomain({ id: NIL_UUID, name: this.state.name, description: this.state.description }).then((response) => {
+        ApiService.createDomain({
+            id: NIL_UUID,
+            name: this.state.name,
+            description: this.state.description,
+            owner: this.state.owner
+        }).then((response) => {
             this.listAllDomains();
             this.setState({ showDomainEditor: false });
         }, (error) => {
@@ -212,6 +217,15 @@ class ListDomainsComponent extends Component {
                                                 fullWidth
                                                 onInput={e => this.setState({ description: e.target.value })}
                                             />
+                                            <TextField
+                                                required
+                                                margin="dense"
+                                                id="owner"
+                                                label="Owner"
+                                                type="owner"
+                                                fullWidth
+                                                onInput={e => this.setState({ owner: e.target.value })}
+                                            />
                                             <Typography variant="body1" color="error" gutterBottom>{this.state.domainEditorError}</Typography>
                                         </form>
                                     </DialogContent>
@@ -229,6 +243,7 @@ class ListDomainsComponent extends Component {
                                         <TableRow>
                                             <TableCell className={this.props.classes.head}>Domain / SubDomain Name</TableCell>
                                             <TableCell className={this.props.classes.head}>Description</TableCell>
+                                            <TableCell className={this.props.classes.head}>Owner</TableCell>
                                             <TableCell className={this.props.classes.head}>Id</TableCell>
                                             <TableCell className={this.props.classes.head} />
                                         </TableRow>
@@ -238,6 +253,7 @@ class ListDomainsComponent extends Component {
                                             <TableRow hover key={row.id}>
                                                 <TableCell>{row.name}</TableCell>
                                                 <TableCell>{row.description}</TableCell>
+                                                <TableCell>{row.owner}</TableCell>
                                                 <TableCell>{row.id}</TableCell>
                                                 <TableCell>
                                                     <IconButton color="primary" variant="outlined" aria-label="refresh" onClick={() => { this.deleteDomain(row.id) }}>
