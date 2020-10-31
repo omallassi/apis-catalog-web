@@ -20,29 +20,20 @@ The [dashboard provides](https://github.com/omallassi/apis-catalog/wiki/stats-ov
 
 HTTP backend is available here https://github.com/omallassi/apis-catalog
 
-## More Details
-All details are available and centralized in the [wiki](https://github.com/omallassi/apis-catalog/wiki).
+## Getting Started
+
+Once the repo has been cloned
+
+* update `package.json` to proxy to your apis-catalog backend (_e.g._ "proxy": "http://localhost:8088")
+* (optional) update the `.env` file with proper values
+* `npm start` will run the app in development mode. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+* 'npm run build` will compile the app in production mode (will require `.env.production` file with real value)
 
 
-### Before build
-update the `.env` file to point out to your html documentations (redoc, windershins whatever). For prodution, you need to create an `env.production`. 
-
-### Available Build Scripts
-
-In the project directory, you can run:
-
-#### `npm start`
-
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
-
-#### `npm run build`
-
-Compile the app in production mode. 
-
-### Deployment
+## Installation 
 
 Please refer to [apis-catalog installation](https://github.com/omallassi/apis-catalog/wiki/installation). 
+
+
+## More Details
+All details are available and centralized in the [wiki](https://github.com/omallassi/apis-catalog/wiki).
