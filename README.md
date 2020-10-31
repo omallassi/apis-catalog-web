@@ -20,15 +20,6 @@ The [dashboard provides](https://github.com/omallassi/apis-catalog/wiki/stats-ov
 
 HTTP backend is available here https://github.com/omallassi/apis-catalog
 
-## Getting Started
-
-Once the repo has been cloned
-
-* update `package.json` to proxy to your apis-catalog backend (_e.g._ "proxy": "http://localhost:8088")
-* (optional) update the `.env` file with proper values
-* `npm start` will run the app in development mode. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-* 'npm run build` will compile the app in production mode (will require `.env.production` file with real value)
-
 
 ## Installation 
 

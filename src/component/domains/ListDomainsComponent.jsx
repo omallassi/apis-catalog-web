@@ -38,6 +38,8 @@ class ListDomainsComponent extends Component {
             domains: [],
             stats: [],
             showDomainEditor: false,
+            showErrorEditor: false,
+            errorMessage: "",
             domainEditorError: "",
             domain: { name: "", description: "", owner: "" }
         }
@@ -94,6 +96,7 @@ class ListDomainsComponent extends Component {
 
     handleClose = () => {
         this.setState({ showDomainEditor: false });
+        this.setState({ showErrorEditor: false, errorMessage: "" });
     };
 
     createDomain = (event) => {
@@ -118,6 +121,9 @@ class ListDomainsComponent extends Component {
             this.listAllDomains();
         }, (error) => {
             console.log(error);
+            console.log(error.response.status);
+            //display message
+            this.setState({ showErrorEditor: true, errorMessage: error + "" });
         });
     }
 
@@ -234,6 +240,15 @@ class ListDomainsComponent extends Component {
                                         <Button onClick={(e) => this.createDomain(e)} type="submit" color="primary">Create</Button>
                                     </DialogActions>
                                     {/* </form> */}
+                                </Dialog>
+                                <Dialog fullWidth maxWidth="md" open={this.state.showErrorEditor} onClose={() => this.handleClose()} aria-labelledby="error-dialog-title">
+                                    <DialogTitle id="error-dialog-title">Action Failed</DialogTitle>
+                                    <DialogContent>
+                                        <Typography variant="body1" color="error" gutterBottom>{this.state.errorMessage}</Typography>
+                                    </DialogContent>
+                                    <DialogActions>
+                                        <Button onClick={() => this.handleClose()}>Close</Button>
+                                    </DialogActions>
                                 </Dialog>
                                 {/* <Route exact path="/domains/new" render={this.renderDomainEditor()} /> */}
                             </Grid>
