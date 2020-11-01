@@ -5,6 +5,7 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import TableSortLabel from '@material-ui/core/TableSortLabel';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Card from '@material-ui/core/Card';
@@ -25,7 +26,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import SyncIcon from '@material-ui/icons/Sync';
 import IconButton from '@material-ui/core/IconButton';
 import { NIL as NIL_UUID } from 'uuid';
-import { Grid } from '@material-ui/core';
+import { Grid, TableContainer } from '@material-ui/core';
 
 import Paper from '@material-ui/core/Paper';
 import { blue } from '@material-ui/core/colors';
@@ -58,7 +59,12 @@ class ListDomainsComponent extends Component {
     listAllDomains() {
         ApiService.listAllDomains().then((res) => {
             console.log(res);
-            this.setState({ domains: res.data.domains });
+
+            var sorted_domains = res.data.domains.sort((a, b) => {
+                return a.name.localeCompare(b.name);
+            });
+
+            this.setState({ domains: sorted_domains });
         });
     }
 
@@ -256,32 +262,36 @@ class ListDomainsComponent extends Component {
                                 {/* <Route exact path="/domains/new" render={this.renderDomainEditor()} /> */}
                             </Grid>
                             <Grid item xs={12}>
-                                <Table className={this.props.classes.table} component={Paper}>
-                                    <TableHead>
-                                        <TableRow>
-                                            <TableCell className={this.props.classes.head}>Domain / SubDomain Name</TableCell>
-                                            <TableCell className={this.props.classes.head}>Description</TableCell>
-                                            <TableCell className={this.props.classes.head}>Owner</TableCell>
-                                            <TableCell className={this.props.classes.head}>Id</TableCell>
-                                            <TableCell className={this.props.classes.head} />
-                                        </TableRow>
-                                    </TableHead>
-                                    <TableBody>
-                                        {this.state.domains.map(row => (
-                                            <TableRow hover key={row.id}>
-                                                <TableCell>{row.name}</TableCell>
-                                                <TableCell>{row.description}</TableCell>
-                                                <TableCell>{row.owner}</TableCell>
-                                                <TableCell>{row.id}</TableCell>
-                                                <TableCell>
-                                                    <IconButton color="primary" variant="outlined" aria-label="refresh" onClick={() => { this.deleteDomain(row.id) }}>
-                                                        <DeleteOutlineIcon color="primary"></DeleteOutlineIcon>
-                                                    </IconButton>
+                                <TableContainer>
+                                    <Table className={this.props.classes.table} component={Paper}>
+                                        <TableHead>
+                                            <TableRow>
+                                                <TableCell key="domain" className={this.props.classes.head} >
+                                                    Domain / SubDomain Name
                                                 </TableCell>
+                                                <TableCell className={this.props.classes.head}>Description</TableCell>
+                                                <TableCell className={this.props.classes.head}>Owner</TableCell>
+                                                <TableCell className={this.props.classes.head}>Id</TableCell>
+                                                <TableCell className={this.props.classes.head} />
                                             </TableRow>
-                                        ))}
-                                    </TableBody>
-                                </Table>
+                                        </TableHead>
+                                        <TableBody>
+                                            {this.state.domains.map(row => (
+                                                <TableRow hover key={row.id}>
+                                                    <TableCell>{row.name}</TableCell>
+                                                    <TableCell>{row.description}</TableCell>
+                                                    <TableCell>{row.owner}</TableCell>
+                                                    <TableCell>{row.id}</TableCell>
+                                                    <TableCell>
+                                                        <IconButton color="primary" variant="outlined" aria-label="refresh" onClick={() => { this.deleteDomain(row.id) }}>
+                                                            <DeleteOutlineIcon color="primary"></DeleteOutlineIcon>
+                                                        </IconButton>
+                                                    </TableCell>
+                                                </TableRow>
+                                            ))}
+                                        </TableBody>
+                                    </Table>
+                                </TableContainer>
                             </Grid>
                         </Grid>
                     </CardContent>
