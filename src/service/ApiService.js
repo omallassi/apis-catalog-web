@@ -14,6 +14,11 @@ class ApiService {
         return axios.get('/v1/domains');
     }
 
+    listAllDomainsErrors() {
+        console.log("listAllDomainsErrors");
+        return axios.get('/v1/domains/errors');
+    }
+
     createDomain(domain) {
         console.info("Creating Domain [" + domain + "]");
         return axios.post('/v1/domains', domain);

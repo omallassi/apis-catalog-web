@@ -38,6 +38,7 @@ class ListDomainsComponent extends Component {
         this.state = {
             domains: [],
             stats: [],
+            errors: [],
             showDomainEditor: false,
             showErrorEditor: false,
             errorMessage: "",
@@ -47,12 +48,14 @@ class ListDomainsComponent extends Component {
 
         this.listAllDomains = this.listAllDomains.bind(this);
         this.buildDomainTreeMap = this.buildDomainTreeMap.bind(this);
+        this.listAllDomainsErrors = this.listAllDomainsErrors.bind(this);
         //
         // this.domainEditorRef = React.createRef();
     }
 
     componentDidMount() {
         this.listAllDomains();
+        this.listAllDomainsErrors();
         this.buildDomainTreeMap();
     }
 
@@ -65,6 +68,13 @@ class ListDomainsComponent extends Component {
             });
 
             this.setState({ domains: sorted_domains });
+        });
+    }
+
+    listAllDomainsErrors() {
+        ApiService.listAllDomainsErrors().then((res) => {
+            console.log(res);
+            this.setState({ errors: res.data.errors });
         });
     }
 
@@ -171,6 +181,42 @@ class ListDomainsComponent extends Component {
                             rootProps={{ 'data-testid': '1' }}
                         />
                     </CardContent>
+
+                    <CardContent>
+                        <Grid container>
+                            <Grid item xs={12}>
+                                <Typography component="h2" variant="h6" color="primary" gutterBottom>Domains Inconsistencies Check</Typography>
+                                <Typography variant="body1" gutterBottom>
+                                    The following table lists the OpenAPI Specifications whose domain is not in "Domains Catalog"
+                                </Typography>
+                            </Grid>
+                            <Grid item xs={12}>
+                                <TableContainer>
+                                    <Table className={this.props.classes.table} component={Paper}>
+                                        <TableHead>
+                                            <TableRow>
+                                                <TableCell className={this.props.classes.head} >
+                                                    OpenAPI Specification
+                                                </TableCell>
+                                                <TableCell className={this.props.classes.head}>Declared Domain</TableCell>
+                                                <TableCell className={this.props.classes.head}># of resources</TableCell>
+                                            </TableRow>
+                                        </TableHead>
+                                        <TableBody>
+                                            {this.state.errors.map(row => (
+                                                <TableRow hover key={row.spec_path}>
+                                                    <TableCell>{row.spec_path}</TableCell>
+                                                    <TableCell>{row.spec_domain}</TableCell>
+                                                    <TableCell>{row.resources}</TableCell>
+                                                </TableRow>
+                                            ))}
+                                        </TableBody>
+                                    </Table>
+                                </TableContainer>
+                            </Grid>
+                        </Grid>
+                    </CardContent>
+
                     <CardContent>
                         <Grid container>
                             <Grid item xs={11}>
