@@ -99,7 +99,7 @@ class DashboardComponent extends Component {
         var data_columns = [];
         data_columns[0] = { type: 'datetime', label: 'Date' };
         data_columns[1] = { type: 'string', role: 'annotation' };
-        data_columns[2] = { type: 'string', role: 'annotationText' };
+        data_columns[2] = { type: 'string', role: 'annotationText', 'p': { 'html': true } };
 
         for (var index in origin_data) {
 
@@ -114,8 +114,12 @@ class DashboardComponent extends Component {
                 var pr_date = new Date(merged_pull_requests[index_2].closedDate).toDateString();
                 var ts_date = new Date(origin_data[index][0]).toDateString();
                 if (pr_date == ts_date) {
-                    data_point[1] = merged_pull_requests[index_2].id;
-                    data_point[2] = "id: " + merged_pull_requests[index_2].id
+                    data_point[1] = data_point[1] != null ?
+                        data_point[1] + " " + merged_pull_requests[index_2].id : merged_pull_requests[index_2].id;
+                    data_point[2] = data_point[2] != null ?
+                        data_point[2] + " <br/>" + "id: " + merged_pull_requests[index_2].id
+                        + " title: " + merged_pull_requests[index_2].title
+                        + " author: " + merged_pull_requests[index_2].author.user.emailAddress : "id: " + merged_pull_requests[index_2].id
                         + " title: " + merged_pull_requests[index_2].title
                         + " author: " + merged_pull_requests[index_2].author.user.emailAddress;
                 }
@@ -184,8 +188,12 @@ class DashboardComponent extends Component {
                         var ts_date = new Date(res.data.endpoints_num[index][0]).toDateString();
 
                         if (pr_date == ts_date) {
-                            line_val[1] = res2.data[index_2].id;
-                            line_val[2] = "id: " + res2.data[index_2].id
+                            line_val[1] = line_val[1] != null ?
+                                line_val[1] + " " + res2.data[index_2].id : res2.data[index_2].id;
+                            line_val[2] = line_val[2] != null ?
+                                line_val[2] + " <br/>" + "id: " + res2.data[index_2].id
+                                + " title: " + res2.data[index_2].title
+                                + " author: " + res2.data[index_2].author.user.emailAddress : "id: " + res2.data[index_2].id
                                 + " title: " + res2.data[index_2].title
                                 + " author: " + res2.data[index_2].author.user.emailAddress;
                         }
@@ -386,7 +394,7 @@ class DashboardComponent extends Component {
                                         height={'600px'}
                                         chartType="LineChart"
                                         loader={<div>Loading Chart</div>}
-                                        columns={[{ type: 'datetime', label: 'Date' }, { type: 'string', role: 'annotation' }, { type: 'string', role: 'annotationText' }, '# of (REST) Operations']}
+                                        columns={[{ type: 'datetime', label: 'Date' }, { type: 'string', role: 'annotation' }, { type: 'string', role: 'annotationText', 'p': { 'html': true } }, '# of (REST) Operations']}
                                         // columns={['Date', '# of (REST) Operations']}
                                         rows={this.state.endpoints_num}
                                         options={{
@@ -408,10 +416,6 @@ class DashboardComponent extends Component {
                                             annotations: {
                                                 style: 'line',
                                                 // stemColor: 'red',
-                                                // 'textStyle': {
-                                                //     'fontSize': 10,
-                                                //     'auraColor': 'none'
-                                                // },
                                                 // 'boxStyle': {
                                                 //     'stroke': '#888888', 'strokeWidth': 0.5,
                                                 //     'rx': 2, 'ry': 2,
@@ -423,7 +427,9 @@ class DashboardComponent extends Component {
                                                 //         'useObjectBoundingBoxUnits': true
                                                 //     }
                                                 // }
+
                                             },
+                                            tooltip: { isHtml: true }
                                         }}
                                         rootProps={{ 'data-testid': '1' }}
                                     />
@@ -474,6 +480,7 @@ class DashboardComponent extends Component {
                                                 //     }
                                                 // }
                                             },
+                                            tooltip: { isHtml: true }
                                         }}
                                         rootProps={{ 'data-testid': '1' }}
                                     />
@@ -529,6 +536,7 @@ class DashboardComponent extends Component {
                                                 //     }
                                                 // }
                                             },
+                                            tooltip: { isHtml: true }
                                         }}
                                         rootProps={{ 'data-testid': '1' }}
                                     />
