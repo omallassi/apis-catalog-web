@@ -16,6 +16,8 @@ The [dashboard provides](https://github.com/omallassi/apis-catalog/wiki/stats-ov
 * metrics w.r.t. the catalog: # of operations, # of resources per domains
 * metrics w.r.t. zally: # and types of zally ignore
 
+These metrics are also "enriched" with pull-requests so that you can understand which PR made your stats drifted. 
+
 ![screenshot](img/screen.png)
 
 HTTP backend is available here https://github.com/omallassi/apis-catalog
