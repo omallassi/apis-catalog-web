@@ -16,6 +16,7 @@ The [dashboard provides](https://github.com/omallassi/apis-catalog/wiki/stats-ov
 These metrics are also "enriched" with pull-requests so that you can understand which PR made your stats drifted. 
 
 ![screenshot](img/dashboard.png)
+![screenshot](img/dashboard_2.png)
 ![screenshot](img/screen-treemap.png)
 
 Then, you can create APIs and manage their lifecycles; 
