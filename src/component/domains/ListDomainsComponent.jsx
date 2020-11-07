@@ -25,6 +25,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 
 import SyncIcon from '@material-ui/icons/Sync';
 import IconButton from '@material-ui/core/IconButton';
+import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
 import { NIL as NIL_UUID } from 'uuid';
 import { Grid, TableContainer } from '@material-ui/core';
 
@@ -195,6 +196,7 @@ class ListDomainsComponent extends Component {
                                     <Table className={this.props.classes.table} component={Paper}>
                                         <TableHead>
                                             <TableRow>
+                                                <TableCell className={this.props.classes.head} ></TableCell>
                                                 <TableCell className={this.props.classes.head} >
                                                     OpenAPI Specification
                                                 </TableCell>
@@ -205,6 +207,9 @@ class ListDomainsComponent extends Component {
                                         <TableBody>
                                             {this.state.errors.map(row => (
                                                 <TableRow hover key={row.spec_path}>
+                                                    <TableCell>
+                                                        <ErrorOutlineIcon color="error" />
+                                                    </TableCell>
                                                     <TableCell>
                                                         {/* //TODO faire un component "réutilisable" (ie. ExternalLink) */}
                                                         <a className="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button" tabIndex="0" role="button" aria-disabled="false"
