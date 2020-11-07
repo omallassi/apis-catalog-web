@@ -59,9 +59,15 @@ class ApiService {
         console.log("refreshing metrics");
         return axios.post('/v1/metrics/refresh');
     }
+
     getOldestPr() {
         console.log("getting oldest PR");
         return axios.get('v1/metrics/pull-requests');
+    }
+
+    getMergedPr() {
+        console.log("getting merged PR");
+        return axios.get('/v1/metrics/merged-pull-requests');
     }
 }
 

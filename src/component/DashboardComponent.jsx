@@ -80,7 +80,7 @@ class DashboardComponent extends Component {
         this.getOldestPr();
     }
 
-    createDataTable(origin_data) {
+    createDataTable(origin_data, merged_pull_requests) {
         //need to parse them to have an array of array
         var columns = [];
         //get the number of columns : ie. distinct zally violations number
@@ -94,15 +94,32 @@ class DashboardComponent extends Component {
             }
         }
 
-        //create data table
+        //create data table and merge with PR
         var data = [];
         var data_columns = [];
         data_columns[0] = { type: 'datetime', label: 'Date' };
+        data_columns[1] = { type: 'string', role: 'annotation' };
+        data_columns[2] = { type: 'string', role: 'annotationText' };
+
         for (var index in origin_data) {
 
-            var data_point = new Array(columns.length + 1);
+            var data_point = new Array(columns.length + 3);
+
             data_point.fill(0);
             data_point[0] = new Date(origin_data[index][0]);
+            data_point[1] = null;
+            data_point[2] = null;
+
+            for (var index_2 in merged_pull_requests) {
+                var pr_date = new Date(merged_pull_requests[index_2].closedDate).toDateString();
+                var ts_date = new Date(origin_data[index][0]).toDateString();
+                if (pr_date == ts_date) {
+                    data_point[1] = merged_pull_requests[index_2].id;
+                    data_point[2] = "id: " + merged_pull_requests[index_2].id
+                        + " title: " + merged_pull_requests[index_2].title
+                        + " author: " + merged_pull_requests[index_2].author.user.emailAddress;
+                }
+            }
 
             var values = origin_data[index][1];
 
@@ -116,7 +133,6 @@ class DashboardComponent extends Component {
             }
             data[data.length] = data_point;
         }
-
         return { data: data, data_columns: data_columns };
     }
 
@@ -150,41 +166,56 @@ class DashboardComponent extends Component {
             }
             this.setState({ pr_ages: formatted_array });
 
-            //because we need to create JS Date object, we are to go through the array....
-            var formatted_endpoints_num = [];
-            for (var index in res.data.endpoints_num) {
-                var line_val = [];
+            //go and get merged_pr
+            ApiService.getMergedPr().then((res2) => {
+                //endpoints_num
+                var formatted_endpoints_num = [];
+                for (var index in res.data.endpoints_num) {
 
-                line_val[0] = new Date(res.data.endpoints_num[index][0]);
-                line_val[1] = res.data.endpoints_num[index][1];
-                line_val[2] = res.data.endpoints_num[index][2];
-                line_val[3] = res.data.endpoints_num[index][3];
+                    var line_val = [];
 
-                formatted_endpoints_num[index] = line_val;
-            }
-            this.setState({ endpoints_num: formatted_endpoints_num });
+                    line_val[0] = new Date(res.data.endpoints_num[index][0]);
+                    line_val[1] = null;
+                    line_val[2] = null;
+                    line_val[3] = res.data.endpoints_num[index][1];
 
-            //
-            var origin_data = res.data.zally_violations;
-            var zally_violations = this.createDataTable(origin_data);
-            //zally violations have the following format 
-            //"zally_violations":[
-            //   [
-            //     "2020-08-17T05:38:03.956767Z",
-            //     {
-            //        "134":3,
-            //        "120":4
-            //     }
-            //  ],...
-            this.setState({ zally_violations_columns: zally_violations.data_columns });
-            this.setState({ zally_violations: zally_violations.data });
+                    for (var index_2 in res2.data) {
+                        var pr_date = new Date(res2.data[index_2].closedDate).toDateString();
+                        var ts_date = new Date(res.data.endpoints_num[index][0]).toDateString();
 
-            //set endpoints num per audience
-            var origin_data = res.data.endpoints_num_per_audience;
-            var endpoints_num_per_audience = this.createDataTable(origin_data)
+                        if (pr_date == ts_date) {
+                            line_val[1] = res2.data[index_2].id;
+                            line_val[2] = "id: " + res2.data[index_2].id
+                                + " title: " + res2.data[index_2].title
+                                + " author: " + res2.data[index_2].author.user.emailAddress;
+                        }
+                    }
+                    formatted_endpoints_num[index] = line_val;
+                }
+                this.setState({ endpoints_num: formatted_endpoints_num });
+                //
+                var origin_data = res.data.zally_violations;
+                var zally_violations = this.createDataTable(origin_data, res2.data);
+                //zally violations have the following format 
+                //"zally_violations":[
+                //   [
+                //     "2020-08-17T05:38:03.956767Z",
+                //     {
+                //        "134":3,
+                //        "120":4
+                //     }
+                //  ],...
+                this.setState({ zally_violations_columns: zally_violations.data_columns });
+                this.setState({ zally_violations: zally_violations.data });
 
-            this.setState({ endpoints_audience_num_columns: endpoints_num_per_audience.data_columns });
-            this.setState({ endpoints_audience_num: endpoints_num_per_audience.data });
+                //set endpoints num per audience
+                var origin_data = res.data.endpoints_num_per_audience;
+                var endpoints_num_per_audience = this.createDataTable(origin_data, res2.data);
+
+                this.setState({ endpoints_audience_num_columns: endpoints_num_per_audience.data_columns });
+                this.setState({ endpoints_audience_num: endpoints_num_per_audience.data });
+            })
+
         });
     }
 
@@ -243,7 +274,7 @@ class DashboardComponent extends Component {
                                         The following chart displays the # of opened Pull-Request
                                     </Typography>
                                     <Chart
-                                        height={'400px'}
+                                        height={'600px'}
                                         chartType="LineChart"
                                         loader={<div>Loading Chart</div>}
                                         columns={['Date', 'Pull Requests #']}
@@ -276,7 +307,7 @@ class DashboardComponent extends Component {
                                         The following chart displays some statistics around pull-requests
                                     </Typography>
                                     <Chart
-                                        height={'400px'}
+                                        height={'600px'}
                                         chartType="LineChart"
                                         loader={<div>Loading Chart</div>}
                                         columns={['Date', 'min (days)', 'p50 (days)', 'max (days)', 'mean (days)']}
@@ -352,7 +383,7 @@ class DashboardComponent extends Component {
                                         The following chart displays the evolution of (REST) resources
                                     </Typography>
                                     <Chart
-                                        height={'400px'}
+                                        height={'600px'}
                                         chartType="LineChart"
                                         loader={<div>Loading Chart</div>}
                                         columns={[{ type: 'datetime', label: 'Date' }, { type: 'string', role: 'annotation' }, { type: 'string', role: 'annotationText' }, '# of (REST) Operations']}
@@ -403,7 +434,7 @@ class DashboardComponent extends Component {
                                         The following chart displays the evolution of (REST) resources per x-audience
                                     </Typography>
                                     <Chart
-                                        height={'400px'}
+                                        height={'600px'}
                                         chartType="LineChart"
                                         loader={<div>Loading Chart</div>}
                                         columns={this.state.endpoints_audience_num_columns} //TODO
@@ -424,6 +455,25 @@ class DashboardComponent extends Component {
                                             vAxis: {
                                                 title: '# of endpoints',
                                             },
+                                            annotations: {
+                                                style: 'line',
+                                                // stemColor: 'red',
+                                                // 'textStyle': {
+                                                //     'fontSize': 10,
+                                                //     'auraColor': 'none'
+                                                // },
+                                                // 'boxStyle': {
+                                                //     'stroke': '#888888', 'strokeWidth': 0.5,
+                                                //     'rx': 2, 'ry': 2,
+                                                //     'gradient': {
+                                                //         'color1': '#eeeeee',
+                                                //         'color2': '#dddddd',
+                                                //         'x1': '0%', 'y1': '0%',
+                                                //         'x2': '0%', 'y2': '100%',
+                                                //         'useObjectBoundingBoxUnits': true
+                                                //     }
+                                                // }
+                                            },
                                         }}
                                         rootProps={{ 'data-testid': '1' }}
                                     />
@@ -439,7 +489,7 @@ class DashboardComponent extends Component {
                                         The following chart displays the evolution of x-zally-ignore
                                     </Typography>
                                     <Chart
-                                        height={'400px'}
+                                        height={'600px'}
                                         chartType="LineChart"
                                         loader={<div>Loading Chart</div>}
                                         columns={this.state.zally_violations_columns}
@@ -459,6 +509,25 @@ class DashboardComponent extends Component {
                                             },
                                             vAxis: {
                                                 title: '# of zally-ignore',
+                                            },
+                                            annotations: {
+                                                style: 'line',
+                                                // stemColor: 'red',
+                                                // 'textStyle': {
+                                                //     'fontSize': 10,
+                                                //     'auraColor': 'none'
+                                                // },
+                                                // 'boxStyle': {
+                                                //     'stroke': '#888888', 'strokeWidth': 0.5,
+                                                //     'rx': 2, 'ry': 2,
+                                                //     'gradient': {
+                                                //         'color1': '#eeeeee',
+                                                //         'color2': '#dddddd',
+                                                //         'x1': '0%', 'y1': '0%',
+                                                //         'x2': '0%', 'y2': '100%',
+                                                //         'useObjectBoundingBoxUnits': true
+                                                //     }
+                                                // }
                                             },
                                         }}
                                         rootProps={{ 'data-testid': '1' }}
