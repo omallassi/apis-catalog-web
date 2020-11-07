@@ -97,12 +97,12 @@ class DashboardComponent extends Component {
         //create data table
         var data = [];
         var data_columns = [];
-        data_columns[0] = 'Date';
+        data_columns[0] = { type: 'datetime', label: 'Date' };
         for (var index in origin_data) {
 
             var data_point = new Array(columns.length + 1);
             data_point.fill(0);
-            data_point[0] = origin_data[index][0];
+            data_point[0] = new Date(origin_data[index][0]);
 
             var values = origin_data[index][1];
 
@@ -122,11 +122,49 @@ class DashboardComponent extends Component {
 
     getStats() {
         ApiService.getStats().then((res) => {
-            this.setState({ pr_num: res.data.pr_num });
-            this.setState({ pr_ages: res.data.pr_ages });
-            this.setState({ endpoints_num: res.data.endpoints_num });
 
+            //because we need to create JS Date objects....loop and loop and loop 
+            var formatted_array = [];
+            for (var index in res.data.pr_num) {
+                var line_val = [];
 
+                line_val[0] = new Date(res.data.pr_num[index][0]);
+                line_val[1] = res.data.pr_num[index][1];
+
+                formatted_array[index] = line_val;
+            }
+            this.setState({ pr_num: formatted_array });
+
+            //because we need to create JS Date objects....loop and loop and loop 
+            var formatted_array = [];
+            for (var index in res.data.pr_ages) {
+                var line_val = [];
+
+                line_val[0] = new Date(res.data.pr_ages[index][0]);
+                line_val[1] = res.data.pr_ages[index][1];
+                line_val[2] = res.data.pr_ages[index][2];
+                line_val[3] = res.data.pr_ages[index][3];
+                line_val[4] = res.data.pr_ages[index][4];
+
+                formatted_array[index] = line_val;
+            }
+            this.setState({ pr_ages: formatted_array });
+
+            //because we need to create JS Date object, we are to go through the array....
+            var formatted_endpoints_num = [];
+            for (var index in res.data.endpoints_num) {
+                var line_val = [];
+
+                line_val[0] = new Date(res.data.endpoints_num[index][0]);
+                line_val[1] = res.data.endpoints_num[index][1];
+                line_val[2] = res.data.endpoints_num[index][2];
+                line_val[3] = res.data.endpoints_num[index][3];
+
+                formatted_endpoints_num[index] = line_val;
+            }
+            this.setState({ endpoints_num: formatted_endpoints_num });
+
+            //
             var origin_data = res.data.zally_violations;
             var zally_violations = this.createDataTable(origin_data);
             //zally violations have the following format 
@@ -218,6 +256,7 @@ class DashboardComponent extends Component {
                                             lineWidth: 3,
                                             explorer: {
                                                 actions: ['dragToZoom', 'rightClickToReset'],
+                                                axis: 'horizontal',
                                                 keepInBounds: true
                                             },
                                             intervals: { style: 'line' },
@@ -248,6 +287,7 @@ class DashboardComponent extends Component {
                                             lineWidth: 3,
                                             explorer: {
                                                 actions: ['dragToZoom', 'rightClickToReset'],
+                                                axis: 'horizontal',
                                                 keepInBounds: true
                                             },
                                             intervals: { style: 'line' },
@@ -315,7 +355,8 @@ class DashboardComponent extends Component {
                                         height={'400px'}
                                         chartType="LineChart"
                                         loader={<div>Loading Chart</div>}
-                                        columns={['Date', '# of (REST) Operations']}
+                                        columns={[{ type: 'datetime', label: 'Date' }, { type: 'string', role: 'annotation' }, { type: 'string', role: 'annotationText' }, '# of (REST) Operations']}
+                                        // columns={['Date', '# of (REST) Operations']}
                                         rows={this.state.endpoints_num}
                                         options={{
                                             title: "Number of (REST) Resources",
@@ -323,6 +364,7 @@ class DashboardComponent extends Component {
                                             lineWidth: 3,
                                             explorer: {
                                                 actions: ['dragToZoom', 'rightClickToReset'],
+                                                axis: 'horizontal',
                                                 keepInBounds: true
                                             },
                                             intervals: { style: 'line' },
@@ -331,6 +373,25 @@ class DashboardComponent extends Component {
                                             },
                                             vAxis: {
                                                 title: '# of operations',
+                                            },
+                                            annotations: {
+                                                style: 'line',
+                                                // stemColor: 'red',
+                                                // 'textStyle': {
+                                                //     'fontSize': 10,
+                                                //     'auraColor': 'none'
+                                                // },
+                                                // 'boxStyle': {
+                                                //     'stroke': '#888888', 'strokeWidth': 0.5,
+                                                //     'rx': 2, 'ry': 2,
+                                                //     'gradient': {
+                                                //         'color1': '#eeeeee',
+                                                //         'color2': '#dddddd',
+                                                //         'x1': '0%', 'y1': '0%',
+                                                //         'x2': '0%', 'y2': '100%',
+                                                //         'useObjectBoundingBoxUnits': true
+                                                //     }
+                                                // }
                                             },
                                         }}
                                         rootProps={{ 'data-testid': '1' }}
@@ -353,6 +414,7 @@ class DashboardComponent extends Component {
                                             lineWidth: 3,
                                             explorer: {
                                                 actions: ['dragToZoom', 'rightClickToReset'],
+                                                axis: 'horizontal',
                                                 keepInBounds: true
                                             },
                                             intervals: { style: 'line' },
@@ -388,6 +450,7 @@ class DashboardComponent extends Component {
                                             lineWidth: 3,
                                             explorer: {
                                                 actions: ['dragToZoom', 'rightClickToReset'],
+                                                axis: 'horizontal',
                                                 keepInBounds: true
                                             },
                                             intervals: { style: 'line' },
