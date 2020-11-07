@@ -5,10 +5,7 @@
 ## Overview 
 > :warning: All of this is, at this stage ideas and POC
 
-The Web UI (at this stage, mostly providing read-only access) to [apis-catalog](https://github.com/omallassi/apis-catalog/).
-
-![screenshot](img/dashboard.png)
-![screenshot](img/screen-treemap.png)
+The Web UI (at this stage, mostly providing read-only access) to [apis-catalog](https://github.com/omallassi/apis-catalog/). 
 
 The [dashboard provides](https://github.com/omallassi/apis-catalog/wiki/stats-overview)
 
@@ -17,6 +14,11 @@ The [dashboard provides](https://github.com/omallassi/apis-catalog/wiki/stats-ov
 * metrics w.r.t. zally: # and types of zally ignore
 
 These metrics are also "enriched" with pull-requests so that you can understand which PR made your stats drifted. 
+
+![screenshot](img/dashboard.png)
+![screenshot](img/screen-treemap.png)
+
+Then, you can create APIs and manage their lifecycles; 
 
 ![screenshot](img/screen.png)
 
