@@ -296,7 +296,8 @@ class DashboardComponent extends Component {
                                             explorer: {
                                                 actions: ['dragToZoom', 'rightClickToReset'],
                                                 axis: 'horizontal',
-                                                keepInBounds: true
+                                                keepInBounds: true,
+                                                maxZoomIn: 0.01,
                                             },
                                             intervals: { style: 'line' },
                                             hAxis: {
@@ -327,7 +328,8 @@ class DashboardComponent extends Component {
                                             explorer: {
                                                 actions: ['dragToZoom', 'rightClickToReset'],
                                                 axis: 'horizontal',
-                                                keepInBounds: true
+                                                keepInBounds: true,
+                                                maxZoomIn: 0.01,
                                             },
                                             intervals: { style: 'line' },
                                             hAxis: {
@@ -404,7 +406,8 @@ class DashboardComponent extends Component {
                                             explorer: {
                                                 actions: ['dragToZoom', 'rightClickToReset'],
                                                 axis: 'horizontal',
-                                                keepInBounds: true
+                                                keepInBounds: true,
+                                                maxZoomIn: 0.01,
                                             },
                                             intervals: { style: 'line' },
                                             hAxis: {
@@ -452,7 +455,8 @@ class DashboardComponent extends Component {
                                             explorer: {
                                                 actions: ['dragToZoom', 'rightClickToReset'],
                                                 axis: 'horizontal',
-                                                keepInBounds: true
+                                                keepInBounds: true,
+                                                maxZoomIn: 0.01,
                                             },
                                             intervals: { style: 'line' },
                                             hAxis: {
@@ -508,7 +512,8 @@ class DashboardComponent extends Component {
                                             explorer: {
                                                 actions: ['dragToZoom', 'rightClickToReset'],
                                                 axis: 'horizontal',
-                                                keepInBounds: true
+                                                keepInBounds: true,
+                                                maxZoomIn: 0.01,
                                             },
                                             intervals: { style: 'line' },
                                             hAxis: {
