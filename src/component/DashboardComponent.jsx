@@ -272,7 +272,7 @@ class DashboardComponent extends Component {
                             textColor="primary">
                             <Tab label="Process" icon={<AssessmentIcon />} {...this.a11yProps(0)} />
                             <Tab label="Catalog" icon={<AssignmentIcon />} {...this.a11yProps(1)} />
-                            <Tab label="Zally Violations" icon={<AssignmentLateIcon />} {...this.a11yProps(1)} />
+                            <Tab label="Zally Violations" icon={<AssignmentLateIcon />} {...this.a11yProps(2)} />
                         </Tabs>
                         <TabPanel value={this.state.value} index={0}>
                             <Grid container direction="row" alignItems="center" spacing={10}>
