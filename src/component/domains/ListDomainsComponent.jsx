@@ -247,7 +247,7 @@ class ListDomainsComponent extends Component {
                             <CardContent>
                                 <Grid container>
                                     <Grid item xs={12}>
-                                        <Typography component="h2" variant="h6" color="primary" gutterBottom>Domains Inconsistencies Check</Typography>
+                                        {/* <Typography component="h2" variant="h6" color="primary" gutterBottom>Domains Inconsistencies Check</Typography> */}
                                         <Typography variant="body1" gutterBottom>
                                             The following table lists the OpenAPI Specifications whose domain is not in "Domains Catalog"
                                 </Typography>
@@ -297,7 +297,7 @@ class ListDomainsComponent extends Component {
                             <CardContent>
                                 <Grid container>
                                     <Grid item xs={11}>
-                                        <Typography component="h2" variant="h6" color="primary" gutterBottom>Domains Catalog</Typography>
+                                        {/* <Typography component="h2" variant="h6" color="primary" gutterBottom>Domains Catalog</Typography> */}
                                         <Typography variant="body1" gutterBottom>
                                             The following table is the list of "declared" Domains and Subdomains.
                                 </Typography>
