@@ -62,12 +62,12 @@ class ApiService {
 
     getOldestPr() {
         console.log("getting oldest PR");
-        return axios.get('v1/metrics/pull-requests');
+        return axios.get('v1/pull-requests');
     }
 
     getMergedPr() {
         console.log("getting merged PR");
-        return axios.get('/v1/metrics/merged-pull-requests');
+        return axios.get('/v1/merged-pull-requests');
     }
 }
 
