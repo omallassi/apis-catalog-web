@@ -8,10 +8,12 @@ import DashboardIcon from '@material-ui/icons/Dashboard';
 import ListAltIcon from '@material-ui/icons/ListAlt';
 import FilterTiltShiftIcon from '@material-ui/icons/FilterTiltShift';
 import ComputerIcon from '@material-ui/icons/Computer';
+import RateReviewIcon from '@material-ui/icons/RateReview';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import Paper from '@material-ui/core/Paper';
+
 
 function ListItemLink(props) {
   const { icon, primary, to } = props;
@@ -62,6 +64,7 @@ export default function ListRouter() {
         <Paper elevation={0}>
           <List aria-label="main mailbox folders">
             <ListItemLink to="/" primary="Dashboard" icon={<DashboardIcon />} />
+            <ListItemLink to="/reviews" primary="APIs Reviews" icon={<RateReviewIcon />} />
             <ListItemLink to="/domains" primary="Domains" icon={<FilterTiltShiftIcon />} />
             <ListItemLink to="/apis" primary="Apis" icon={<ListAltIcon />} />
             <ListItemLink to="/envs" primary="Environments" icon={<ComputerIcon />} />

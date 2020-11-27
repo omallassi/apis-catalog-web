@@ -69,6 +69,11 @@ class ApiService {
         console.log("getting merged PR");
         return axios.get('/v1/merged-pull-requests');
     }
+
+    listAllReviews() {
+        console.log("list all reviews");
+        return axios.get('/v1/reviews');
+    }
 }
 
 export default new ApiService();
