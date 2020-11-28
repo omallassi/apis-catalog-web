@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Box from '@material-ui/core/Box';
+import { borders } from '@material-ui/system';
 import { deepOrange, lightGreen, blueGrey, blue } from '@material-ui/core/colors';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
@@ -19,6 +20,11 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
+
+import ArrowRightIcon from '@material-ui/icons/ArrowRight';
+import TrendingDownIcon from '@material-ui/icons/TrendingDown';
+import TrendingUpIcon from '@material-ui/icons/TrendingUp';
+
 
 // function TabPanel(props) {
 //     const { children, value, index, ...other } = props;
@@ -134,37 +140,43 @@ class ReviewDetailsComponent extends Component {
                     <CardContent>
                         <Grid container direction="row" justify="flex-start" alignItems="flex-start" spacing={1}>
                             <Grid container xs={12} spacing={1} item={true}>
-                                <Grid item xs={4}>
-                                    <TextField id="id" variant="outlined" value={this.state.review.id} label="ID" fullWidth margin="normal" />
-                                </Grid>
-                                <Grid item xs={8}>
-                                    <TextField id="title" variant="outlined" value={this.state.review.title} label="TITLE" fullWidth margin="normal" />
-                                </Grid>
-                                <Grid item xs={6}>
+                                <Grid item xs={2}>
                                     <Card>
-                                        <CardHeader title="Added Zally Ignore" avatar={<Avatar aria-label="recipe" className={this.props.classes.avatargreen}>A</Avatar>} />
+                                        <CardHeader title="Added Zally Ignore" titleTypographyProps={{ color: "textPrimary", variant: "overline" }} />
                                         <CardContent>
-                                            <Typography variant="body2" color="textSecondary" component="p">
+                                            <Typography variant="h3" color="textSecondary" component="p">
                                                 {this.state.added_zally}</Typography>
                                         </CardContent>
                                     </Card>
                                 </Grid>
-                                <Grid item xs={6}>
+                                <Grid item xs={2}>
                                     <Card>
-                                        <CardHeader title="Removed Zally Ignore" avatar={<Avatar aria-label="recipe" className={this.props.classes.avatarorange}>A</Avatar>} />
+                                        <CardHeader title="Removed Zally Ignore" titleTypographyProps={{ color: "textPrimary", variant: "overline" }} />
                                         <CardContent>
-                                            <Typography variant="body2" color="textSecondary" component="p">
+                                            <Typography variant="h3" color="textSecondary" component="p">
                                                 {this.state.removed_zally}</Typography>
                                         </CardContent>
                                     </Card>
                                 </Grid>
+                                <Grid item xs={2}>
+                                    <TextField id="id" variant="outlined" value={this.state.review.id} label="ID" fullWidth margin="normal" />
+                                </Grid>
+                                <Grid item xs={6}>
+                                    <TextField id="title" variant="outlined" value={this.state.review.title} label="REVIEW TITLE" fullWidth margin="normal" />
+                                </Grid>
+
                                 <Grid item xs={6}>
                                     <Card>
-                                        <CardHeader title="Added Path(s)" avatar={<Avatar aria-label="recipe" className={this.props.classes.avatargreen}>A</Avatar>} />
+                                        <CardHeader title="Added Path(s)"
+                                            avatar={<TrendingUpIcon color="primary" />}
+                                            titleTypographyProps={{ color: "textPrimary", variant: "overline" }} />
                                         <CardContent>
                                             <List>
                                                 {this.state.added_paths.map(diff => (
                                                     <ListItem>
+                                                        <ListItemIcon>
+                                                            <ArrowRightIcon />
+                                                        </ListItemIcon>
                                                         <ListItemText key={diff.line}
                                                             primary={diff.line}
                                                         />
@@ -176,11 +188,16 @@ class ReviewDetailsComponent extends Component {
                                 </Grid>
                                 <Grid item xs={6}>
                                     <Card>
-                                        <CardHeader title="Removed Path(s)" avatar={<Avatar aria-label="recipe" className={this.props.classes.avatarorange}>A</Avatar>} />
+                                        <CardHeader title="Removed Path(s)"
+                                            avatar={<TrendingDownIcon color="primary" />}
+                                            titleTypographyProps={{ color: "textPrimary", variant: "overline" }} />
                                         <CardContent>
                                             <List>
                                                 {this.state.removed_paths.map(diff => (
                                                     <ListItem>
+                                                        <ListItemIcon>
+                                                            <ArrowRightIcon />
+                                                        </ListItemIcon>
                                                         <ListItemText key={diff.line}
                                                             primary={diff.line}
                                                         />
@@ -192,11 +209,16 @@ class ReviewDetailsComponent extends Component {
                                 </Grid>
                                 <Grid item xs={6}>
                                     <Card>
-                                        <CardHeader title="Added Permission(s)" avatar={<Avatar aria-label="recipe" className={this.props.classes.avatargreen}>A</Avatar>} />
+                                        <CardHeader title="Added Permission(s)"
+                                            avatar={<TrendingUpIcon color="primary" />}
+                                            titleTypographyProps={{ color: "textPrimary", variant: "overline" }} />
                                         <CardContent>
                                             <List>
                                                 {this.state.added_permissions.map(diff => (
                                                     <ListItem>
+                                                        <ListItemIcon>
+                                                            <ArrowRightIcon />
+                                                        </ListItemIcon>
                                                         <ListItemText key={diff.line}
                                                             primary={diff.line}
                                                         />
@@ -208,11 +230,16 @@ class ReviewDetailsComponent extends Component {
                                 </Grid>
                                 <Grid item xs={6}>
                                     <Card>
-                                        <CardHeader title="Removed Permission(s)" avatar={<Avatar aria-label="recipe" className={this.props.classes.avatarorange}>A</Avatar>} />
+                                        <CardHeader title="Removed Permission(s)"
+                                            avatar={<TrendingDownIcon color="primary" />}
+                                            titleTypographyProps={{ color: "textPrimary", variant: "overline" }} />
                                         <CardContent>
                                             <List>
                                                 {this.state.removed_permissions.map(diff => (
                                                     <ListItem>
+                                                        <ListItemIcon>
+                                                            <ArrowRightIcon />
+                                                        </ListItemIcon>
                                                         <ListItemText key={diff.line}
                                                             primary={diff.line}
                                                         />
@@ -226,7 +253,7 @@ class ReviewDetailsComponent extends Component {
                             </Grid>
                         </Grid>
                     </CardContent>
-                </Card>
+                </Card >
             </Box >
         );
     }

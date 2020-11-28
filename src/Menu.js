@@ -63,11 +63,11 @@ export default function ListRouter() {
 
         <Paper elevation={0}>
           <List aria-label="main mailbox folders">
-            <ListItemLink to="/" primary="Dashboard" icon={<DashboardIcon />} />
-            <ListItemLink to="/reviews" primary="APIs Reviews" icon={<RateReviewIcon />} />
-            <ListItemLink to="/domains" primary="Domains" icon={<FilterTiltShiftIcon />} />
-            <ListItemLink to="/apis" primary="Apis" icon={<ListAltIcon />} />
-            <ListItemLink to="/envs" primary="Environments" icon={<ComputerIcon />} />
+            <ListItemLink to="/" primary="Dashboard" icon={<DashboardIcon color="primary" />} />
+            <ListItemLink to="/reviews" primary="APIs Reviews" icon={<RateReviewIcon color="primary" />} />
+            <ListItemLink to="/domains" primary="Domains" icon={<FilterTiltShiftIcon color="primary" />} />
+            <ListItemLink to="/apis" primary="Apis" icon={<ListAltIcon color="primary" />} />
+            <ListItemLink to="/envs" primary="Environments" icon={<ComputerIcon color="primary" />} />
             <li>
               <a className="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button" tabIndex="0" role="button" aria-disabled="false"
                 href={process.env.REACT_APP_PACT_DOC_URL} target="_blank">

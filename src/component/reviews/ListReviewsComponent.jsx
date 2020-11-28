@@ -106,7 +106,7 @@ class ListReviewsComponent extends Component {
         if (this.reviewDetails.current !== null) {
             var kept;
             this.state.reviews.forEach(function (review, index) {
-                if (id == review.id) {
+                if (id === review.id) {
                     kept = review;
                     //TODO return stop looping faster
                 }
@@ -169,7 +169,7 @@ class ListReviewsComponent extends Component {
                                                     </Link>
                                                 </TableCell>
                                                 <TableCell>
-                                                    {row.added_path != 0 &&
+                                                    {row.added_path !== 0 &&
                                                         <Chip
                                                             label={row.added_path}
                                                             color="primary"
@@ -178,7 +178,7 @@ class ListReviewsComponent extends Component {
                                                     }
                                                 </TableCell>
                                                 <TableCell>
-                                                    {row.removed_path != 0 &&
+                                                    {row.removed_path !== 0 &&
                                                         <Chip
                                                             label={row.removed_path}
                                                             color="primary"
@@ -187,7 +187,7 @@ class ListReviewsComponent extends Component {
                                                     }
                                                 </TableCell>
                                                 <TableCell>
-                                                    {row.added_permission != 0 &&
+                                                    {row.added_permission !== 0 &&
                                                         <Chip
                                                             label={row.added_permission}
                                                             color="primary"
@@ -196,7 +196,7 @@ class ListReviewsComponent extends Component {
                                                     }
                                                 </TableCell>
                                                 <TableCell>
-                                                    {row.removed_permission != 0 &&
+                                                    {row.removed_permission !== 0 &&
                                                         <Chip
                                                             label={row.removed_permission}
                                                             color="primary"
@@ -205,7 +205,7 @@ class ListReviewsComponent extends Component {
                                                     }
                                                 </TableCell>
                                                 <TableCell>
-                                                    {row.added_zally != 0 &&
+                                                    {row.added_zally !== 0 &&
                                                         <Chip
                                                             label={row.added_zally}
                                                             color="primary"
@@ -214,7 +214,7 @@ class ListReviewsComponent extends Component {
                                                     }
                                                 </TableCell>
                                                 <TableCell>
-                                                    {row.removed_zally != 0 &&
+                                                    {row.removed_zally !== 0 &&
                                                         <Chip
                                                             label={row.removed_zally}
                                                             color="primary"
