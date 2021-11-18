@@ -270,11 +270,12 @@ class DashboardComponent extends Component {
                             onChange={(event, newValue) => this.setState({ value: newValue })}
                             indicatorColor="primary"
                             textColor="primary">
-                            <Tab label="Process" icon={<AssessmentIcon />} {...this.a11yProps(0)} />
-                            <Tab label="Catalog" icon={<AssignmentIcon />} {...this.a11yProps(1)} />
+
+                            <Tab label="Catalog" icon={<AssignmentIcon />} {...this.a11yProps(0)} />
+                            <Tab label="Process" icon={<AssessmentIcon />} {...this.a11yProps(1)} />
                             <Tab label="Zally Violations" icon={<AssignmentLateIcon />} {...this.a11yProps(2)} />
                         </Tabs>
-                        <TabPanel value={this.state.value} index={0}>
+                        <TabPanel value={this.state.value} index={1}>
                             <Grid container direction="row" alignItems="center" spacing={10}>
                                 <Grid item xs={12}>
                                     <Typography variant="body1" gutterBottom className={this.props.classes.wrapIcon}>
@@ -384,7 +385,7 @@ class DashboardComponent extends Component {
                                 </Grid>
                             </Grid>
                         </TabPanel>
-                        <TabPanel value={this.state.value} index={1}>
+                        <TabPanel value={this.state.value} index={0}>
                             <Typography variant="body1" gutterBottom>A Resource correspond to a Path in OpenAPI specification and can thus, support muliple operations (ie. GET, POST etc...)</Typography>
                             <Grid container direction="row" alignItems="center" spacing={10}>
                                 <Grid item xs={12}>
@@ -396,7 +397,7 @@ class DashboardComponent extends Component {
                                         height={'600px'}
                                         chartType="LineChart"
                                         loader={<div>Loading Chart</div>}
-                                        columns={[{ type: 'datetime', label: 'Date' }, { type: 'string', role: 'annotation' }, { type: 'string', role: 'annotationText', 'p': { 'html': true } }, '# of (REST) Operations']}
+                                        columns={[{ type: 'datetime', label: 'Date' }, { type: 'string', role: 'annotation' }, { type: 'string', role: 'annotationText', 'p': { 'html': true } }, '# of (REST) Paths']}
                                         // columns={['Date', '# of (REST) Operations']}
                                         rows={this.state.endpoints_num}
                                         options={{
