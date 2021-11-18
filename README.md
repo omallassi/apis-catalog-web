@@ -18,9 +18,19 @@ Please, refer to [Web UIs](https://github.com/omallassi/apis-catalog/wiki/Web-UI
 
 These metrics are also "enriched" with pull-requests so that you can understand which PR made your stats drifted. 
 
+### Metrics related dashboards
+
 ![screenshot](img/dashboard.png)
 ![screenshot](img/dashboard_2.png)
+
+### Domains related dashboards 
+
+You can view the repartition of `operations` per domains
+
 ![screenshot](img/screen-treemap.png)
+
+You can also compare your specifications with a domain catalog (assuming the domain catalog is some sort of "validated")
+![screenshot](img/screen-domains-violations.png)
 
 Then, you can create APIs and manage their lifecycles; 
 
