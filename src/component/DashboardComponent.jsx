@@ -1,30 +1,30 @@
 import React, { Component } from 'react'
 import ApiService from "../service/ApiService";
-import Typography from '@material-ui/core/Typography';
-import { Box } from '@material-ui/core';
+import Typography from '@mui/material/Typography';
+import { Box } from '@mui/material';
 import Chart from "react-google-charts";
-import Grid from '@material-ui/core/Grid';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import SyncIcon from '@material-ui/icons/Sync';
-import IconButton from '@material-ui/core/IconButton';
+import Grid from '@mui/material/Grid';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import SyncIcon from '@mui/icons-material/Sync';
+import IconButton from '@mui/material/IconButton';
 
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
 
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import AssessmentIcon from '@material-ui/icons/Assessment';
-import AssignmentLateIcon from '@material-ui/icons/AssignmentLate';
-import AssignmentIcon from '@material-ui/icons/Assignment';
-import BlurLinearTwoToneIcon from '@material-ui/icons/BlurLinearTwoTone';
+import withStyles from '@mui/styles/withStyles';
+import AssessmentIcon from '@mui/icons-material/Assessment';
+import AssignmentLateIcon from '@mui/icons-material/AssignmentLate';
+import AssignmentIcon from '@mui/icons-material/Assignment';
+import BlurLinearTwoToneIcon from '@mui/icons-material/BlurLinearTwoTone';
 
-import { blue } from '@material-ui/core/colors';
+import { blue } from '@mui/material/colors';
 
 
 function TabPanel(props) {
@@ -256,9 +256,13 @@ class DashboardComponent extends Component {
                                 <Typography variant="h6" color="primary">Design Time Governance Metrics</Typography>
                             </Grid>
                             <Grid item xs={1}>
-                                <IconButton color="primary" aria-label="refresh" onClick={() => {
-                                    ApiService.refreshMetrics();
-                                }}>
+                                <IconButton
+                                    color="primary"
+                                    aria-label="refresh"
+                                    onClick={() => {
+                                        ApiService.refreshMetrics();
+                                    }}
+                                    size="large">
                                     <SyncIcon></SyncIcon>
                                 </IconButton>
                             </Grid>
@@ -363,17 +367,18 @@ class DashboardComponent extends Component {
                                             {this.state.oldest_pr.map(row => (
                                                 <TableRow hover key={row.id}>
                                                     <TableCell>
-                                                        <a className="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button" tabIndex="0" role="button" aria-disabled="false"
+
+                                                        <a className="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-button css-rxp3g8-MuiButtonBase-root-MuiListItem-root" tabIndex="0" role="button" aria-disabled="false"
                                                             href={process.env.REACT_APP_STASH_BASE_URL + "/pull-requests/" + row.id + "/overview"} target="_blank">
-                                                            <div className="MuiListItemIcon-root">
-                                                                <svg className="MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
-                                                                    <path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"></path>
-                                                                </svg>
-                                                            </div>
+                                                            <div class="MuiListItemIcon-root css-cveggr-MuiListItemIcon-root"><svg class="MuiSvgIcon-root MuiSvgIcon-colorPrimary MuiSvgIcon-fontSizeMedium css-1vn2d77-MuiSvgIcon-root" focusable="false" aria-hidden="true" viewBox="0 0 24 24">
+                                                                <path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"></path></svg></div>
+
                                                             <div className="MuiListItemText-root">
                                                                 <span className="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock">{row.id}</span>
                                                             </div>
-                                                        </a></TableCell>
+                                                        </a>
+
+                                                    </TableCell>
                                                     <TableCell>{row.title}</TableCell>
                                                     <TableCell>{this.getCreationDate(row.createdDate)}</TableCell>
                                                     <TableCell>{row.author.user.displayName}</TableCell>

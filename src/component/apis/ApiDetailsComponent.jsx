@@ -1,26 +1,26 @@
 import React, { Component } from 'react'
 import ApiService from "../../service/ApiService";
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import TableContainer from '@material-ui/core/TableContainer';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
-import Avatar from '@material-ui/core/Avatar';
-import { deepOrange, green, blueGrey, blue } from '@material-ui/core/colors';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import TableContainer from '@mui/material/TableContainer';
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
+import Avatar from '@mui/material/Avatar';
+import { deepOrange, green, blueGrey, blue } from '@mui/material/colors';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import { TextField } from '@material-ui/core';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import Grid from '@material-ui/core/Grid';
-import PlaylistAddCheckIcon from '@material-ui/icons/PlaylistAddCheck';
-import ListAltIcon from '@material-ui/icons/ListAlt';
+import withStyles from '@mui/styles/withStyles';
+import { TextField } from '@mui/material';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import Grid from '@mui/material/Grid';
+import PlaylistAddCheckIcon from '@mui/icons-material/PlaylistAddCheck';
+import ListAltIcon from '@mui/icons-material/ListAlt';
 
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -133,7 +133,7 @@ class ApiDetailsComponent extends Component {
             <Box>
                 <Card variant="outlined">
                     <CardContent>
-                        <Grid container direction="row" justify="flex-start" alignItems="flex-start" spacing={1}>
+                        <Grid container direction="row" justifyContent="flex-start" alignItems="flex-start" spacing={1}>
                             <Grid container xs={12} spacing={1} item={true}>
                                 <Grid item xs={12} sm={2}>
                                     <TextField id="status" className="textfield" inputProps={{ className: this.statusClass(classes, this.state.api.status) }} variant="outlined" value={this.state.api.status} label="Status" fullWidth margin="normal" />
@@ -196,12 +196,17 @@ class ApiDetailsComponent extends Component {
                                                     <TableCell>{row.version}</TableCell>
                                                     <TableCell>{row.description}</TableCell>
                                                     <TableCell>
-                                                        <a className="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button" tabIndex="0" role="button" aria-disabled="false"
+                                                        <a className="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-button css-rxp3g8-MuiButtonBase-root-MuiListItem-root" tabIndex="0" role="button" aria-disabled="false"
                                                             href={process.env.REACT_APP_STASH_BASE_URL + "/browse/catalog/" + row.name}
                                                             target="_blank">
-                                                            <div className="MuiListItemIcon-root"><svg className="MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
+                                                            <div class="MuiListItemIcon-root css-cveggr-MuiListItemIcon-root"><svg class="MuiSvgIcon-root MuiSvgIcon-colorPrimary MuiSvgIcon-fontSizeMedium css-1vn2d77-MuiSvgIcon-root" focusable="false" aria-hidden="true" viewBox="0 0 24 24">
                                                                 <path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"></path></svg></div>
-                                                            <div className="MuiListItemText-root"><span className="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock">{row.name}</span></div><span className="MuiTouchRipple-root"></span>
+                                                            <div class="MuiListItemText-root css-tlelie-MuiListItemText-root">
+                                                                <span class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-10hburv-MuiTypography-root">
+                                                                    {row.name}
+                                                                </span>
+                                                            </div>
+                                                            <span className="MuiTouchRipple-root"></span>
                                                         </a>
                                                     </TableCell>
                                                 </TableRow>

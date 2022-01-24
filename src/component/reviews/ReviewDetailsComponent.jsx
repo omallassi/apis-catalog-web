@@ -1,24 +1,24 @@
 import React, { Component } from 'react'
-import Box from '@material-ui/core/Box';
-import { deepOrange, lightGreen, blueGrey } from '@material-ui/core/colors';
+import Box from '@mui/material/Box';
+import { deepOrange, lightGreen, blueGrey } from '@mui/material/colors';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import { TextField } from '@material-ui/core';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import CardHeader from '@material-ui/core/CardHeader';
-import Grid from '@material-ui/core/Grid';
+import withStyles from '@mui/styles/withStyles';
+import { TextField } from '@mui/material';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardHeader from '@mui/material/CardHeader';
+import Grid from '@mui/material/Grid';
 
-import Typography from '@material-ui/core/Typography';
+import Typography from '@mui/material/Typography';
 
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
 
-import ArrowRightIcon from '@material-ui/icons/ArrowRight';
-import TrendingDownIcon from '@material-ui/icons/TrendingDown';
-import TrendingUpIcon from '@material-ui/icons/TrendingUp';
+import ArrowRightIcon from '@mui/icons-material/ArrowRight';
+import TrendingDownIcon from '@mui/icons-material/TrendingDown';
+import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 
 
 // function TabPanel(props) {
@@ -133,7 +133,7 @@ class ReviewDetailsComponent extends Component {
             <Box>
                 <Card variant="outlined">
                     <CardContent>
-                        <Grid container direction="row" justify="flex-start" alignItems="flex-start" spacing={1}>
+                        <Grid container direction="row" justifyContent="flex-start" alignItems="flex-start" spacing={1}>
                             <Grid container xs={12} spacing={1} item={true}>
                                 <Grid item xs={2}>
                                     <Card>

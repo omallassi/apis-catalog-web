@@ -1,41 +1,41 @@
 import React, { Component } from 'react'
 import ApiService from "../../service/ApiService";
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
 import Chart from "react-google-charts";
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import AddCircleIcon from '@material-ui/icons/AddCircle';
-import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
+import withStyles from '@mui/styles/withStyles';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogTitle from '@material-ui/core/DialogTitle';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogTitle from '@mui/material/DialogTitle';
 
-import SyncIcon from '@material-ui/icons/Sync';
-import AssignmentLateIcon from '@material-ui/icons/AssignmentLate';
-import AssignmentIcon from '@material-ui/icons/Assignment';
-import IconButton from '@material-ui/core/IconButton';
-import TableChartTwoToneIcon from '@material-ui/icons/TableChartTwoTone';
-import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
+import SyncIcon from '@mui/icons-material/Sync';
+import AssignmentLateIcon from '@mui/icons-material/AssignmentLate';
+import AssignmentIcon from '@mui/icons-material/Assignment';
+import IconButton from '@mui/material/IconButton';
+import TableChartTwoToneIcon from '@mui/icons-material/TableChartTwoTone';
+import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 import { NIL as NIL_UUID } from 'uuid';
-import { Grid, TableContainer } from '@material-ui/core';
+import { Grid, TableContainer } from '@mui/material';
 
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
 
-import Paper from '@material-ui/core/Paper';
-import { blue } from '@material-ui/core/colors';
+import Paper from '@mui/material/Paper';
+import { blue } from '@mui/material/colors';
 
 
 function TabPanel(props) {
@@ -272,12 +272,15 @@ class ListDomainsComponent extends Component {
                                                             </TableCell>
                                                             <TableCell>
                                                                 {/* //TODO faire un component "réutilisable" (ie. ExternalLink) */}
-                                                                <a className="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button" tabIndex="0" role="button" aria-disabled="false"
+                                                                <a className="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-button css-rxp3g8-MuiButtonBase-root-MuiListItem-root" tabIndex="0" role="button" aria-disabled="false"
                                                                     href={process.env.REACT_APP_STASH_BASE_URL + "/browse/catalog/" + row.spec_path}
                                                                     target="_blank">
-                                                                    <div className="MuiListItemIcon-root"><svg className="MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
+                                                                    <div class="MuiListItemIcon-root css-cveggr-MuiListItemIcon-root"><svg class="MuiSvgIcon-root MuiSvgIcon-colorPrimary MuiSvgIcon-fontSizeMedium css-1vn2d77-MuiSvgIcon-root" focusable="false" aria-hidden="true" viewBox="0 0 24 24">
                                                                         <path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"></path></svg></div>
-                                                                    <div className="MuiListItemText-root"><span className="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock">{row.spec_path}</span></div><span className="MuiTouchRipple-root"></span>
+
+                                                                    <div className="MuiListItemText-root">
+                                                                        <span className="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock">{row.spec_path}</span>
+                                                                    </div>
                                                                 </a>
                                                             </TableCell>
                                                             <TableCell>{row.spec_domain}</TableCell>
@@ -314,10 +317,22 @@ class ListDomainsComponent extends Component {
                             <AddCircleTwoToneIcon />Add new domain
                         </Fab> */}
 
-                                        <IconButton className={this.props.classes.fab} color="primary" variant="outlined" aria-label="refresh" onClick={() => this.handleClickOpen()}>
+                                        <IconButton
+                                            className={this.props.classes.fab}
+                                            color="primary"
+                                            variant="outlined"
+                                            aria-label="refresh"
+                                            onClick={() => this.handleClickOpen()}
+                                            size="large">
                                             <AddCircleIcon color="primary" />
                                         </IconButton>
-                                        <IconButton className={this.props.classes.fab} color="primary" variant="outlined" aria-label="refresh" onClick={() => { this.listAllDomains() }}>
+                                        <IconButton
+                                            className={this.props.classes.fab}
+                                            color="primary"
+                                            variant="outlined"
+                                            aria-label="refresh"
+                                            onClick={() => { this.listAllDomains() }}
+                                            size="large">
                                             <SyncIcon color="primary"></SyncIcon>
                                         </IconButton>
                                         {/* <Button color="primary" className={this.props.classes.fab} onClick={() => this.handleClickOpen()}>
@@ -350,7 +365,7 @@ class ListDomainsComponent extends Component {
                                                         type="description"
                                                         multiline
                                                         rows="4"
-                                                        rowsMax="4"
+                                                        maxRows="4"
                                                         fullWidth
                                                         onInput={e => this.setState({ description: e.target.value })}
                                                     />
@@ -405,7 +420,12 @@ class ListDomainsComponent extends Component {
                                                             <TableCell>{row.owner}</TableCell>
                                                             <TableCell>{row.id}</TableCell>
                                                             <TableCell>
-                                                                <IconButton color="primary" variant="outlined" aria-label="refresh" onClick={() => { this.deleteDomain(row.id) }}>
+                                                                <IconButton
+                                                                    color="primary"
+                                                                    variant="outlined"
+                                                                    aria-label="refresh"
+                                                                    onClick={() => { this.deleteDomain(row.id) }}
+                                                                    size="large">
                                                                     <DeleteOutlineIcon color="primary"></DeleteOutlineIcon>
                                                                 </IconButton>
                                                             </TableCell>

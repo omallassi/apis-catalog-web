@@ -1,23 +1,23 @@
 import React, { Component } from 'react'
-import { withStyles } from "@material-ui/core";
+import withStyles from '@mui/styles/withStyles';
 
 import PropTypes from 'prop-types';
 
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import { Grid, Link } from '@material-ui/core';
-import Divider from '@material-ui/core/Divider';
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import { Grid, Link } from '@mui/material';
+import Divider from '@mui/material/Divider';
 
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import TableContainer from '@material-ui/core/TableContainer';
-import { blue, lightGreen, deepOrange } from '@material-ui/core/colors';
-import Chip from '@material-ui/core/Chip';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import TableContainer from '@mui/material/TableContainer';
+import { blue, lightGreen, deepOrange } from '@mui/material/colors';
+import Chip from '@mui/material/Chip';
 
 import ApiService from "../../service/ApiService";
 import ReviewDetailsComponent from './ReviewDetailsComponent';
@@ -149,13 +149,15 @@ class ListReviewsComponent extends Component {
                                         {this.state.reviews_stats.map(row => (
                                             <TableRow hover key={row.id}>
                                                 <TableCell>
-                                                    <a className="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button" tabIndex="0" role="button" aria-disabled="false"
-                                                        href={process.env.REACT_APP_STASH_BASE_URL + "/pull-requests/" + row.id + "/overview"} target="_blank">
-                                                        <div className="MuiListItemIcon-root">
-                                                            <svg className="MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
+                                                    <a className="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-button css-rxp3g8-MuiButtonBase-root-MuiListItem-root" tabIndex="0" role="button" aria-disabled="false"
+                                                        href={process.env.REACT_APP_STASH_BASE_URL + "/pull-requests/" + row.id + "/overview"}
+                                                        target="_blank">
+                                                        <div class="MuiListItemIcon-root css-cveggr-MuiListItemIcon-root">
+                                                            <svg class="MuiSvgIcon-root MuiSvgIcon-colorPrimary MuiSvgIcon-fontSizeMedium css-1vn2d77-MuiSvgIcon-root" focusable="false" aria-hidden="true" viewBox="0 0 24 24">
                                                                 <path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"></path>
                                                             </svg>
                                                         </div>
+
                                                         <div className="MuiListItemText-root">
                                                             <span className="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock">{row.id}</span>
                                                         </div>
