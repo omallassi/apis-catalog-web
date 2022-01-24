@@ -1,24 +1,19 @@
 import React, { Component } from 'react'
 import Box from '@material-ui/core/Box';
-import { borders } from '@material-ui/system';
-import { deepOrange, lightGreen, blueGrey, blue } from '@material-ui/core/colors';
+import { deepOrange, lightGreen, blueGrey } from '@material-ui/core/colors';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import { Avatar, TextField } from '@material-ui/core';
+import { TextField } from '@material-ui/core';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardHeader from '@material-ui/core/CardHeader';
-import CardMedia from '@material-ui/core/CardMedia';
-import CardActions from '@material-ui/core/CardActions';
 import Grid from '@material-ui/core/Grid';
 
 import Typography from '@material-ui/core/Typography';
 
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
 
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';

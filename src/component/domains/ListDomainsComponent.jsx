@@ -5,7 +5,6 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import TableSortLabel from '@material-ui/core/TableSortLabel';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Card from '@material-ui/core/Card';
@@ -210,7 +209,7 @@ class ListDomainsComponent extends Component {
                             <CardContent>
                                 <Typography variant="body1" gutterBottom>
                                     The following diagram displays volume of resources per domain and subdomains, based on the Open API Specifications (available in git).
-                        </Typography>
+                                </Typography>
                                 <Chart
                                     chartType="TreeMap"
                                     loader={<div>Loading Chart</div>}
@@ -250,7 +249,7 @@ class ListDomainsComponent extends Component {
                                         {/* <Typography component="h2" variant="h6" color="primary" gutterBottom>Domains Inconsistencies Check</Typography> */}
                                         <Typography variant="body1" gutterBottom>
                                             The following table lists the OpenAPI Specifications whose domain is not in "Domains Catalog"
-                                </Typography>
+                                        </Typography>
                                     </Grid>
                                     <Grid item xs={12}>
                                         <TableContainer>
@@ -260,7 +259,7 @@ class ListDomainsComponent extends Component {
                                                         <TableCell className={this.props.classes.head} ></TableCell>
                                                         <TableCell className={this.props.classes.head} >
                                                             OpenAPI Specification
-                                                </TableCell>
+                                                        </TableCell>
                                                         <TableCell className={this.props.classes.head}>Declared Domain</TableCell>
                                                         <TableCell className={this.props.classes.head}># of resources</TableCell>
                                                     </TableRow>
@@ -300,7 +299,7 @@ class ListDomainsComponent extends Component {
                                         {/* <Typography component="h2" variant="h6" color="primary" gutterBottom>Domains Catalog</Typography> */}
                                         <Typography variant="body1" gutterBottom>
                                             The following table is the list of "declared" Domains and Subdomains.
-                                </Typography>
+                                        </Typography>
                                     </Grid>
                                     <Grid item xs={1}>
                                         {/* <Fab
@@ -391,7 +390,7 @@ class ListDomainsComponent extends Component {
                                                     <TableRow>
                                                         <TableCell key="domain" className={this.props.classes.head} >
                                                             Domain / SubDomain Name
-                                                </TableCell>
+                                                        </TableCell>
                                                         <TableCell className={this.props.classes.head}>Description</TableCell>
                                                         <TableCell className={this.props.classes.head}>Owner</TableCell>
                                                         <TableCell className={this.props.classes.head}>Id</TableCell>

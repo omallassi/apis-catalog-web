@@ -66,16 +66,27 @@ export default function ListRouter() {
             <ListItemLink to="/" primary="Dashboard" icon={<DashboardIcon color="primary" />} />
             <ListItemLink to="/reviews" primary="APIs Reviews" icon={<RateReviewIcon color="primary" />} />
             <ListItemLink to="/domains" primary="Domains" icon={<FilterTiltShiftIcon color="primary" />} />
-            <ListItemLink to="/apis" primary="Apis" icon={<ListAltIcon color="primary" />} />
-            <ListItemLink to="/envs" primary="Environments" icon={<ComputerIcon color="primary" />} />
-            <li>
-              <a className="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button" tabIndex="0" role="button" aria-disabled="false"
-                href={process.env.REACT_APP_PACT_DOC_URL} target="_blank">
-                <div className="MuiListItemIcon-root"><svg className="MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"></path></svg></div>
-                <div className="MuiListItemText-root"><span className="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock">PACT Broker</span></div><span className="MuiTouchRipple-root"></span>
-              </a>
-            </li>
+
+            {"true" == process.env.REACT_APP_BETA
+              ? < ListItemLink to="/apis" primary="Apis" icon={<ListAltIcon color="primary" />} />
+              : null
+            }
+            {"true" == process.env.REACT_APP_BETA
+              ? < ListItemLink to="/envs" primary="Environments" icon={<ComputerIcon color="primary" />} />
+              : null
+            }
+            {"true" == process.env.REACT_APP_BETA
+              ?
+              <li>
+                <a className="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button" tabIndex="0" role="button" aria-disabled="false"
+                  href={process.env.REACT_APP_PACT_DOC_URL} target="_blank">
+                  <div className="MuiListItemIcon-root"><svg className="MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"></path></svg></div>
+                  <div className="MuiListItemText-root"><span className="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock">PACT Broker</span></div><span className="MuiTouchRipple-root"></span>
+                </a>
+              </li>
+              : null
+            }
             <li>
               <a className="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button" tabIndex="0" role="button" aria-disabled="false"
                 href={process.env.REACT_APP_API_DOC_URL} target="_blank">
