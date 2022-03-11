@@ -8,6 +8,7 @@ import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import { Grid, Link } from '@mui/material';
+import LinkIcon from '@mui/icons-material/Link';
 import Divider from '@mui/material/Divider';
 
 import Table from '@mui/material/Table';
@@ -149,19 +150,8 @@ class ListReviewsComponent extends Component {
                                         {this.state.reviews_stats.map(row => (
                                             <TableRow hover key={row.id}>
                                                 <TableCell>
-                                                    <a className="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-button css-rxp3g8-MuiButtonBase-root-MuiListItem-root" tabIndex="0" role="button" aria-disabled="false"
-                                                        href={process.env.REACT_APP_STASH_BASE_URL + "/pull-requests/" + row.id + "/overview"}
-                                                        target="_blank">
-                                                        <div class="MuiListItemIcon-root css-cveggr-MuiListItemIcon-root">
-                                                            <svg class="MuiSvgIcon-root MuiSvgIcon-colorPrimary MuiSvgIcon-fontSizeMedium css-1vn2d77-MuiSvgIcon-root" focusable="false" aria-hidden="true" viewBox="0 0 24 24">
-                                                                <path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"></path>
-                                                            </svg>
-                                                        </div>
-
-                                                        <div className="MuiListItemText-root">
-                                                            <span className="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock">{row.id}</span>
-                                                        </div>
-                                                    </a>
+                                                    <LinkIcon/>
+                                                    <Link href={process.env.REACT_APP_STASH_BASE_URL + "/pull-requests/" + row.id + "/overview"} target="_blank">{row.id}</Link>
                                                 </TableCell>
                                                 <TableCell component="th" scope="row">
                                                     <Link component="button" variant="body2" onClick={() => {

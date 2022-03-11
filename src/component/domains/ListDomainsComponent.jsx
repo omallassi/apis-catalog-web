@@ -37,6 +37,8 @@ import Tab from '@mui/material/Tab';
 import Paper from '@mui/material/Paper';
 import { blue } from '@mui/material/colors';
 
+import Link from '@mui/material/Link';
+import LinkIcon from '@mui/icons-material/Link';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -273,17 +275,8 @@ class ListDomainsComponent extends Component {
                                                                     <ErrorOutlineIcon color="error" />
                                                                 </TableCell>
                                                                 <TableCell>
-                                                                    {/* //TODO faire un component "réutilisable" (ie. ExternalLink) */}
-                                                                    <a className="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-button css-rxp3g8-MuiButtonBase-root-MuiListItem-root" tabIndex="0" role="button" aria-disabled="false"
-                                                                        href={process.env.REACT_APP_STASH_BASE_URL + "/browse/catalog/" + row.spec_path}
-                                                                        target="_blank">
-                                                                        <div class="MuiListItemIcon-root css-cveggr-MuiListItemIcon-root"><svg class="MuiSvgIcon-root MuiSvgIcon-colorPrimary MuiSvgIcon-fontSizeMedium css-1vn2d77-MuiSvgIcon-root" focusable="false" aria-hidden="true" viewBox="0 0 24 24">
-                                                                            <path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"></path></svg></div>
-
-                                                                        <div className="MuiListItemText-root">
-                                                                            <span className="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock">{row.spec_path}</span>
-                                                                        </div>
-                                                                    </a>
+                                                                    <LinkIcon/>
+                                                                    <Link href={process.env.REACT_APP_STASH_BASE_URL + "/browse/catalog/" + row.spec_path} target="_blank">{row.spec_path}</Link>
                                                                 </TableCell>
                                                                 <TableCell>{row.spec_domain}</TableCell>
                                                                 <TableCell>{row.resources}</TableCell>
