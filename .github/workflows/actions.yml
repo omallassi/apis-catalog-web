@@ -19,5 +19,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: Install dependencies
         run: npm install
+      - run: npm test -- --coverage
       - run: CI=false npm run build --if-present
-      #- run: npm test
+      - name: Upload coverage reports
+        run: COVERALLS_REPO_TOKEN=IR5rxUeuM8dHeAFKoqAnk4AolKw9DAHK0 npm run coveralls
