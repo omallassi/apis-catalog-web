@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, useState } from 'react'
 import ApiService from "../service/ApiService";
 import Typography from '@mui/material/Typography';
 import { Box } from '@mui/material';
@@ -7,6 +7,7 @@ import Grid from '@mui/material/Grid';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import SyncIcon from '@mui/icons-material/Sync';
+import CircularProgress from '@mui/material/CircularProgress';
 import IconButton from '@mui/material/IconButton';
 
 import Table from '@mui/material/Table';
@@ -28,6 +29,8 @@ import Link from '@mui/material/Link';
 import LinkIcon from '@mui/icons-material/Link';
 
 import { blue } from '@mui/material/colors';
+
+import Tooltip from '@mui/material/Tooltip';
 
 
 function TabPanel(props) {
@@ -72,6 +75,7 @@ class DashboardComponent extends Component {
             zally_violations: [],
             zally_violations_columns: [],
             value: 0,
+            loading: false,
         }
 
         this.getStats = this.getStats.bind(this);
@@ -250,6 +254,7 @@ class DashboardComponent extends Component {
     }
 
     render() {
+        
         return (
             <Box>
                 <Card variant="outlined">
@@ -259,15 +264,26 @@ class DashboardComponent extends Component {
                                 <Typography variant="h6" color="primary">Design Time Governance Metrics</Typography>
                             </Grid>
                             <Grid item xs={1}>
-                                <IconButton
-                                    color="primary"
-                                    aria-label="refresh"
-                                    onClick={() => {
-                                        ApiService.refreshMetrics();
-                                    }}
-                                    size="large">
-                                    <SyncIcon></SyncIcon>
-                                </IconButton>
+                                <Tooltip title = "Refresh metrics...">
+                                    <IconButton
+                                        color="primary"
+                                        aria-label="refresh"
+                                        onClick = {() => {
+                                            this.setState( {loading: true}, () => {
+                                                ApiService.refreshMetrics().then((response) => {
+                                                    this.setState({loading: false});
+                                                })
+                                                .catch((error) => {
+                                                    console.log("refresh metrics w/ errors " + error);
+                                                    this.setState({loading: false});
+                                                });
+                                                
+                                            });
+                                        }}
+                                        size="large">
+                                        {this.state.loading? <CircularProgress size={30} /> : <SyncIcon/>}
+                                    </IconButton>
+                                </Tooltip>
                             </Grid>
                         </Grid>
                     </CardContent>
