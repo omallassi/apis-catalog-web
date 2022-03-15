@@ -32,6 +32,11 @@ import { blue } from '@mui/material/colors';
 
 import Tooltip from '@mui/material/Tooltip';
 
+import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
+
+import Collapse from '@mui/material/Collapse';
+import CloseIcon from '@mui/icons-material/Close';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -76,6 +81,8 @@ class DashboardComponent extends Component {
             zally_violations_columns: [],
             value: 0,
             loading: false,
+            message: '',
+            message_level: '',
         }
 
         this.getStats = this.getStats.bind(this);
@@ -254,6 +261,19 @@ class DashboardComponent extends Component {
     }
 
     render() {
+        let message_component;
+        if (this.state.message)
+        {
+            message_component =  <Collapse in = {true} ><Alert severity={this.state.message_level} action={<IconButton aria-label="close" color={this.state.message_level} size="small"
+                onClick={() => {
+                 this.setState({message: ''});
+                }}
+              >
+                <CloseIcon fontSize="inherit" />
+              </IconButton>}>
+                  <strong>{this.state.message}</strong>
+                </Alert></Collapse>
+        }
         
         return (
             <Box>
@@ -263,6 +283,9 @@ class DashboardComponent extends Component {
                             <Grid item xs={11}>
                                 <Typography variant="h6" color="primary">Design Time Governance Metrics</Typography>
                             </Grid>
+                            <Grid item xs={11}>
+                                {message_component}
+                            </Grid>
                             <Grid item xs={1}>
                                 <Tooltip title = "Refresh metrics...">
                                     <IconButton
@@ -271,11 +294,11 @@ class DashboardComponent extends Component {
                                         onClick = {() => {
                                             this.setState( {loading: true}, () => {
                                                 ApiService.refreshMetrics().then((response) => {
-                                                    this.setState({loading: false});
+                                                    this.setState({loading: false, message: 'Metrics have been refreshed', message_level: 'success'});
                                                 })
                                                 .catch((error) => {
                                                     console.log("refresh metrics w/ errors " + error);
-                                                    this.setState({loading: false});
+                                                    this.setState({loading: false, message: error.message, message_level: 'error'});
                                                 });
                                                 
                                             });
