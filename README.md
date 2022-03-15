@@ -1,6 +1,6 @@
 ![logo](https://raw.githubusercontent.com/wiki/omallassi/apis-catalog/assets/logo.png)
 
-[![npm build](https://github.com/omallassi/apis-catalog-web/actions/workflows/actions.yml/badge.svg)](https://github.com/omallassi/apis-catalog-web/actions/workflows/actions.yml) [![Coverage Status](https://coveralls.io/repos/github/omallassi/apis-catalog-web/badge.svg?branch=master)](https://coveralls.io/github/omallassi/apis-catalog-web?branch=master)
+[![npm build](https://github.com/omallassi/apis-catalog-web/actions/workflows/actions.yml/badge.svg)](https://github.com/omallassi/apis-catalog-web/actions/workflows/actions.yml) [![Coverage Status](https://coveralls.io/repos/github/omallassi/apis-catalog-web/badge.svg)](https://coveralls.io/github/omallassi/apis-catalog-web)
 
 ## Overview 
 > :warning: All of this is, at this stage ideas and POC
