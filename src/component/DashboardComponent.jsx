@@ -83,6 +83,7 @@ class DashboardComponent extends Component {
             loading: false,
             message: '',
             message_level: '',
+            chart_loading: false,
         }
 
         this.getStats = this.getStats.bind(this);
@@ -155,6 +156,7 @@ class DashboardComponent extends Component {
     }
 
     getStats() {
+        this.setState( {chart_loading: true} );
         ApiService.getStats().then((res) => {
 
             //because we need to create JS Date objects....loop and loop and loop 
@@ -236,8 +238,15 @@ class DashboardComponent extends Component {
 
                 this.setState({ endpoints_audience_num_columns: endpoints_num_per_audience.data_columns });
                 this.setState({ endpoints_audience_num: endpoints_num_per_audience.data });
-            })
 
+                this.setState( {chart_loading: false} );
+            }).catch( (err) => {
+                console.error("Error while getting merged pull request " + err);
+                this.setState({chart_loading: false, message: "Error while loading statistics - " + err.message, message_level: 'error'});
+            });
+        }).catch((err) => {
+            console.error("Error while getting stats " + err);
+            this.setState({chart_loading: false, message: "Error while loading statistics - " + err.message, message_level: 'error'});
         });
     }
 
@@ -271,7 +280,8 @@ class DashboardComponent extends Component {
               >
                 <CloseIcon fontSize="inherit" />
               </IconButton>}>
-                  <strong>{this.state.message}</strong>
+                  <AlertTitle><strong>{this.state.message_level}</strong></AlertTitle>
+                  {this.state.message}
                 </Alert></Collapse>
         }
         
@@ -295,12 +305,12 @@ class DashboardComponent extends Component {
                                             this.setState( {loading: true}, () => {
                                                 ApiService.refreshMetrics().then((response) => {
                                                     this.setState({loading: false, message: 'Metrics have been refreshed', message_level: 'success'});
+                                                    this.getStats();
                                                 })
                                                 .catch((error) => {
-                                                    console.log("refresh metrics w/ errors " + error);
+                                                    console.error("refresh metrics w/ errors " + error);
                                                     this.setState({loading: false, message: error.message, message_level: 'error'});
                                                 });
-                                                
                                             });
                                         }}
                                         size="large">
@@ -328,6 +338,10 @@ class DashboardComponent extends Component {
                                         <BlurLinearTwoToneIcon className={this.props.classes.linkIcon} style={{ fill: "#6573c3" }} />
                                         The following chart displays the # of opened Pull-Request
                                     </Typography>
+                                </Grid>
+                                <Grid item xs={12}>
+                                    { !this.state.chart_loading && 
+                                    
                                     <Chart
                                         height={'600px'}
                                         chartType="LineChart"
@@ -356,12 +370,19 @@ class DashboardComponent extends Component {
                                         }}
                                         rootProps={{ 'data-testid': '1' }}
                                     />
+                                    }
+                                    { this.state.chart_loading && 
+                                        <CircularProgress size={30} /> 
+                                    }
                                 </Grid>
                                 <Grid item xs={12}>
                                     <Typography variant="body1" gutterBottom className={this.props.classes.wrapIcon}>
                                         <BlurLinearTwoToneIcon className={this.props.classes.linkIcon} style={{ fill: "#6573c3" }} />
                                         The following chart displays some statistics around pull-requests
                                     </Typography>
+                                    </Grid>
+                                    <Grid item xs={12}>
+                                    { !this.state.chart_loading && 
                                     <Chart
                                         height={'600px'}
                                         chartType="LineChart"
@@ -388,6 +409,10 @@ class DashboardComponent extends Component {
                                         }}
                                         rootProps={{ 'data-testid': '1' }}
                                     />
+                                    }
+                                    { this.state.chart_loading && 
+                                        <CircularProgress size={30} /> 
+                                    }
                                 </Grid>
                                 <Grid item xs={12} >
                                     <Typography variant="body1" gutterBottom className={this.props.classes.wrapIcon}>
@@ -431,102 +456,116 @@ class DashboardComponent extends Component {
                                         <BlurLinearTwoToneIcon className={this.props.classes.linkIcon} style={{ fill: "#6573c3" }} />
                                         The following chart displays the evolution of (REST) resources
                                     </Typography>
-                                    <Chart
-                                        height={'600px'}
-                                        chartType="LineChart"
-                                        loader={<div>Loading Chart</div>}
-                                        columns={[{ type: 'datetime', label: 'Date' }, { type: 'string', role: 'annotation' }, { type: 'string', role: 'annotationText', 'p': { 'html': true } }, '# of (REST) Paths']}
-                                        // columns={['Date', '# of (REST) Operations']}
-                                        rows={this.state.endpoints_num}
-                                        options={{
-                                            title: "Number of (REST) Resources",
-                                            //curveType: 'function',
-                                            lineWidth: 3,
-                                            explorer: {
-                                                actions: ['dragToZoom', 'rightClickToReset'],
-                                                axis: 'horizontal',
-                                                keepInBounds: true,
-                                                maxZoomIn: 0.01,
-                                            },
-                                            intervals: { style: 'line' },
-                                            hAxis: {
-                                                title: 'Time',
-                                            },
-                                            vAxis: {
-                                                title: '# of operations',
-                                            },
-                                            annotations: {
-                                                style: 'line',
-                                                // stemColor: 'red',
-                                                // 'boxStyle': {
-                                                //     'stroke': '#888888', 'strokeWidth': 0.5,
-                                                //     'rx': 2, 'ry': 2,
-                                                //     'gradient': {
-                                                //         'color1': '#eeeeee',
-                                                //         'color2': '#dddddd',
-                                                //         'x1': '0%', 'y1': '0%',
-                                                //         'x2': '0%', 'y2': '100%',
-                                                //         'useObjectBoundingBoxUnits': true
-                                                //     }
-                                                // }
+                                </Grid>
+                                <Grid item xs={12}>
+                                    { !this.state.chart_loading && 
+                                        <Chart
+                                            height={'600px'}
+                                            chartType="LineChart"
+                                            loader={<div>Loading Chart</div>}
+                                            columns={[{ type: 'datetime', label: 'Date' }, { type: 'string', role: 'annotation' }, { type: 'string', role: 'annotationText', 'p': { 'html': true } }, '# of (REST) Paths']}
+                                            // columns={['Date', '# of (REST) Operations']}
+                                            rows={this.state.endpoints_num}
+                                            options={{
+                                                title: "Number of (REST) Resources",
+                                                //curveType: 'function',
+                                                lineWidth: 3,
+                                                explorer: {
+                                                    actions: ['dragToZoom', 'rightClickToReset'],
+                                                    axis: 'horizontal',
+                                                    keepInBounds: true,
+                                                    maxZoomIn: 0.01,
+                                                },
+                                                intervals: { style: 'line' },
+                                                hAxis: {
+                                                    title: 'Time',
+                                                },
+                                                vAxis: {
+                                                    title: '# of operations',
+                                                },
+                                                annotations: {
+                                                    style: 'line',
+                                                    // stemColor: 'red',
+                                                    // 'boxStyle': {
+                                                    //     'stroke': '#888888', 'strokeWidth': 0.5,
+                                                    //     'rx': 2, 'ry': 2,
+                                                    //     'gradient': {
+                                                    //         'color1': '#eeeeee',
+                                                    //         'color2': '#dddddd',
+                                                    //         'x1': '0%', 'y1': '0%',
+                                                    //         'x2': '0%', 'y2': '100%',
+                                                    //         'useObjectBoundingBoxUnits': true
+                                                    //     }
+                                                    // }
 
-                                            },
-                                            tooltip: { isHtml: true }
-                                        }}
-                                        rootProps={{ 'data-testid': '1' }}
-                                    />
+                                                },
+                                                tooltip: { isHtml: true }
+                                            }}
+                                            rootProps={{ 'data-testid': '1' }}
+                                        />
+                                    }
+                                    { this.state.chart_loading && 
+                                        <CircularProgress size={30} /> 
+                                    }
                                 </Grid>
                                 <Grid item xs={12}>
                                     <Typography variant="body1" gutterBottom className={this.props.classes.wrapIcon}>
                                         <BlurLinearTwoToneIcon className={this.props.classes.linkIcon} style={{ fill: "#6573c3" }} />
                                         The following chart displays the evolution of (REST) resources per x-audience
                                     </Typography>
-                                    <Chart
-                                        height={'600px'}
-                                        chartType="LineChart"
-                                        loader={<div>Loading Chart</div>}
-                                        columns={this.state.endpoints_audience_num_columns} //TODO
-                                        rows={this.state.endpoints_audience_num} //TODO
-                                        options={{
-                                            title: "Number of Resources per Audience",
-                                            //curveType: 'function',
-                                            lineWidth: 3,
-                                            explorer: {
-                                                actions: ['dragToZoom', 'rightClickToReset'],
-                                                axis: 'horizontal',
-                                                keepInBounds: true,
-                                                maxZoomIn: 0.01,
-                                            },
-                                            intervals: { style: 'line' },
-                                            hAxis: {
-                                                title: 'Date',
-                                            },
-                                            vAxis: {
-                                                title: '# of endpoints',
-                                            },
-                                            annotations: {
-                                                style: 'line',
-                                                // stemColor: 'red',
-                                                // 'textStyle': {
-                                                //     'fontSize': 10,
-                                                //     'auraColor': 'none'
-                                                // },
-                                                // 'boxStyle': {
-                                                //     'stroke': '#888888', 'strokeWidth': 0.5,
-                                                //     'rx': 2, 'ry': 2,
-                                                //     'gradient': {
-                                                //         'color1': '#eeeeee',
-                                                //         'color2': '#dddddd',
-                                                //         'x1': '0%', 'y1': '0%',
-                                                //         'x2': '0%', 'y2': '100%',
-                                                //         'useObjectBoundingBoxUnits': true
-                                                //     }
-                                                // }
-                                            },
-                                            tooltip: { isHtml: true }
-                                        }}
-                                        rootProps={{ 'data-testid': '1' }}
-                                    />
+                                    </Grid>
+                                    <Grid item xs={12}>
+                                        { !this.state.chart_loading && 
+                                        <Chart
+                                            height={'600px'}
+                                            chartType="LineChart"
+                                            loader={<div>Loading Chart</div>}
+                                            columns={this.state.endpoints_audience_num_columns} //TODO
+                                            rows={this.state.endpoints_audience_num} //TODO
+                                            options={{
+                                                title: "Number of Resources per Audience",
+                                                //curveType: 'function',
+                                                lineWidth: 3,
+                                                explorer: {
+                                                    actions: ['dragToZoom', 'rightClickToReset'],
+                                                    axis: 'horizontal',
+                                                    keepInBounds: true,
+                                                    maxZoomIn: 0.01,
+                                                },
+                                                intervals: { style: 'line' },
+                                                hAxis: {
+                                                    title: 'Date',
+                                                },
+                                                vAxis: {
+                                                    title: '# of endpoints',
+                                                },
+                                                annotations: {
+                                                    style: 'line',
+                                                    // stemColor: 'red',
+                                                    // 'textStyle': {
+                                                    //     'fontSize': 10,
+                                                    //     'auraColor': 'none'
+                                                    // },
+                                                    // 'boxStyle': {
+                                                    //     'stroke': '#888888', 'strokeWidth': 0.5,
+                                                    //     'rx': 2, 'ry': 2,
+                                                    //     'gradient': {
+                                                    //         'color1': '#eeeeee',
+                                                    //         'color2': '#dddddd',
+                                                    //         'x1': '0%', 'y1': '0%',
+                                                    //         'x2': '0%', 'y2': '100%',
+                                                    //         'useObjectBoundingBoxUnits': true
+                                                    //     }
+                                                    // }
+                                                },
+                                                tooltip: { isHtml: true }
+                                            }}
+                                            rootProps={{ 'data-testid': '1' }}
+                                        />
+                                    }
+                                    { this.state.chart_loading && 
+                                        <CircularProgress size={30} /> 
+                                    }
                                 </Grid>
                             </Grid>
                         </TabPanel>
@@ -538,52 +577,59 @@ class DashboardComponent extends Component {
                                         <BlurLinearTwoToneIcon className={this.props.classes.linkIcon} style={{ fill: "#6573c3" }} />
                                         The following chart displays the evolution of x-zally-ignore
                                     </Typography>
-                                    <Chart
-                                        height={'600px'}
-                                        chartType="LineChart"
-                                        loader={<div>Loading Chart</div>}
-                                        columns={this.state.zally_violations_columns}
-                                        rows={this.state.zally_violations}
-                                        options={{
-                                            title: "Number of Resources with zally-ignore",
-                                            //curveType: 'function',
-                                            lineWidth: 3,
-                                            explorer: {
-                                                actions: ['dragToZoom', 'rightClickToReset'],
-                                                axis: 'horizontal',
-                                                keepInBounds: true,
-                                                maxZoomIn: 0.01,
-                                            },
-                                            intervals: { style: 'line' },
-                                            hAxis: {
-                                                title: 'Date',
-                                            },
-                                            vAxis: {
-                                                title: '# of zally-ignore',
-                                            },
-                                            annotations: {
-                                                style: 'line',
-                                                // stemColor: 'red',
-                                                // 'textStyle': {
-                                                //     'fontSize': 10,
-                                                //     'auraColor': 'none'
-                                                // },
-                                                // 'boxStyle': {
-                                                //     'stroke': '#888888', 'strokeWidth': 0.5,
-                                                //     'rx': 2, 'ry': 2,
-                                                //     'gradient': {
-                                                //         'color1': '#eeeeee',
-                                                //         'color2': '#dddddd',
-                                                //         'x1': '0%', 'y1': '0%',
-                                                //         'x2': '0%', 'y2': '100%',
-                                                //         'useObjectBoundingBoxUnits': true
-                                                //     }
-                                                // }
-                                            },
-                                            tooltip: { isHtml: true }
-                                        }}
-                                        rootProps={{ 'data-testid': '1' }}
-                                    />
+                                    </Grid>
+                                    <Grid item xs={12}>
+                                        { !this.state.chart_loading && 
+                                        <Chart
+                                            height={'600px'}
+                                            chartType="LineChart"
+                                            loader={<div>Loading Chart</div>}
+                                            columns={this.state.zally_violations_columns}
+                                            rows={this.state.zally_violations}
+                                            options={{
+                                                title: "Number of Resources with zally-ignore",
+                                                //curveType: 'function',
+                                                lineWidth: 3,
+                                                explorer: {
+                                                    actions: ['dragToZoom', 'rightClickToReset'],
+                                                    axis: 'horizontal',
+                                                    keepInBounds: true,
+                                                    maxZoomIn: 0.01,
+                                                },
+                                                intervals: { style: 'line' },
+                                                hAxis: {
+                                                    title: 'Date',
+                                                },
+                                                vAxis: {
+                                                    title: '# of zally-ignore',
+                                                },
+                                                annotations: {
+                                                    style: 'line',
+                                                    // stemColor: 'red',
+                                                    // 'textStyle': {
+                                                    //     'fontSize': 10,
+                                                    //     'auraColor': 'none'
+                                                    // },
+                                                    // 'boxStyle': {
+                                                    //     'stroke': '#888888', 'strokeWidth': 0.5,
+                                                    //     'rx': 2, 'ry': 2,
+                                                    //     'gradient': {
+                                                    //         'color1': '#eeeeee',
+                                                    //         'color2': '#dddddd',
+                                                    //         'x1': '0%', 'y1': '0%',
+                                                    //         'x2': '0%', 'y2': '100%',
+                                                    //         'useObjectBoundingBoxUnits': true
+                                                    //     }
+                                                    // }
+                                                },
+                                                tooltip: { isHtml: true }
+                                            }}
+                                            rootProps={{ 'data-testid': '1' }}
+                                        />
+                                    }
+                                    { this.state.chart_loading && 
+                                        <CircularProgress size={30} /> 
+                                    }
                                 </Grid>
                             </Grid>
                         </TabPanel>
@@ -599,7 +645,6 @@ class DashboardComponent extends Component {
         );
     }
 }
-
 
 const useStyles = theme => ({
     wrapIcon: {
