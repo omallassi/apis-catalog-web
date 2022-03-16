@@ -34,11 +34,18 @@ import { Grid, TableContainer } from '@mui/material';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 
-import Paper from '@mui/material/Paper';
 import { blue } from '@mui/material/colors';
 
 import Link from '@mui/material/Link';
 import LinkIcon from '@mui/icons-material/Link';
+
+import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
+
+import Collapse from '@mui/material/Collapse';
+import CloseIcon from '@mui/icons-material/Close';
+
+import Tooltip from '@mui/material/Tooltip';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -78,7 +85,10 @@ class ListDomainsComponent extends Component {
             errorMessage: "",
             domainEditorError: "",
             domain: { name: "", description: "", owner: "" },
+            is_domain_repo_read_only: false,
             value: 0,
+            message: '',
+            message_level: '',
         }
 
         this.listAllDomains = this.listAllDomains.bind(this);
@@ -102,7 +112,10 @@ class ListDomainsComponent extends Component {
                 return a.name.localeCompare(b.name);
             });
 
-            this.setState({ domains: sorted_domains });
+            this.setState({ is_domain_repo_read_only: res.data.is_read_only, domains: sorted_domains });
+        }).catch( (err) => {
+            console.error("Error while getting domain stats " + err);
+            this.setState({message: "Error while listing domains - " + err.message, message_level: 'error'});
         });
     }
 
@@ -110,6 +123,9 @@ class ListDomainsComponent extends Component {
         ApiService.listAllDomainsErrors().then((res) => {
             console.log(res);
             this.setState({ errors: res.data.errors });
+        }).catch( (err) => {
+            console.error("Error while getting domain stats " + err);
+            this.setState({message: "Error while loading domains - " + err.message, message_level: 'error'});
         });
     }
 
@@ -124,8 +140,8 @@ class ListDomainsComponent extends Component {
                 data_table[data_table.length] = [response[index].name, response[index].parent, response[index].value];
             }
 
-            console.log(data_table);
-            console.log(data_table.length);
+            console.debug(data_table);
+            console.debug(data_table.length);
 
             //we should map it to
             //[
@@ -138,6 +154,9 @@ class ListDomainsComponent extends Component {
             //]
 
             this.setState({ stats: data_table })
+        }).catch( (err) => {
+            console.error("Error while getting domain stats " + err);
+            this.setState({message: "Error while loading domain statistics - " + err.message, message_level: 'error'});
         });
     }
 
@@ -186,6 +205,21 @@ class ListDomainsComponent extends Component {
     }
 
     render() {
+        let message_component;
+        if (this.state.message)
+        {
+            message_component =  <Collapse in = {true} ><Alert severity={this.state.message_level} action={<IconButton aria-label="close" color={this.state.message_level} size="small"
+                onClick={() => {
+                 this.setState({message: ''});
+                }}
+              >
+                <CloseIcon fontSize="inherit" />
+              </IconButton>}>
+                  <AlertTitle><strong>{this.state.message_level}</strong></AlertTitle>
+                  {this.state.message}
+                </Alert></Collapse>
+        }
+
         return (
             <Box>
                 <Card variant="outlined">
@@ -193,6 +227,7 @@ class ListDomainsComponent extends Component {
                         <Grid container>
                             <Grid item xs={11}>
                                 <Typography variant="h6" color="primary">Domain Management</Typography>
+                                {message_component}
                             </Grid>
                             <Grid item xs={1}></Grid>
                         </Grid>
@@ -248,16 +283,16 @@ class ListDomainsComponent extends Component {
                             <CardContent>
                                 <Grid container>
                                     <Grid item xs={12}>
-                                        {/* <Typography component="h2" variant="h6" color="primary" gutterBottom>Domains Inconsistencies Check</Typography> */}
-                                        <Typography variant="body1" gutterBottom>
-                                            The following table lists the OpenAPI Specifications whose domain is not in "Domains Catalog"
-                                        </Typography>
+                                        {Array.isArray(this.state.errors) && this.state.errors.length > 0 && (
+                                            <Typography variant="body1" gutterBottom>
+                                                The following table lists the OpenAPI Specifications whose domain is not in "Domains Catalog"
+                                            </Typography>
+                                        )}
                                     </Grid>
                                     <Grid item xs={12}>
                                         {Array.isArray(this.state.errors) && this.state.errors.length > 0 && (
                                             <TableContainer>
-                                                <Table className={this.props.classes.table} component={Paper}>
-
+                                                <Table className={this.props.classes.table}>
                                                     <TableHead>
                                                         <TableRow>
                                                             <TableCell className={this.props.classes.head} ></TableCell>
@@ -286,10 +321,10 @@ class ListDomainsComponent extends Component {
                                                 </Table>
                                             </TableContainer>
                                         )}
-                                        {Array.isArray(this.state.errors) && this.state.errors.length == 0 && (
-                                            <Typography variant="body1" gutterBottom>
-                                                No violation detected.
-                                            </Typography>
+                                        {Array.isArray(this.state.errors) && this.state.errors.length === 0 && (
+                                            <Alert severity="info">
+                                                <strong>No</strong> violation detected.
+                                            </Alert>
                                         )}
                                     </Grid>
                                 </Grid>
@@ -300,32 +335,24 @@ class ListDomainsComponent extends Component {
                             <CardContent>
                                 <Grid container>
                                     <Grid item xs={11}>
-                                        {/* <Typography component="h2" variant="h6" color="primary" gutterBottom>Domains Catalog</Typography> */}
                                         <Typography variant="body1" gutterBottom>
                                             The following table is the list of "declared" Domains and Subdomains.
                                         </Typography>
                                     </Grid>
                                     <Grid item xs={1}>
-                                        {/* <Fab
-                            color="primary"
-                            aria-label="add"
-                            variant="extended"
-                            className={this.props.classes.fab}
-                            component={Link}
-                            onClick={() => this.handleClickOpen()}
-                            to="#"
-                        >
-                            <AddCircleTwoToneIcon />Add new domain
-                        </Fab> */}
-
                                         <IconButton
                                             className={this.props.classes.fab}
                                             color="primary"
                                             variant="outlined"
                                             aria-label="refresh"
-                                            onClick={() => this.handleClickOpen()}
+                                            onClick={ () => {
+                                                if (! this.state.is_domain_repo_read_only)
+                                                    this.handleClickOpen()
+                                            } }
                                             size="large">
-                                            <AddCircleIcon color="primary" />
+                                            <Tooltip title = "Add Domain">
+                                                <AddCircleIcon color={this.state.is_domain_repo_read_only? "disabled": "primary"} />
+                                            </Tooltip>
                                         </IconButton>
                                         <IconButton
                                             className={this.props.classes.fab}
@@ -336,18 +363,11 @@ class ListDomainsComponent extends Component {
                                             size="large">
                                             <SyncIcon color="primary"></SyncIcon>
                                         </IconButton>
-                                        {/* <Button color="primary" className={this.props.classes.fab} onClick={() => this.handleClickOpen()}>
-                            <AddCircleTwoToneIcon />Add new domain
-                        </Button> */}
-                                        {/* <DomainEditor ref={this.domainEditorRef} /> */}
+                                       
                                         <Dialog fullWidth maxWidth="md" open={this.state.showDomainEditor} onClose={() => this.handleClose()} aria-labelledby="form-dialog-title">
                                             <DialogTitle id="form-dialog-title">Create a new Domain/SubDomain</DialogTitle>
-                                            {/* <form onSubmit={() => this.handleSubmit()}> */}
+                                            
                                             <DialogContent>
-                                                {/* <DialogContentText>
-                                    To subscribe to this website, please enter your email address here. We will send updates
-                                    occasionally.
-                                </DialogContentText> */}
                                                 <form className={this.props.classes.root} noValidate autoComplete="on">
                                                     <TextField
                                                         required
@@ -401,7 +421,7 @@ class ListDomainsComponent extends Component {
                                     </Grid>
                                     <Grid item xs={12}>
                                         <TableContainer>
-                                            <Table className={this.props.classes.table} component={Paper}>
+                                            <Table className={this.props.classes.table}>
                                                 <TableHead>
                                                     <TableRow>
                                                         <TableCell key="domain" className={this.props.classes.head} >
@@ -425,9 +445,14 @@ class ListDomainsComponent extends Component {
                                                                     color="primary"
                                                                     variant="outlined"
                                                                     aria-label="refresh"
-                                                                    onClick={() => { this.deleteDomain(row.id) }}
+                                                                    onClick={ () => {
+                                                                        if (! this.state.is_domain_repo_read_only)
+                                                                            this.deleteDomain(row.id)
+                                                                    } }
                                                                     size="large">
-                                                                    <DeleteOutlineIcon color="primary"></DeleteOutlineIcon>
+                                                                     <Tooltip title = "Delete Domain">
+                                                                        <DeleteOutlineIcon color={this.state.is_domain_repo_read_only? "disabled": "primary"} />
+                                                                    </Tooltip>
                                                                 </IconButton>
                                                             </TableCell>
                                                         </TableRow>
