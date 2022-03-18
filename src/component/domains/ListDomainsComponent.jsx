@@ -334,10 +334,17 @@ class ListDomainsComponent extends Component {
                         <TabPanel value={this.state.value} index={2}>
                             <CardContent>
                                 <Grid container>
-                                    <Grid item xs={11}>
+                                    <Grid item xs={12}>
                                         <Typography variant="body1" gutterBottom>
                                             The following table is the list of "declared" Domains and Subdomains.
                                         </Typography>
+                                    </Grid>
+                                    <Grid item xs={11}>
+                                        {this.state.is_domain_repo_read_only && (
+                                            <Alert severity="info">
+                                                The domain repository is <strong>read-only</strong>
+                                            </Alert>
+                                        )}
                                     </Grid>
                                     <Grid item xs={1}>
                                         <IconButton
@@ -361,7 +368,9 @@ class ListDomainsComponent extends Component {
                                             aria-label="refresh"
                                             onClick={() => { this.listAllDomains() }}
                                             size="large">
+                                            <Tooltip title = "Refresh Domain List">
                                             <SyncIcon color="primary"></SyncIcon>
+                                            </Tooltip>
                                         </IconButton>
                                        
                                         <Dialog fullWidth maxWidth="md" open={this.state.showDomainEditor} onClose={() => this.handleClose()} aria-labelledby="form-dialog-title">
