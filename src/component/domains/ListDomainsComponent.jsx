@@ -47,6 +47,8 @@ import CloseIcon from '@mui/icons-material/Close';
 
 import Tooltip from '@mui/material/Tooltip';
 
+import CircularProgress from '@mui/material/CircularProgress';
+
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
 
@@ -89,6 +91,7 @@ class ListDomainsComponent extends Component {
             value: 0,
             message: '',
             message_level: '',
+            loading: false,
         }
 
         this.listAllDomains = this.listAllDomains.bind(this);
@@ -131,6 +134,7 @@ class ListDomainsComponent extends Component {
 
     buildDomainTreeMap() {
         //
+        this.setState({loading: true});
         ApiService.getDomainsMetrics().then((res) => {
             var response = res.data;
             var data_table = [['Name', 'Parent', 'Resources Number (num)'], ['Global', null, 0]]
@@ -153,10 +157,10 @@ class ListDomainsComponent extends Component {
             //    ['authz', 'iam', 52],
             //]
 
-            this.setState({ stats: data_table })
+            this.setState({ stats: data_table, loading: false })
         }).catch( (err) => {
             console.error("Error while getting domain stats " + err);
-            this.setState({message: "Error while loading domain statistics - " + err.message, message_level: 'error'});
+            this.setState({message: "Error while loading domain statistics - " + err.message, message_level: 'error', loading: false});
         });
     }
 
@@ -247,6 +251,7 @@ class ListDomainsComponent extends Component {
                                 <Typography variant="body1" gutterBottom>
                                     The following diagram displays volume of resources per domain and subdomains, based on the Open API Specifications (available in git).
                                 </Typography>
+                                { !this.state.loading && 
                                 <Chart
                                     chartType="TreeMap"
                                     loader={<div>Loading Chart</div>}
@@ -275,6 +280,10 @@ class ListDomainsComponent extends Component {
                                     }}
                                     rootProps={{ 'data-testid': '1' }}
                                 />
+                                }
+                                { this.state.loading && 
+                                    <CircularProgress size={30} /> 
+                                }
                             </CardContent>
 
                         </TabPanel>
