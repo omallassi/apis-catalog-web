@@ -8,7 +8,16 @@ WORKDIR /apis-catalog-web
 
 COPY ./ ./
 
+# TODO
+# instancier ./docker-config/config-template.json > CONFIG .json 
+# and subsenv 
+# all of this in the entrypoint and that should be ok
+
+# RUN REACT_APP_DOMAIN=${DOMAIN} \ 
+#   REACT_APP_API_KEY=${API_KEY} \ 
+#   npm run build 
+
 RUN npm install
-RUN npm run build
+# RUN npm run build
 
 #ENTRYPOINT [ "./docker-config/entrypoint.sh" , "--variables"]

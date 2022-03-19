@@ -14,6 +14,8 @@ import PropTypes from 'prop-types';
 import makeStyles from '@mui/styles/makeStyles';
 import List from '@mui/material/List';
 import Paper from '@mui/material/Paper';
+import Chip from '@mui/material/Chip';
+import Stack from '@mui/material/Stack';
 
 
 function ListItemLink(props) {
@@ -71,26 +73,28 @@ export default function ListRouter() {
             <ListItemLink to="/reviews" primary="APIs Reviews" icon={<RateReviewIcon color="primary" />} />
             <ListItemLink to="/domains" primary="Domains" icon={<FilterTiltShiftIcon color="primary" />} />
 
-            {"true" == process.env.REACT_APP_BETA
-              ? < ListItemLink to="/apis" primary="Apis" icon={<ListAltIcon color="primary" />} />
+            {process.env.REACT_APP_BETA
+              ? <Stack direction="row" spacing={1}><Chip label="beta" variant="outlined" color="primary" size="small" />< ListItemLink to="/apis" primary="Apis" icon={<ListAltIcon color="primary" />} /></Stack>
               : null
             }
-            {"true" == process.env.REACT_APP_BETA
-              ? < ListItemLink to="/envs" primary="Environments" icon={<ComputerIcon color="primary" />} />
+            {process.env.REACT_APP_BETA
+              ? <Stack direction="row" spacing={1}><Chip label="beta" variant="outlined" color="primary" size="small" />< ListItemLink to="/envs" primary="Environments" icon={<ComputerIcon color="primary" />} /></Stack>
               : null
             }
-            {"true" == process.env.REACT_APP_BETA
+            {process.env.REACT_APP_BETA
               ?
-              <ListItem button component="a" href="{process.env.REACT_APP_PACT_DOC_URL}" target="_blank">
+              <Stack direction="row" spacing={1}><Chip label="beta" variant="outlined" color="primary" size="small" />
+              <ListItem button component="a" href={process.env.REACT_APP_PACT_DOC_URL} target="_blank">
                 <ListItemIcon>
                   <LinkIcon /> 
                 </ListItemIcon>
                 <ListItemText primary="PACT Broker" />
               </ListItem>
+              </Stack>
               : null
             }
 
-            <ListItem button component="a" href="{process.env.REACT_APP_API_DOC_URL}" target="_blank">
+            <ListItem button component="a" href={process.env.REACT_APP_API_DOC_URL} target="_blank">
               <ListItemIcon>
                 <LinkIcon /> 
               </ListItemIcon>
