@@ -15,8 +15,6 @@ import makeStyles from '@mui/styles/makeStyles';
 import List from '@mui/material/List';
 import Paper from '@mui/material/Paper';
 
-import Config from "./config.json";
-
 
 function ListItemLink(props) {
   const { icon, primary, to } = props;
@@ -51,8 +49,6 @@ const useStyles = makeStyles({
 export default function ListRouter() {
   const classes = useStyles();
 
-  console.info("is using config " + JSON.stringify(Config) );
-
   return (
 
     <Router forceRefresh={true}>
@@ -75,17 +71,17 @@ export default function ListRouter() {
             <ListItemLink to="/reviews" primary="APIs Reviews" icon={<RateReviewIcon color="primary" />} />
             <ListItemLink to="/domains" primary="Domains" icon={<FilterTiltShiftIcon color="primary" />} />
 
-            {Config.REACT_APP_BETA
+            {"true" == process.env.REACT_APP_BETA
               ? < ListItemLink to="/apis" primary="Apis" icon={<ListAltIcon color="primary" />} />
               : null
             }
-            {Config.REACT_APP_BETA
+            {"true" == process.env.REACT_APP_BETA
               ? < ListItemLink to="/envs" primary="Environments" icon={<ComputerIcon color="primary" />} />
               : null
             }
-            {Config.REACT_APP_BETA
+            {"true" == process.env.REACT_APP_BETA
               ?
-              <ListItem button component="a" href={Config.REACT_APP_PACT_DOC_URL} target="_blank">
+              <ListItem button component="a" href="{process.env.REACT_APP_PACT_DOC_URL}" target="_blank">
                 <ListItemIcon>
                   <LinkIcon /> 
                 </ListItemIcon>
@@ -94,7 +90,7 @@ export default function ListRouter() {
               : null
             }
 
-            <ListItem button component="a" href={Config.REACT_APP_API_DOC_URL} target="_blank">
+            <ListItem button component="a" href="{process.env.REACT_APP_API_DOC_URL}" target="_blank">
               <ListItemIcon>
                 <LinkIcon /> 
               </ListItemIcon>
