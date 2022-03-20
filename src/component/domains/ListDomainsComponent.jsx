@@ -48,6 +48,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import Tooltip from '@mui/material/Tooltip';
 
 import CircularProgress from '@mui/material/CircularProgress';
+import DoneIcon from '@mui/icons-material/Done';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -136,6 +137,8 @@ class ListDomainsComponent extends Component {
         //
         this.setState({loading: true});
         ApiService.getDomainsMetrics().then((res) => {
+            console.log(res);
+
             var response = res.data;
             var data_table = [['Name', 'Parent', 'Resources Number (num)'], ['Global', null, 0]]
 
@@ -144,8 +147,8 @@ class ListDomainsComponent extends Component {
                 data_table[data_table.length] = [response[index].name, response[index].parent, response[index].value];
             }
 
-            console.debug(data_table);
-            console.debug(data_table.length);
+            console.debug("domain stats for treemap : " + data_table);
+            console.debug("domain stats length for treemap : " + data_table.length);
 
             //we should map it to
             //[
@@ -445,6 +448,7 @@ class ListDomainsComponent extends Component {
                                                         <TableCell key="domain" className={this.props.classes.head} >
                                                             Domain / SubDomain Name
                                                         </TableCell>
+                                                        <TableCell className={this.props.classes.head}>Is void</TableCell>
                                                         <TableCell className={this.props.classes.head}>Description</TableCell>
                                                         <TableCell className={this.props.classes.head}>Owner</TableCell>
                                                         <TableCell className={this.props.classes.head}>Id</TableCell>
@@ -454,7 +458,16 @@ class ListDomainsComponent extends Component {
                                                 <TableBody>
                                                     {this.state.domains.map(row => (
                                                         <TableRow hover key={row.id}>
-                                                            <TableCell>{row.name}</TableCell>
+                                                            { row.is_empty &&
+                                                                <TableCell 
+                                                                    className={this.props.classes.table_cell_is_empty}>
+                                                                        {row.name}
+                                                            </TableCell>
+                                                            }
+                                                            { !row.is_empty &&
+                                                                <TableCell>{row.name}</TableCell>
+                                                            }
+                                                            <TableCell>{ row.is_empty ? <DoneIcon/> : "" }</TableCell>
                                                             <TableCell>{row.description}</TableCell>
                                                             <TableCell>{row.owner}</TableCell>
                                                             <TableCell>{row.id}</TableCell>
@@ -500,6 +513,9 @@ const useStyles = theme => ({
         backgroundColor: blue[700],
         color: theme.palette.getContrastText(blue[700])
     },
+    table_cell_is_empty: {
+        color: theme.palette.error.dark
+    }
 });
 
 ListDomainsComponent.propTypes = {

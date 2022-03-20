@@ -11,11 +11,12 @@ class ApiService {
     }
 
     listAllDomains() {
+        console.info("ApiService - List all domains");
         return axios.get('/v1/domains');
     }
 
     listAllDomainsErrors() {
-        console.log("ApiService - listAllDomainsErrors");
+        console.info("ApiService - list all domains errors");
         return axios.get('/v1/domains/errors');
     }
 
@@ -29,10 +30,12 @@ class ApiService {
     }
 
     getDomainsMetrics() {
+        console.info("ApiService - get Domain metrics");
         return axios.get('/v1/domains/stats');
     }
 
     listAllEnvs() {
+        console.info("ApiService - get all envs");
         return axios.get('/v1/envs');
     }
 
