@@ -22,4 +22,4 @@ jobs:
       - run: npm test -- --coverage
       - run: CI=false npm run build --if-present
       - name: Upload coverage reports
-        run: COVERALLS_REPO_TOKEN=IR5rxUeuM8dHeAFKoqAnk4AolKw9DAHK0 npm run coveralls
+        run: COVERALLS_REPO_TOKEN="${{secrets.COVERALLS_TOKEN}}" npm run coveralls
