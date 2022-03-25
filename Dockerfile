@@ -1,4 +1,4 @@
-FROM apis-catalog/apis-catalog:latest
+FROM ghcr.io/omallassi/apis-catalog:master
 
 RUN curl -sL https://deb.nodesource.com/setup_17.x | bash -
 RUN apt-get install -y nodejs
