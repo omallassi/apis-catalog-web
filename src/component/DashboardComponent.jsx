@@ -95,6 +95,12 @@ class DashboardComponent extends Component {
         this.getOldestPr();
     }
 
+    componentWillUnmount(){
+        this.setState = (state,callback)=>{
+            return;
+        };
+    }
+
     createDataTable(origin_data, merged_pull_requests) {
         //need to parse them to have an array of array
         var columns = [];

@@ -37,6 +37,12 @@ class ListApiComponent extends Component {
         this.listAllApis();
     }
 
+    componentWillUnmount(){
+        this.setState = (state,callback)=>{
+            return;
+        };
+    }
+
     listAllApis() {
         ApiService.listAllApis().then((res) => {
             this.setState({ apis: res.data.apis })

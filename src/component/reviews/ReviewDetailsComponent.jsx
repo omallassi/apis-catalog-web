@@ -67,6 +67,12 @@ class ReviewDetailsComponent extends Component {
     componentDidMount() {
     }
 
+    componentWillUnmount(){
+        this.setState = (state,callback)=>{
+            return;
+        };
+    }
+
     updateSelectedReview(id, review) {
         this.setState({ review: { 'id': id, 'title': review.title } });
         //

@@ -74,6 +74,12 @@ class ApiDetailsComponent extends Component {
         this.listDeploymentsForApi(this.state.id);
     }
 
+    componentWillUnmount(){
+        this.setState = (state,callback)=>{
+            return;
+        };
+    }
+
     listSpecsForApi(id) {
         ApiService.listSpecsForApi(id).then((res) => {
             this.setState({ specs: res.data.specs });

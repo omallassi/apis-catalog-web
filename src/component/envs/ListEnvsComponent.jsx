@@ -29,6 +29,12 @@ class ListEnvsComponent extends Component {
         this.listAllEnvs();
     }
 
+    componentWillUnmount(){
+        this.setState = (state,callback)=>{
+            return;
+        };
+    }
+
     listAllEnvs() {
         ApiService.listAllEnvs().then((res) => {
             this.setState({ envs: res.data.envs })

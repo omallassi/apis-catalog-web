@@ -43,6 +43,12 @@ class ListReviewsComponent extends Component {
         this.listAllReviews();
     }
 
+    componentWillUnmount(){
+        this.setState = (state,callback)=>{
+            return;
+        };
+    }
+
     listAllReviews() {
         ApiService.listAllReviews().then((res) => {
             this.setState({ reviews: res.data.reviews });

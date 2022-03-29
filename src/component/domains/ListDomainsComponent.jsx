@@ -108,6 +108,12 @@ class ListDomainsComponent extends Component {
         this.buildDomainTreeMap();
     }
 
+    componentWillUnmount(){
+        this.setState = (state,callback)=>{
+            return;
+        };
+    }
+
     listAllDomains() {
         ApiService.listAllDomains().then((res) => {
             console.log(res);
