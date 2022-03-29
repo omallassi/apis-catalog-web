@@ -1,5 +1,5 @@
 import React, { Component, useState } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import withStyles from '@mui/styles/withStyles';
 import PropTypes from 'prop-types';
 
@@ -18,13 +18,13 @@ import ListEnvsComponent from './envs/ListEnvsComponent';
     return (
         // <div style={style}>
             // <BrowserRouter>
-                <Switch>
-                    <Route path="/" exact component={DashBoardComponent} />
-                    <Route path="/domains" exact component={ListDomainsComponent} />
-                    <Route path="/reviews" exact component={ListReviewsComponent} />
-                    <Route path="/apis" exact component={ListApiComponent} />
-                    <Route path="/envs" exact component={ListEnvsComponent} />
-                </Switch>
+                <Routes>
+                    <Route path="/" exact element={<DashBoardComponent/>} />
+                    <Route path="/domains" exact element={<ListDomainsComponent/>} />
+                    <Route path="/reviews" exact element={<ListReviewsComponent/>} />
+                    <Route path="/apis" exact element={<ListApiComponent/>} />
+                    <Route path="/envs" exact element={<ListEnvsComponent/>} />
+                </Routes>
             // </BrowserRouter>
         // </div>
     )
