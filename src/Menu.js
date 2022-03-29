@@ -17,12 +17,15 @@ import Stack from '@mui/material/Stack';
 import withStyles from '@mui/styles/withStyles';
 import PropTypes from 'prop-types';
 
+import Divider from '@mui/material/Divider';
+
 
 function ListItemLink(props) {
   const { icon, primary, to } = props;
 
   const renderLink = React.useMemo(
-    () => React.forwardRef((itemProps, ref) => <Link to={to} ref={ref} {...itemProps} />),
+    () => 
+      React.forwardRef((itemProps, ref) => <Link to={to} ref={ref} {...itemProps} role={undefined} />),
     [to],
   );
 
@@ -52,9 +55,7 @@ class ListRouter extends Component {
       <div className={this.props.classes.root}>
         <Paper elevation={0}>
           <List>
-
-
-          <ListItemLink to="/" primary="Dashboard" icon={<DashboardIcon color="primary" />} />
+            <ListItemLink to="/" primary="Dashboard" icon={<DashboardIcon color="primary" />} />
             <ListItemLink to="/reviews" primary="APIs Reviews" icon={<RateReviewIcon color="primary" />} />
             <ListItemLink to="/domains" primary="Domains" icon={<FilterTiltShiftIcon color="primary" />} />
 
@@ -68,6 +69,7 @@ class ListRouter extends Component {
             }
             {process.env.REACT_APP_BETA
               ?
+              
               <Stack direction="row" spacing={1}><Chip label="beta" variant="outlined" color="primary" size="small" />
               <ListItem button component="a" href={process.env.REACT_APP_PACT_DOC_URL} target="_blank">
                 <ListItemIcon>
