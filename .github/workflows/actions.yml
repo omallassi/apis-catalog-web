@@ -53,9 +53,8 @@ jobs:
           images: ${{env.REGISTRY}}/${{env.IMAGE_NAME}}
 
       - name: build and push Docker image
-        uses: docker/build-push-action@v2.10.0
+        uses: docker/build-push-action@v3
         with: 
           context: .
           push: true
           tags: omallassi/apis-catalog-web:latest
-          labels: omallassi/apis-catalog-web:latest
