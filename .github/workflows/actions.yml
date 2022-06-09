@@ -57,5 +57,5 @@ jobs:
         with: 
           context: .
           push: true
-          tags: ${{steps.meta.outputs.tags}}
-          labels: ${{steps.meta.outputs.labels}} 
+          tags: omallassi/apis-catalog-web:latest
+          labels: omallassi/apis-catalog-web:latest
