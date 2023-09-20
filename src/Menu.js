@@ -60,28 +60,28 @@ class ListRouter extends Component {
            <ListItemLink to="/domains" primary="Domain Mgmt" icon={<FilterTiltShiftIcon color="primary" />} />
 
             {process.env.REACT_APP_BETA
-              ? <Stack direction="row" spacing={1}><Chip label="beta" variant="outlined" color="primary" size="small" />< ListItemLink to="/" primary="Dashboard" icon={<DashboardIcon color="primary" />} /></Stack>
+              ? <Stack direction="row" spacing={1}><Chip label="beta" color="warning" variant="outlined" size="small" />< ListItemLink to="/" primary="Dashboard" icon={<DashboardIcon color="primary" />} /></Stack>
               : null
             }
             {process.env.REACT_APP_BETA
-              ? <Stack direction="row" spacing={1}><Chip label="beta" variant="outlined" color="primary" size="small" /><ListItemLink to="/reviews" primary="APIs Reviews" icon={<RateReviewIcon color="primary" />} /></Stack>
+              ? <Stack direction="row" spacing={1}><Chip label="beta" color="warning" variant="outlined"  size="small" /><ListItemLink to="/reviews" primary="APIs Reviews" icon={<RateReviewIcon color="primary" />} /></Stack>
               : null
             }
             
             
 
             {process.env.REACT_APP_BETA
-              ? <Stack direction="row" spacing={1}><Chip label="beta" variant="outlined" color="primary" size="small" />< ListItemLink to="/apis" primary="Apis" icon={<ListAltIcon color="primary" />} /></Stack>
+              ? <Stack direction="row" spacing={1}><Chip label="beta" color="warning" variant="outlined"  size="small" />< ListItemLink to="/apis" primary="Apis" icon={<ListAltIcon color="primary" />} /></Stack>
               : null
             }
             {process.env.REACT_APP_BETA
-              ? <Stack direction="row" spacing={1}><Chip label="beta" variant="outlined" color="primary" size="small" />< ListItemLink to="/envs" primary="Environments" icon={<ComputerIcon color="primary" />} /></Stack>
+              ? <Stack direction="row" spacing={1}><Chip label="beta" color="warning" variant="outlined" size="small" />< ListItemLink to="/envs" primary="Environments" icon={<ComputerIcon color="primary" />} /></Stack>
               : null
             }
             {process.env.REACT_APP_BETA
               ?
               
-              <Stack direction="row" spacing={1}><Chip label="beta" variant="outlined" color="primary" size="small" />
+              <Stack direction="row" spacing={1}><Chip label="beta" color="warning" variant="outlined" size="small" />
               <ListItem button component="a" href={process.env.REACT_APP_PACT_DOC_URL} target="_blank">
                 <ListItemIcon>
                   <LinkIcon /> 
