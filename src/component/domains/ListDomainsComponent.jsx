@@ -246,6 +246,14 @@ class ListDomainsComponent extends Component {
                         </Grid>
                     </CardContent>
                     <CardContent>
+                        <Grid container>
+                            <Grid item xs={11}>
+                                <Typography>The following groups all information to help understanding domains and subdomains, how they relates, their "volumes" w.r.t numer of endpoints, their organisation per layer etc.</Typography>
+                            </Grid>
+                            <Grid item xs={1}></Grid>
+                        </Grid>
+                    </CardContent>
+                    <CardContent>
                         <Tabs
                             value={this.state.value}
                             onChange={(event, newValue) => this.setState({ value: newValue })}

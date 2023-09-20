@@ -9,6 +9,7 @@ import ListAltIcon from '@mui/icons-material/ListAlt';
 import FilterTiltShiftIcon from '@mui/icons-material/FilterTiltShift';
 import ComputerIcon from '@mui/icons-material/Computer';
 import RateReviewIcon from '@mui/icons-material/RateReview';
+import LayersIcon from '@mui/icons-material/Layers';
 import List from '@mui/material/List';
 import Paper from '@mui/material/Paper';
 import Chip from '@mui/material/Chip';
@@ -55,9 +56,19 @@ class ListRouter extends Component {
       <div className={this.props.classes.root}>
         <Paper elevation={0}>
           <List>
-            <ListItemLink to="/" primary="Dashboard" icon={<DashboardIcon color="primary" />} />
-            <ListItemLink to="/reviews" primary="APIs Reviews" icon={<RateReviewIcon color="primary" />} />
-            <ListItemLink to="/domains" primary="Domains" icon={<FilterTiltShiftIcon color="primary" />} />
+           <ListItemLink to="/layers" primary="System & Layer Mgmt" icon={<LayersIcon color="primary" />} />
+           <ListItemLink to="/domains" primary="Domain Mgmt" icon={<FilterTiltShiftIcon color="primary" />} />
+
+            {process.env.REACT_APP_BETA
+              ? <Stack direction="row" spacing={1}><Chip label="beta" variant="outlined" color="primary" size="small" />< ListItemLink to="/" primary="Dashboard" icon={<DashboardIcon color="primary" />} /></Stack>
+              : null
+            }
+            {process.env.REACT_APP_BETA
+              ? <Stack direction="row" spacing={1}><Chip label="beta" variant="outlined" color="primary" size="small" /><ListItemLink to="/reviews" primary="APIs Reviews" icon={<RateReviewIcon color="primary" />} /></Stack>
+              : null
+            }
+            
+            
 
             {process.env.REACT_APP_BETA
               ? <Stack direction="row" spacing={1}><Chip label="beta" variant="outlined" color="primary" size="small" />< ListItemLink to="/apis" primary="Apis" icon={<ListAltIcon color="primary" />} /></Stack>
