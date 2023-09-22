@@ -78,6 +78,11 @@ class ApiService {
         console.log("ApiService - list all reviews");
         return axios.get('/v1/reviews');
     }
+
+    listAllSystems(){
+        console.log("ApiService - list all systems and layers");
+        return axios.get('/v1/systems')
+    }
 }
 
 export default new ApiService();

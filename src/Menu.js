@@ -4,6 +4,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import { Link } from 'react-router-dom';
 import DashboardIcon from '@mui/icons-material/Dashboard';
+import DatasetLinkedIcon from '@mui/icons-material/DatasetLinked';
 import LinkIcon from '@mui/icons-material/Link';
 import ListAltIcon from '@mui/icons-material/ListAlt';
 import FilterTiltShiftIcon from '@mui/icons-material/FilterTiltShift';
@@ -94,7 +95,7 @@ class ListRouter extends Component {
 
             <ListItem button component="a" href={process.env.REACT_APP_API_DOC_URL} target="_blank">
               <ListItemIcon>
-                <LinkIcon /> 
+              <DatasetLinkedIcon/>
               </ListItemIcon>
               <ListItemText primary="APIs Doc" />
             </ListItem> 
