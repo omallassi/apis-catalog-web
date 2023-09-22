@@ -62,6 +62,7 @@ class ListEnvsComponent extends Component {
                                 <TableBody>
                                     {this.state.envs.map(row => (
                                         <TableRow hover key={row.id}>
+                                            {console.log(this.state.envs)}
                                             <TableCell><Avatar className={classes.avatar}>{row.id}</Avatar></TableCell>
                                             <TableCell>{row.name}</TableCell>
                                             <TableCell>{row.id}</TableCell>

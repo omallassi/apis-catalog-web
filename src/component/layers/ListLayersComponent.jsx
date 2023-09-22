@@ -75,11 +75,7 @@ class ListLayersComponent extends Component {
         ApiService.listAllSystems().then((res) => {
             console.log(res);
 
-            // var sorted_domains = res.data.systems.sort((a, b) => {
-            //     return a.name.localeCompare(b.name);
-            // });
-
-            //this.setState({systems: res.data });
+            this.setState({systems: res.data.systems });
         }).catch( (err) => {
             console.error("Error while getting systems " + err);
             this.setState({message: "Error while listing systems - " + err.message, message_level: 'error'});
@@ -141,23 +137,16 @@ class ListLayersComponent extends Component {
                                                 </TableRow>
                                             </TableHead>
                                             <TableBody>
-                                                {this.state.systems.map(row => (
-                                                    <TableRow hover key={row.id}>
-                                                        { row.is_empty &&
-                                                            <TableCell 
-                                                                className={this.props.classes.table_cell_is_empty}>
-                                                                    {row.name}
-                                                        </TableCell>
-                                                        }
-                                                        { !row.is_empty &&
-                                                            <TableCell>{row.name}</TableCell>
-                                                        }
-                                                        <TableCell>{ row.is_empty ? <DoneIcon/> : "" }</TableCell>
-                                                        <TableCell>{row.description}</TableCell>
-                                                        <TableCell>{row.owner}</TableCell>
-                                                        <TableCell>{row.id}</TableCell>
-                                                        <TableCell>
-                                                        </TableCell>
+                                                {this.state.systems.map(row => ( 
+                                                    <TableRow>
+                                                    <TableCell key="domain" className={this.props.classes.head} >
+                                                        {row.name}
+                                                    </TableCell>
+                                                    <TableCell className={this.props.classes.head}>Is void</TableCell>
+                                                    <TableCell className={this.props.classes.head}>Description</TableCell>
+                                                    <TableCell className={this.props.classes.head}>Owner</TableCell>
+                                                    <TableCell className={this.props.classes.head}>Id</TableCell>
+                                                    <TableCell className={this.props.classes.head} />
                                                     </TableRow>
                                                 ))}
                                             </TableBody>
