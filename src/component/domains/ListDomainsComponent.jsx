@@ -50,6 +50,8 @@ import Tooltip from '@mui/material/Tooltip';
 import CircularProgress from '@mui/material/CircularProgress';
 import DoneIcon from '@mui/icons-material/Done';
 
+import Badge from '@mui/material/Badge';
+
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
 
@@ -260,7 +262,7 @@ class ListDomainsComponent extends Component {
                             indicatorColor="primary"
                             textColor="primary">
                             <Tab label="Domain Statistics" icon={<TableChartTwoToneIcon />} {...this.a11yProps(0)} />
-                            <Tab label="Violation(s)" icon={<AssignmentLateIcon />} {...this.a11yProps(1)} />
+                            <Tab label="Violation(s)" icon={<Badge badgeContent={this.state.errors.length} showZero color={this.state.errors.length == 0 ? "success" : "error"}><AssignmentLateIcon/></Badge>} {...this.a11yProps(1)} />
                             <Tab label="Domain Catalog" icon={<AssignmentIcon />} {...this.a11yProps(2)} />
                         </Tabs>
                         <TabPanel value={this.state.value} index={0}>

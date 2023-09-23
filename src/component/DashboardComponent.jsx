@@ -338,44 +338,42 @@ class DashboardComponent extends Component {
                             <Tab label="Zally Violations" icon={<AssignmentLateIcon />} {...this.a11yProps(2)} />
                         </Tabs>
                         <TabPanel value={this.state.value} index={1}>
-                            <Grid container direction="row" alignItems="center" spacing={10}>
+                            <Grid container direction="row" alignItems="center" spacing={1}>
                                 <Grid item xs={12}>
                                     <Typography variant="body1" gutterBottom className={this.props.classes.wrapIcon}>
-                                        <BlurLinearTwoToneIcon className={this.props.classes.linkIcon} style={{ fill: "#6573c3" }} />
-                                        The following chart displays the # of opened Pull-Request
+                                        <BlurLinearTwoToneIcon className={this.props.classes.linkIcon} style={{ fill: "#6573c3" }} /> The following chart displays the # of opened Pull-Request
                                     </Typography>
                                 </Grid>
                                 <Grid item xs={12}>
                                     { !this.state.chart_loading && 
-                                    
-                                    <Chart
-                                        height={'600px'}
-                                        chartType="LineChart"
-                                        loader={<div>Loading Chart</div>}
-                                        columns={['Date', 'Pull Requests #']}
-                                        rows={this.state.pr_num}
-                                        options={{
-                                            title: "Opened Pull Requests #",
-                                            // curveType: "function",
-                                            // legend: { position: "bottom",},
-                                            //curveType: 'function',
-                                            lineWidth: 3,
-                                            explorer: {
-                                                actions: ['dragToZoom', 'rightClickToReset'],
-                                                axis: 'horizontal',
-                                                keepInBounds: true,
-                                                maxZoomIn: 0.01,
-                                            },
-                                            intervals: { style: 'line' },
-                                            hAxis: {
-                                                title: 'Date',
-                                            },
-                                            vAxis: {
-                                                title: '# of PRs',
-                                            }
-                                        }}
-                                        rootProps={{ 'data-testid': '1' }}
-                                    />
+                                        <Chart
+                                            height={'300px'}
+                                            chartType="LineChart"
+                                            loader={<div>Loading Chart</div>}
+                                            columns={['Date', 'Pull Requests #']}
+                                            rows={this.state.pr_num}
+                                            options={{
+                                                title: "Opened Pull Requests #",
+                                                // curveType: "function",
+                                                // legend: { position: "bottom",},
+                                                //curveType: 'function',
+                                                lineWidth: 3,
+                                                explorer: {
+                                                    actions: ['dragToZoom', 'rightClickToReset'],
+                                                    axis: 'horizontal',
+                                                    keepInBounds: true,
+                                                    maxZoomIn: 0.01,
+                                                },
+                                                intervals: { style: 'line' },
+                                                hAxis: {
+                                                    title: 'Date',
+                                                },
+                                                vAxis: {
+                                                    title: '# of PRs',
+                                                }
+                                            }}
+                                            rootProps={{ 'data-testid': '1' }}
+                                        />
                                     }
                                     { this.state.chart_loading && 
                                         <CircularProgress size={30} /> 
@@ -383,38 +381,37 @@ class DashboardComponent extends Component {
                                 </Grid>
                                 <Grid item xs={12}>
                                     <Typography variant="body1" gutterBottom className={this.props.classes.wrapIcon}>
-                                        <BlurLinearTwoToneIcon className={this.props.classes.linkIcon} style={{ fill: "#6573c3" }} />
-                                        The following chart displays some statistics around pull-requests
+                                        <BlurLinearTwoToneIcon className={this.props.classes.linkIcon} style={{ fill: "#6573c3" }} /> The following chart displays some statistics around pull-requests
                                     </Typography>
-                                    </Grid>
-                                    <Grid item xs={12}>
+                                </Grid>
+                                <Grid item xs={12}>
                                     { !this.state.chart_loading && 
-                                    <Chart
-                                        height={'600px'}
-                                        chartType="LineChart"
-                                        loader={<div>Loading Chart</div>}
-                                        columns={['Date', 'min (days)', 'p50 (days)', 'max (days)', 'mean (days)']}
-                                        rows={this.state.pr_ages}
-                                        options={{
-                                            title: "Opened Pull Requests Stats",
-                                            //curveType: 'function',
-                                            lineWidth: 3,
-                                            explorer: {
-                                                actions: ['dragToZoom', 'rightClickToReset'],
-                                                axis: 'horizontal',
-                                                keepInBounds: true,
-                                                maxZoomIn: 0.01,
-                                            },
-                                            intervals: { style: 'line' },
-                                            hAxis: {
-                                                title: 'Time',
-                                            },
-                                            vAxis: {
-                                                title: '# of days',
-                                            },
-                                        }}
-                                        rootProps={{ 'data-testid': '1' }}
-                                    />
+                                        <Chart
+                                            height={'300px'}
+                                            chartType="LineChart"
+                                            loader={<div>Loading Chart</div>}
+                                            columns={['Date', 'min (days)', 'p50 (days)', 'max (days)', 'mean (days)']}
+                                            rows={this.state.pr_ages}
+                                            options={{
+                                                title: "Opened Pull Requests Stats",
+                                                //curveType: 'function',
+                                                lineWidth: 3,
+                                                explorer: {
+                                                    actions: ['dragToZoom', 'rightClickToReset'],
+                                                    axis: 'horizontal',
+                                                    keepInBounds: true,
+                                                    maxZoomIn: 0.01,
+                                                },
+                                                intervals: { style: 'line' },
+                                                hAxis: {
+                                                    title: 'Time',
+                                                },
+                                                vAxis: {
+                                                    title: '# of days',
+                                                },
+                                            }}
+                                            rootProps={{ 'data-testid': '1' }}
+                                        />
                                     }
                                     { this.state.chart_loading && 
                                         <CircularProgress size={30} /> 
@@ -429,7 +426,7 @@ class DashboardComponent extends Component {
                                     <Table>
                                         <TableHead>
                                             <TableRow>
-                                                <TableCell className={this.props.classes.head}>Pull Request Id</TableCell>
+                                                <TableCell className={this.props.classes.head}>Id</TableCell>
                                                 <TableCell className={this.props.classes.head}>Pull Request Title</TableCell>
                                                 <TableCell className={this.props.classes.head}>Creation Date</TableCell>
                                                 <TableCell className={this.props.classes.head}>Author Name</TableCell>
@@ -456,7 +453,7 @@ class DashboardComponent extends Component {
                         </TabPanel>
                         <TabPanel value={this.state.value} index={0}>
                             <Typography variant="body1" gutterBottom>A Resource correspond to a Path in OpenAPI specification and can thus, support muliple operations (ie. GET, POST etc...)</Typography>
-                            <Grid container direction="row" alignItems="center" spacing={10}>
+                            <Grid container direction="row" alignItems="center" spacing={1}>
                                 <Grid item xs={12}>
                                     <Typography variant="body1" gutterBottom className={this.props.classes.wrapIcon}>
                                         <BlurLinearTwoToneIcon className={this.props.classes.linkIcon} style={{ fill: "#6573c3" }} />
@@ -577,7 +574,7 @@ class DashboardComponent extends Component {
                         </TabPanel>
                         <TabPanel value={this.state.value} index={2}>
                             <Typography variant="body1" gutterBottom>A Resource correspond to a Path in OpenAPI specification and can thus, support muliple operations (ie. GET, POST etc...)</Typography>
-                            <Grid container direction="row" alignItems="center" spacing={10}>
+                            <Grid container direction="row" alignItems="center" spacing={1}>
                                 <Grid item xs={12}>
                                     <Typography variant="body1" gutterBottom className={this.props.classes.wrapIcon}>
                                         <BlurLinearTwoToneIcon className={this.props.classes.linkIcon} style={{ fill: "#6573c3" }} />

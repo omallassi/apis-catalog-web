@@ -66,7 +66,7 @@ class ApiService {
 
     getOldestPr() {
         console.log("ApiService - getting oldest PR");
-        return axios.get('v1/pull-requests');
+        return axios.get('/v1/pull-requests?limit=5');
     }
 
     getMergedPr() {

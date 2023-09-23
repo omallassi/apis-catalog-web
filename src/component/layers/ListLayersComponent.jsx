@@ -50,6 +50,9 @@ import Tooltip from '@mui/material/Tooltip';
 import CircularProgress from '@mui/material/CircularProgress';
 import DoneIcon from '@mui/icons-material/Done';
 
+import Chip from '@mui/material/Chip';
+import Avatar from '@mui/material/Avatar';
+
 
 class ListLayersComponent extends Component {
     constructor(props) {
@@ -113,7 +116,7 @@ class ListLayersComponent extends Component {
                     <CardContent>
                         <Grid container>
                             <Grid item xs={11}>
-                                <Typography>The following groups ..........</Typography>
+                                <Typography>The following table groups all defined layers per systems</Typography>
                             </Grid>
                             <Grid item xs={1}></Grid>
                         </Grid>
@@ -126,28 +129,24 @@ class ListLayersComponent extends Component {
                                         <Table className={this.props.classes.table}>
                                             <TableHead>
                                                 <TableRow>
-                                                    <TableCell key="domain" className={this.props.classes.head} >
-                                                        Domain / SubDomain Name
+                                                    <TableCell className={this.props.classes.head}></TableCell>
+                                                    <TableCell key="system" className={this.props.classes.head} >
+                                                        System Name
                                                     </TableCell>
-                                                    <TableCell className={this.props.classes.head}>Is void</TableCell>
+                                                    <TableCell className={this.props.classes.head}>Layer Name</TableCell>
                                                     <TableCell className={this.props.classes.head}>Description</TableCell>
-                                                    <TableCell className={this.props.classes.head}>Owner</TableCell>
-                                                    <TableCell className={this.props.classes.head}>Id</TableCell>
-                                                    <TableCell className={this.props.classes.head} />
                                                 </TableRow>
                                             </TableHead>
                                             <TableBody>
                                                 {this.state.systems.map(row => ( 
-                                                    <TableRow>
-                                                    <TableCell key="domain" className={this.props.classes.head} >
-                                                        {row.name}
-                                                    </TableCell>
-                                                    <TableCell className={this.props.classes.head}>Is void</TableCell>
-                                                    <TableCell className={this.props.classes.head}>Description</TableCell>
-                                                    <TableCell className={this.props.classes.head}>Owner</TableCell>
-                                                    <TableCell className={this.props.classes.head}>Id</TableCell>
-                                                    <TableCell className={this.props.classes.head} />
-                                                    </TableRow>
+                                                    row.layers.map( sub_row => (
+                                                        <TableRow hover>
+                                                            <TableCell><Avatar src={sub_row.image} /></TableCell>
+                                                            <TableCell><Typography variant="button" display="block">{row.name}</Typography></TableCell>
+                                                            <TableCell><Typography variant="button" display="block" color={sub_row.color}>{sub_row.name}</Typography></TableCell>
+                                                            <TableCell>{sub_row.description}</TableCell>
+                                                        </TableRow>
+                                                    ))
                                                 ))}
                                             </TableBody>
                                         </Table>
