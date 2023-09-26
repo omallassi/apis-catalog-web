@@ -31,6 +31,8 @@ import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 import { NIL as NIL_UUID } from 'uuid';
 import { Grid, TableContainer } from '@mui/material';
 
+import Inventory2Icon from '@mui/icons-material/Inventory2';
+
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 
@@ -51,6 +53,12 @@ import CircularProgress from '@mui/material/CircularProgress';
 import DoneIcon from '@mui/icons-material/Done';
 
 import Badge from '@mui/material/Badge';
+
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import LensBlurOutlinedIcon from '@mui/icons-material/LensBlurOutlined';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -95,11 +103,14 @@ class ListDomainsComponent extends Component {
             message: '',
             message_level: '',
             loading: false,
+            //will be an array of tuple, each line of systems will be [system_name, layer_name, domains[<Str>]]
+            domains_per_system_and_layer: [],
         }
 
         this.listAllDomains = this.listAllDomains.bind(this);
         this.buildDomainTreeMap = this.buildDomainTreeMap.bind(this);
         this.listAllDomainsErrors = this.listAllDomainsErrors.bind(this);
+        this.listAllDomainsPerLayersAndSystems = this.listAllDomainsPerLayersAndSystems.bind(this);
         //
         // this.domainEditorRef = React.createRef();
     }
@@ -108,6 +119,7 @@ class ListDomainsComponent extends Component {
         this.listAllDomains();
         this.listAllDomainsErrors();
         this.buildDomainTreeMap();
+        this.listAllDomainsPerLayersAndSystems();
     }
 
     componentWillUnmount(){
@@ -212,6 +224,43 @@ class ListDomainsComponent extends Component {
         });
     }
 
+
+
+    listAllDomainsPerLayersAndSystems() {
+
+        ApiService.listAllSystems().then((res) => {
+            var systems = res.data.systems;
+            var index = 0
+            var array_of_response = []
+            //for loop .... and get domains for each (system, layer)
+            for (var i = 0; i < systems.length; i++){
+                for(var j = 0; j < systems[i].layers.length; j++){
+                    var system_name = systems[i].name;
+                    var layer_name = systems[i].layers[j].name;
+
+                    ApiService.listAllDomainsPerSystemAndLayer(system_name, layer_name).then( (res) => {                        
+                        array_of_response[index] = [res.data.system, res.data.layer, res.data.domains];
+                        array_of_response.sort();
+                        index = index + 1;
+
+                        console.log("all domains per system and layer " + array_of_response);
+                        this.setState( {domains_per_system_and_layer: array_of_response} );
+
+                    }).catch( (err) => {
+                        console.error("Error while getting domain stats " + err);
+                        //TODO
+                        this.setState({message: "Error while listing domains - " + err.message, message_level: 'error'});
+                    });  
+                    
+                }
+            }
+        }).catch( (err) => {
+            console.error("Error while getting systems " + err);
+            this.setState({message: "Error while listing systems - " + err.message, message_level: 'error'});
+        });
+
+    }
+
     a11yProps(index) {
         return {
             id: `full-width-tab-${index}`,
@@ -261,11 +310,68 @@ class ListDomainsComponent extends Component {
                             onChange={(event, newValue) => this.setState({ value: newValue })}
                             indicatorColor="primary"
                             textColor="primary">
-                            <Tab label="Domain Statistics" icon={<TableChartTwoToneIcon />} {...this.a11yProps(0)} />
-                            <Tab label="Violation(s)" icon={<Badge badgeContent={this.state.errors.length} showZero color={this.state.errors.length == 0 ? "success" : "error"}><AssignmentLateIcon/></Badge>} {...this.a11yProps(1)} />
-                            <Tab label="Domain Catalog" icon={<AssignmentIcon />} {...this.a11yProps(2)} />
+                            
+                            <Tab label="Domain Org." icon={<Inventory2Icon />} {...this.a11yProps(0)} />
+                            <Tab label="Domain Statistics" icon={<TableChartTwoToneIcon />} {...this.a11yProps(1)} />
+                            <Tab label="Violation(s)" icon={<Badge badgeContent={this.state.errors.length} showZero color={this.state.errors.length == 0 ? "success" : "error"}><AssignmentLateIcon/></Badge>} {...this.a11yProps(2)} />
+                            <Tab label="Domain Catalog" icon={<AssignmentIcon />} {...this.a11yProps(3)} />
+                            
                         </Tabs>
+
                         <TabPanel value={this.state.value} index={0}>
+                            <CardContent>
+                                <Grid container>
+                                    <Grid item xs={11}>
+                                        <Typography>The following table groups all defined layers per systems</Typography>
+                                    </Grid>
+                                    <Grid item xs={1}></Grid>
+                                </Grid>
+                            </CardContent>
+                            
+                            <CardContent>
+                                <Grid container>
+                                    <Grid item xs={12}>
+                                        <TableContainer>
+                                            <Table className={this.props.classes.table}>
+                                                <TableHead>
+                                                    <TableRow>
+                                                        <TableCell className={this.props.classes.head}></TableCell>
+                                                        <TableCell className={this.props.classes.head} >System Name</TableCell>
+                                                        <TableCell className={this.props.classes.head}>Layer Name</TableCell>
+                                                        <TableCell className={this.props.classes.head}>Domains</TableCell>
+                                                    </TableRow>
+                                                </TableHead>
+                                                <TableBody>
+                                                    {this.state.domains_per_system_and_layer.map(row => ( 
+                                                            <TableRow hover key={row.id}>
+                                                                <TableCell></TableCell>
+                                                                <TableCell><Typography variant="button" > { row[0] }  </Typography></TableCell>
+                                                                <TableCell><Typography variant="button" > { row[1] }  </Typography></TableCell>
+                                                                <TableCell>
+                                                                    <Typography > 
+                                                                        <List>
+                                                                        {row[2].map( curr_domain => (     
+                                                                            <ListItem>
+                                                                                <ListItemIcon>
+                                                                                    <LensBlurOutlinedIcon fontSize="small" color="info"/>
+                                                                                </ListItemIcon>
+                                                                                <ListItemText primary={curr_domain}/>
+                                                                            </ListItem>
+                                                                        ))}
+                                                                        </List>
+                                                                    </Typography>
+                                                                </TableCell>
+                                                            </TableRow>
+                                                    ))}
+                                                </TableBody>
+                                            </Table>
+                                        </TableContainer>
+                                    </Grid>
+                                </Grid>
+                            </CardContent>
+                        </TabPanel>
+
+                        <TabPanel value={this.state.value} index={1}>
                             <CardContent>
                                 <Typography variant="body1" gutterBottom>
                                     The following diagram displays volume of resources per domain and subdomains, based on the Open API Specifications (available in git).
@@ -307,7 +413,7 @@ class ListDomainsComponent extends Component {
 
                         </TabPanel>
 
-                        <TabPanel value={this.state.value} index={1}>
+                        <TabPanel value={this.state.value} index={2}>
                             <CardContent>
                                 <Grid container>
                                     <Grid item xs={12}>
@@ -359,7 +465,7 @@ class ListDomainsComponent extends Component {
                             </CardContent>
                         </TabPanel>
 
-                        <TabPanel value={this.state.value} index={2}>
+                        <TabPanel value={this.state.value} index={3}>
                             <CardContent>
                                 <Grid container>
                                     <Grid item xs={12}>
@@ -461,7 +567,7 @@ class ListDomainsComponent extends Component {
                                             <Table className={this.props.classes.table}>
                                                 <TableHead>
                                                     <TableRow>
-                                                        <TableCell key="domain" className={this.props.classes.head} >
+                                                        <TableCell className={this.props.classes.head} >
                                                             Domain / SubDomain Name
                                                         </TableCell>
                                                         <TableCell className={this.props.classes.head}>Is void</TableCell>
@@ -511,6 +617,7 @@ class ListDomainsComponent extends Component {
                                 </Grid>
                             </CardContent>
                         </TabPanel>
+
                     </CardContent>
                 </Card>
             </Box >

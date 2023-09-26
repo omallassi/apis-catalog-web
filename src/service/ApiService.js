@@ -81,7 +81,13 @@ class ApiService {
 
     listAllSystems(){
         console.log("ApiService - list all systems and layers");
-        return axios.get('/v1/systems')
+        return axios.get('/v1/systems');
+    }
+
+    listAllDomainsPerSystemAndLayer(system, layer){
+        console.info("ApiService - Get Domains for System [" + system + "] and Layer [" + layer + "]");
+
+        return axios.get('/v1/systems/' + system + '/layers/' + layer);
     }
 }
 

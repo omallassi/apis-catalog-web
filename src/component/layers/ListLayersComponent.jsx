@@ -130,7 +130,7 @@ class ListLayersComponent extends Component {
                                             <TableHead>
                                                 <TableRow>
                                                     <TableCell className={this.props.classes.head}></TableCell>
-                                                    <TableCell key="system" className={this.props.classes.head} >
+                                                    <TableCell className={this.props.classes.head} >
                                                         System Name
                                                     </TableCell>
                                                     <TableCell className={this.props.classes.head}>Layer Name</TableCell>
