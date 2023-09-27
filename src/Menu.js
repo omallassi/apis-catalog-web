@@ -79,27 +79,24 @@ class ListRouter extends Component {
               ? <Stack direction="row" spacing={1}><Chip label="beta" color="warning" variant="outlined" size="small" />< ListItemLink to="/envs" primary="Environments" icon={<ComputerIcon color="primary" />} /></Stack>
               : null
             }
-            {process.env.REACT_APP_BETA
-              ?
-              
-              <Stack direction="row" spacing={1}><Chip label="beta" color="warning" variant="outlined" size="small" />
+
+            <Stack direction="row" spacing={1}>
               <ListItem button component="a" href={process.env.REACT_APP_PACT_DOC_URL} target="_blank">
                 <ListItemIcon>
                   <LinkIcon /> 
                 </ListItemIcon>
                 <ListItemText primary="PACT Broker" />
               </ListItem>
-              </Stack>
-              : null
-            }
+            </Stack>
 
-            <ListItem button component="a" href={process.env.REACT_APP_API_DOC_URL} target="_blank">
-              <ListItemIcon>
-              <DatasetLinkedIcon/>
-              </ListItemIcon>
-              <ListItemText primary="APIs Doc" />
-            </ListItem> 
-            
+            <Stack direction="row" spacing={1}>
+              <ListItem button component="a" href={process.env.REACT_APP_API_DOC_URL} target="_blank">
+                <ListItemIcon>
+                <DatasetLinkedIcon/>
+                </ListItemIcon>
+                <ListItemText primary="APIs Doc" />
+              </ListItem> 
+            </Stack>
           </List>
         </Paper>
       </div >
