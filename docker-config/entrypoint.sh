@@ -6,8 +6,8 @@ echo -e "\033[1;32m*** Creating config file [/apis-catalog/config/local.toml] **
 envsubst < "/apis-catalog/config/local-template.toml" > "/apis-catalog/config/local.toml" 
 cat /apis-catalog/config/local.toml
 
-echo -e "\033[1;32m*** Cloning the api repo [$REPO_TO_CLONE] in [$CATALOG_PATH] ***\033[0m"
-git clone $REPO_TO_CLONE $CATALOG_PATH
+echo -e "\033[1;32m*** Cloning the api repo [$CATALOG_GIT_URL] in [$CATALOG_PATH] ***\033[0m"
+git clone $CATALOG_GIT_URL $CATALOG_PATH
 
 
 # Build the UI
