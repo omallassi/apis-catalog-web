@@ -312,9 +312,9 @@ class ListDomainsComponent extends Component {
                             textColor="primary">
                             
                             <Tab label="Domain Org." icon={<Inventory2Icon />} {...this.a11yProps(0)} />
-                            <Tab label="Domain Statistics" icon={<TableChartTwoToneIcon />} {...this.a11yProps(1)} />
-                            <Tab label="Violation(s)" icon={<Badge badgeContent={this.state.errors.length} showZero color={this.state.errors.length == 0 ? "success" : "error"}><AssignmentLateIcon/></Badge>} {...this.a11yProps(2)} />
-                            <Tab label="Domain Catalog" icon={<AssignmentIcon />} {...this.a11yProps(3)} />
+                            <Tab label="Violation(s)" icon={<Badge badgeContent={this.state.errors.length} showZero color={this.state.errors.length == 0 ? "success" : "error"}><AssignmentLateIcon/></Badge>} {...this.a11yProps(1)} />
+                            <Tab label="Domain Catalog" icon={<AssignmentIcon />} {...this.a11yProps(2)} />
+                            <Tab label="Domain Statistics" icon={<TableChartTwoToneIcon />} {...this.a11yProps(3)} />
                             
                         </Tabs>
 
@@ -371,7 +371,7 @@ class ListDomainsComponent extends Component {
                             </CardContent>
                         </TabPanel>
 
-                        <TabPanel value={this.state.value} index={1}>
+                        <TabPanel value={this.state.value} index={3}>
                             <CardContent>
                                 <Typography variant="body1" gutterBottom>
                                     The following diagram displays volume of resources per domain and subdomains, based on the Open API Specifications (available in git).
@@ -413,7 +413,7 @@ class ListDomainsComponent extends Component {
 
                         </TabPanel>
 
-                        <TabPanel value={this.state.value} index={2}>
+                        <TabPanel value={this.state.value} index={1}>
                             <CardContent>
                                 <Grid container>
                                     <Grid item xs={12}>
@@ -430,11 +430,10 @@ class ListDomainsComponent extends Component {
                                                     <TableHead>
                                                         <TableRow>
                                                             <TableCell className={this.props.classes.head} ></TableCell>
-                                                            <TableCell className={this.props.classes.head} >
-                                                                OpenAPI Specification
-                                                            </TableCell>
+                                                            <TableCell className={this.props.classes.head} >OpenAPI Specification</TableCell>
                                                             <TableCell className={this.props.classes.head}>Declared Domain</TableCell>
                                                             <TableCell className={this.props.classes.head}># of resources</TableCell>
+                                                            <TableCell className={this.props.classes.head}>Catalog</TableCell>
                                                         </TableRow>
                                                     </TableHead>
                                                     <TableBody>
@@ -449,6 +448,7 @@ class ListDomainsComponent extends Component {
                                                                 </TableCell>
                                                                 <TableCell>{row.spec_domain}</TableCell>
                                                                 <TableCell>{row.resources}</TableCell>
+                                                                <TableCell>{row.spec_catalog_id}</TableCell>
                                                             </TableRow>
                                                         ))}
                                                     </TableBody>
@@ -465,12 +465,13 @@ class ListDomainsComponent extends Component {
                             </CardContent>
                         </TabPanel>
 
-                        <TabPanel value={this.state.value} index={3}>
+                        <TabPanel value={this.state.value} index={2}>
                             <CardContent>
                                 <Grid container>
                                     <Grid item xs={12}>
                                         <Typography variant="body1" gutterBottom>
-                                            The following table is the list of "declared" Domains and Subdomains.
+                                            The following table is the list of official Domains and Subdomains that have been defined in your domain catalog. 
+                                            Is Void indicates that no endpoints for this domain have been found in any of the OAI spec declared catalogs. 
                                         </Typography>
                                     </Grid>
                                     <Grid item xs={11}>

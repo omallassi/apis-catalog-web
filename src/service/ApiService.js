@@ -87,7 +87,7 @@ class ApiService {
     listAllDomainsPerSystemAndLayer(system, layer){
         console.info("ApiService - Get Domains for System [" + system + "] and Layer [" + layer + "]");
 
-        return axios.get('/v1/systems/' + system + '/layers/' + layer);
+        return axios.get('/v1/systems/' + system + '/layers/' + layer, {timeout: 60000});
     }
 }
 
