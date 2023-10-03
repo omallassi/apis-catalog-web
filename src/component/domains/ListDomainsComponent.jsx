@@ -105,12 +105,14 @@ class ListDomainsComponent extends Component {
             loading: false,
             //will be an array of tuple, each line of systems will be [system_name, layer_name, domains[<Str>]]
             domains_per_system_and_layer: [],
+            catalogs: new Map(),
         }
 
         this.listAllDomains = this.listAllDomains.bind(this);
         this.buildDomainTreeMap = this.buildDomainTreeMap.bind(this);
         this.listAllDomainsErrors = this.listAllDomainsErrors.bind(this);
         this.listAllDomainsPerLayersAndSystems = this.listAllDomainsPerLayersAndSystems.bind(this);
+        this.listAllCatalogs = this.listAllCatalogs.bind(this);
         //
         // this.domainEditorRef = React.createRef();
     }
@@ -120,6 +122,7 @@ class ListDomainsComponent extends Component {
         this.listAllDomainsErrors();
         this.buildDomainTreeMap();
         this.listAllDomainsPerLayersAndSystems();
+        this.listAllCatalogs();
     }
 
     componentWillUnmount(){
@@ -150,6 +153,19 @@ class ListDomainsComponent extends Component {
         }).catch( (err) => {
             console.error("Error while getting domain stats " + err);
             this.setState({message: "Error while loading domains - " + err.message, message_level: 'error'});
+        });
+    }
+
+    listAllCatalogs() {
+        ApiService.listAllCatalogs().then((res) => {
+            console.log(res);
+            let res_as_map = res.data.map( obj => {
+                    return this.state.catalogs.set(obj.id, obj.name);
+                }
+            )
+        }).catch( (err) => {
+            console.error("Error while getting catalogs " + err);
+            this.setState({message: "Error while getting catalogs - " + err.message, message_level: 'error'});
         });
     }
 
@@ -429,16 +445,17 @@ class ListDomainsComponent extends Component {
                                                 <Table className={this.props.classes.table}>
                                                     <TableHead>
                                                         <TableRow>
+                                                            <TableCell className={this.props.classes.head}>Catalog</TableCell>
                                                             <TableCell className={this.props.classes.head} ></TableCell>
                                                             <TableCell className={this.props.classes.head} >OpenAPI Specification</TableCell>
                                                             <TableCell className={this.props.classes.head}>Declared Domain</TableCell>
                                                             <TableCell className={this.props.classes.head}># of resources</TableCell>
-                                                            <TableCell className={this.props.classes.head}>Catalog</TableCell>
                                                         </TableRow>
                                                     </TableHead>
                                                     <TableBody>
                                                         {this.state.errors.map(row => (
                                                             <TableRow hover key={row.spec_path}>
+                                                                <TableCell>{this.state.catalogs.get(row.spec_catalog_id)}</TableCell>
                                                                 <TableCell>
                                                                     <ErrorOutlineIcon color="error" />
                                                                 </TableCell>
@@ -448,7 +465,7 @@ class ListDomainsComponent extends Component {
                                                                 </TableCell>
                                                                 <TableCell>{row.spec_domain}</TableCell>
                                                                 <TableCell>{row.resources}</TableCell>
-                                                                <TableCell>{row.spec_catalog_id}</TableCell>
+
                                                             </TableRow>
                                                         ))}
                                                     </TableBody>

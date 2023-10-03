@@ -89,6 +89,13 @@ class ApiService {
 
         return axios.get('/v1/systems/' + system + '/layers/' + layer, {timeout: 60000});
     }
+
+    listAllCatalogs(){
+        console.info("ApiService - Get All Catalog");
+
+        return axios.get('/v1/catalogs');
+    }
+
 }
 
 export default new ApiService();
