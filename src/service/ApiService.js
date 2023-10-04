@@ -61,7 +61,12 @@ class ApiService {
 
     refreshMetrics() {
         console.log("ApiService - is refreshing metrics (on server)");
-        return axios.post('/v1/metrics/refresh');
+        return axios.post('/v1/metrics/refresh', {timeout: 120000});
+    }
+
+    refreshCatalogs() {
+        console.log("ApiService - is refreshing catalogs (on server)");
+        return axios.post('/v1/catalogs/refresh', {timeout: 120000});
     }
 
     getOldestPr() {

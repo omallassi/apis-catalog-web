@@ -9,6 +9,7 @@ import CardContent from '@mui/material/CardContent';
 import SyncIcon from '@mui/icons-material/Sync';
 import CircularProgress from '@mui/material/CircularProgress';
 import IconButton from '@mui/material/IconButton';
+import CloudSyncIcon from '@mui/icons-material/CloudSync';
 
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -80,7 +81,8 @@ class DashboardComponent extends Component {
             zally_violations: [],
             zally_violations_columns: [],
             value: 0,
-            loading: false,
+            loading_metrics: false,
+            loading_catalogs: false,
             message: '',
             message_level: '',
             chart_loading: false,
@@ -299,28 +301,52 @@ class DashboardComponent extends Component {
                             <Grid item xs={11}>
                                 <Typography variant="h6" color="primary">Design Time Governance Metrics</Typography>
                             </Grid>
-                            <Grid item xs={11}>
+                            <Grid item xs={10}>
                                 {message_component}
                             </Grid>
                             <Grid item xs={1}>
-                                <Tooltip title = "Refresh metrics...">
+                                <Tooltip title = "Click here to refresh only catalogs">
                                     <IconButton
                                         color="primary"
-                                        aria-label="refresh"
+                                        aria-label="Refresh catalogs"
+                                        disabled={this.state.loading_metrics} //disabled if refreshing metrics
                                         onClick = {() => {
-                                            this.setState( {loading: true}, () => {
-                                                ApiService.refreshMetrics().then((response) => {
-                                                    this.setState({loading: false, message: 'Metrics have been refreshed', message_level: 'success'});
+                                            this.setState( {loading_catalogs: true}, () => {
+                                                ApiService.refreshCatalogs().then((response) => {
+                                                    this.setState({loading_catalogs: false, message: 'Catalogs have been refreshed', message_level: 'success'});
                                                     this.getStats();
                                                 })
                                                 .catch((error) => {
-                                                    console.error("refresh metrics w/ errors " + error);
-                                                    this.setState({loading: false, message: error.message, message_level: 'error'});
+                                                    console.error("Refresh Catalogs failed w/ errors " + error);
+                                                    this.setState({loading_catalogs: false, message: error.message, message_level: 'error'});
                                                 });
                                             });
                                         }}
                                         size="large">
-                                        {this.state.loading? <CircularProgress size={30} /> : <SyncIcon/>}
+                                        {this.state.loading_catalogs? <CircularProgress size={30} /> : <CloudSyncIcon/>}
+                                    </IconButton>
+                                </Tooltip>
+                            </Grid>
+                            <Grid item xs={1}>
+                                <Tooltip title = "Click here to refresh all metrics">
+                                    <IconButton
+                                        color="primary"
+                                        aria-label="Refresh Metrics"
+                                        disabled={this.state.loading_catalogs} //disabled if refreshing catalogs
+                                        onClick = {() => {
+                                            this.setState( {loading_metrics: true}, () => {
+                                                ApiService.refreshMetrics().then((response) => {
+                                                    this.setState({loading_metrics: false, message: 'Metrics have been refreshed', message_level: 'success'});
+                                                    this.getStats();
+                                                })
+                                                .catch((error) => {
+                                                    console.error("Refresh metrics failed w/ errors " + error);
+                                                    this.setState({loading_metrics: false, message: error.message, message_level: 'error'});
+                                                });
+                                            });
+                                        }}
+                                        size="large">
+                                        {this.state.loading_metrics? <CircularProgress size={30} /> : <SyncIcon/>}
                                     </IconButton>
                                 </Tooltip>
                             </Grid>
