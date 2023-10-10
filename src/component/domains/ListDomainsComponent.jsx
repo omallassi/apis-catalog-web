@@ -14,6 +14,7 @@ import PropTypes from 'prop-types';
 import withStyles from '@mui/styles/withStyles';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import DatasetLinkedIcon from '@mui/icons-material/DatasetLinked';
 
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
@@ -277,6 +278,15 @@ class ListDomainsComponent extends Component {
 
     }
 
+    getHtmlDocUri(system, layer) {
+        if( "default" ===  system.toLowerCase() ){
+            return "/default.html";
+        }
+        else {
+            return "/" + system.toLowerCase() + layer.toLowerCase() + ".html";
+        }
+    }
+
     a11yProps(index) {
         return {
             id: `full-width-tab-${index}`,
@@ -351,7 +361,7 @@ class ListDomainsComponent extends Component {
                                             <Table className={this.props.classes.table}>
                                                 <TableHead>
                                                     <TableRow>
-                                                        <TableCell className={this.props.classes.head}></TableCell>
+                                                        <TableCell className={this.props.classes.head}>Doc</TableCell>
                                                         <TableCell className={this.props.classes.head} >System Name</TableCell>
                                                         <TableCell className={this.props.classes.head}>Layer Name</TableCell>
                                                         <TableCell className={this.props.classes.head}>Domains</TableCell>
@@ -360,9 +370,15 @@ class ListDomainsComponent extends Component {
                                                 <TableBody>
                                                     {this.state.domains_per_system_and_layer.map(row => ( 
                                                             <TableRow hover key={row.id}>
-                                                                <TableCell></TableCell>
-                                                                <TableCell><Typography variant="button" > { row[0] }  </Typography></TableCell>
-                                                                <TableCell><Typography variant="button" > { row[1] }  </Typography></TableCell>
+                                                                <TableCell style={{ verticalAlign: 'top' }}>
+                                                                    <ListItem button component="a" href={process.env.REACT_APP_API_DOC_URL + this.getHtmlDocUri(row[0], row[1])} target="_blank">
+                                                                        <Tooltip title="Link to HTML API doc (do not contain all specs depending on catalogs)">
+                                                                            <DatasetLinkedIcon fontSize='small' color='primary'/>
+                                                                        </Tooltip>
+                                                                    </ListItem>
+                                                                </TableCell>
+                                                                <TableCell style={{ verticalAlign: 'top' }} ><Typography variant="button"> { row[0] }  </Typography></TableCell>
+                                                                <TableCell style={{ verticalAlign: 'top' }}><Typography variant="button" > { row[1] }  </Typography></TableCell>
                                                                 <TableCell>
                                                                     <Typography > 
                                                                         <List>

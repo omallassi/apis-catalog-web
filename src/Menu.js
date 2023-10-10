@@ -69,8 +69,6 @@ class ListRouter extends Component {
               : null
             }
             
-            
-
             {process.env.REACT_APP_BETA
               ? <Stack direction="row" spacing={1}><Chip label="beta" color="warning" variant="outlined"  size="small" />< ListItemLink to="/apis" primary="Apis" icon={<ListAltIcon color="primary" />} /></Stack>
               : null
