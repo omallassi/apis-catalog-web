@@ -371,7 +371,12 @@ class ListDomainsComponent extends Component {
                                                                                 <ListItemIcon>
                                                                                     <LensBlurOutlinedIcon fontSize="small" color="info"/>
                                                                                 </ListItemIcon>
-                                                                                <ListItemText primary={curr_domain}/>
+                                                                                <ListItemText>
+                                                                                    <Grid container spacing={2}>
+                                                                                        <Grid item xs={8}><Typography>{curr_domain.name}</Typography></Grid>
+                                                                                        <Grid item xs={4}><Typography align="right">{ this.state.catalogs.get(curr_domain.catalog_id) }</Typography></Grid>
+                                                                                    </Grid>
+                                                                                </ListItemText>
                                                                             </ListItem>
                                                                         ))}
                                                                         </List>
