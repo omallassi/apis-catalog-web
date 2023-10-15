@@ -522,9 +522,21 @@ class ListDomainsComponent extends Component {
                                                     <TableBody>
                                                         {this.state.errors.map(row => (
                                                             <TableRow hover key={row.spec_path}>
-                                                                <TableCell>{this.state.catalogs.get(row.spec_catalog_id)}</TableCell>
+                                                                <TableCell><Typography style={{  color: theme.palette.getContrastText(blueGrey[100]),
+                                                                                            padding: '.3em .3em .3em .3em',
+                                                                                            margin: 'auto',
+                                                                                            textAlign: 'center',
+                                                                                            verticalAlign: 'middle',
+                                                                                            fontWeight: '500',
+                                                                                            borderRadius: '.25em',
+                                                                                            fontSize: '90%',
+                                                                                            backgroundColor: blueGrey[100],
+                                                                                            textTransform: 'uppercase' }}>
+                                                                    {this.state.catalogs.get(row.spec_catalog_id)}
+                                                                    </Typography>
+                                                                </TableCell>
                                                                 <TableCell>
-                                                                    <ErrorOutlineIcon color="error" />
+                                                                    <ErrorOutlineIcon color="error" fontSize="small"/>
                                                                 </TableCell>
                                                                 <TableCell>
                                                                     <LinkIcon/>
