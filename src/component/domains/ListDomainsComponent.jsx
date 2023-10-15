@@ -37,7 +37,7 @@ import Inventory2Icon from '@mui/icons-material/Inventory2';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 
-import { blue } from '@mui/material/colors';
+import { blue, blueGrey } from '@mui/material/colors';
 
 import Link from '@mui/material/Link';
 import LinkIcon from '@mui/icons-material/Link';
@@ -87,6 +87,10 @@ TabPanel.propTypes = {
     value: PropTypes.any.isRequired,
 };
 
+const styles = (theme) => ({
+
+  });
+
 class ListDomainsComponent extends Component {
     constructor(props) {
         super(props)
@@ -107,6 +111,7 @@ class ListDomainsComponent extends Component {
             //will be an array of tuple, each line of systems will be [system_name, layer_name, domains[<Str>]]
             domains_per_system_and_layer: [],
             catalogs: new Map(),
+            systems: new Map(),
         }
 
         this.listAllDomains = this.listAllDomains.bind(this);
@@ -254,6 +259,8 @@ class ListDomainsComponent extends Component {
                 for(var j = 0; j < systems[i].layers.length; j++){
                     var system_name = systems[i].name;
                     var layer_name = systems[i].layers[j].name;
+                    //keep the list, will be used in the <Table>
+                    this.state.systems.set(system_name + layer_name, systems[i].layers[j])
 
                     ApiService.listAllDomainsPerSystemAndLayer(system_name, layer_name).then( (res) => {                        
                         array_of_response[index] = [res.data.system, res.data.layer, res.data.domains];
@@ -295,6 +302,8 @@ class ListDomainsComponent extends Component {
     }
 
     render() {
+        const { classes, theme } = this.props;
+
         let message_component;
         if (this.state.message)
         {
@@ -377,8 +386,33 @@ class ListDomainsComponent extends Component {
                                                                         </Tooltip>
                                                                     </ListItem>
                                                                 </TableCell>
-                                                                <TableCell style={{ verticalAlign: 'top' }} ><Typography variant="button"> { row[0] }  </Typography></TableCell>
-                                                                <TableCell style={{ verticalAlign: 'top' }}><Typography variant="button" > { row[1] }  </Typography></TableCell>
+                                                                <TableCell style={{ verticalAlign: 'top' }} ><Typography style={{  color: theme.palette.getContrastText(blue[700]),
+                                                                    padding: '.3em .3em .3em .3em',
+                                                                    margin: 'auto',
+                                                                    textAlign: 'center',
+                                                                    verticalAlign: 'middle',
+                                                                    fontWeight: '500',
+                                                                    borderRadius: '.25em',
+                                                                    fontSize: '90%',
+                                                                    backgroundColor: blue[700],
+                                                                    textTransform: 'uppercase' }}> 
+                                                                        { row[0] }  
+                                                                    </Typography>
+                                                                </TableCell>
+                                                                <TableCell style={{ verticalAlign: 'top' }}>
+                                                                    <Typography style={{  color: theme.palette.getContrastText(blue[700]),
+                                                                        padding: '.3em .3em .3em .3em',
+                                                                        margin: 'auto',
+                                                                        textAlign: 'center',
+                                                                        verticalAlign: 'middle',
+                                                                        fontWeight: '500',
+                                                                        borderRadius: '.25em',
+                                                                        fontSize: '90%',
+                                                                        backgroundColor: this.state.systems.get(row[0] + row[1]).color,
+                                                                        textTransform: 'uppercase' }}> 
+                                                                        { row[1] }  
+                                                                    </Typography>
+                                                                </TableCell>
                                                                 <TableCell>
                                                                     <Typography > 
                                                                         <List>
@@ -390,7 +424,19 @@ class ListDomainsComponent extends Component {
                                                                                 <ListItemText>
                                                                                     <Grid container spacing={2}>
                                                                                         <Grid item xs={8}><Typography>{curr_domain.name}</Typography></Grid>
-                                                                                        <Grid item xs={4}><Typography align="right">{ this.state.catalogs.get(curr_domain.catalog_id) }</Typography></Grid>
+                                                                                        <Grid item xs={4}><Typography align="right" style={{  color: theme.palette.getContrastText(blueGrey[100]),
+                                                                                            padding: '.3em .3em .3em .3em',
+                                                                                            margin: 'auto',
+                                                                                            textAlign: 'center',
+                                                                                            verticalAlign: 'middle',
+                                                                                            fontWeight: '500',
+                                                                                            borderRadius: '.25em',
+                                                                                            fontSize: '90%',
+                                                                                            backgroundColor: blueGrey[100],
+                                                                                            textTransform: 'uppercase' }}>
+                                                                                        { this.state.catalogs.get(curr_domain.catalog_id) }
+                                                                                        </Typography>
+                                                                                        </Grid>
                                                                                     </Grid>
                                                                                 </ListItemText>
                                                                             </ListItem>
@@ -684,4 +730,4 @@ ListDomainsComponent.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(useStyles)(ListDomainsComponent);
+export default withStyles(styles, { withTheme: true })(ListDomainsComponent);

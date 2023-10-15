@@ -9,35 +9,12 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import Chart from "react-google-charts";
 import PropTypes from 'prop-types';
 import withStyles from '@mui/styles/withStyles';
-import AddCircleIcon from '@mui/icons-material/AddCircle';
-import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
-
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogTitle from '@mui/material/DialogTitle';
-
-import SyncIcon from '@mui/icons-material/Sync';
-import AssignmentLateIcon from '@mui/icons-material/AssignmentLate';
-import AssignmentIcon from '@mui/icons-material/Assignment';
 import IconButton from '@mui/material/IconButton';
-import TableChartTwoToneIcon from '@mui/icons-material/TableChartTwoTone';
-import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
-import { NIL as NIL_UUID } from 'uuid';
 import { Grid, TableContainer } from '@mui/material';
 
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-
 import { blue } from '@mui/material/colors';
-
-import Link from '@mui/material/Link';
-import LinkIcon from '@mui/icons-material/Link';
 
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
@@ -45,14 +22,10 @@ import AlertTitle from '@mui/material/AlertTitle';
 import Collapse from '@mui/material/Collapse';
 import CloseIcon from '@mui/icons-material/Close';
 
-import Tooltip from '@mui/material/Tooltip';
-
-import CircularProgress from '@mui/material/CircularProgress';
-import DoneIcon from '@mui/icons-material/Done';
-
-import Chip from '@mui/material/Chip';
 import Avatar from '@mui/material/Avatar';
 
+const styles = (theme) => ({
+  });
 
 class ListLayersComponent extends Component {
     constructor(props) {
@@ -63,6 +36,7 @@ class ListLayersComponent extends Component {
 
         this.listAllSystems = this.listAllSystems.bind(this);
     }
+
 
     componentDidMount() {
         this.listAllSystems();
@@ -86,6 +60,8 @@ class ListLayersComponent extends Component {
     }
 
     render() {
+        const { classes, theme } = this.props;
+
         let message_component;
         if (this.state.message)
         {
@@ -142,8 +118,31 @@ class ListLayersComponent extends Component {
                                                     row.layers.map( sub_row => (
                                                         <TableRow hover>
                                                             <TableCell><Avatar src={sub_row.image} /></TableCell>
-                                                            <TableCell><Typography variant="button" display="block">{row.name}</Typography></TableCell>
-                                                            <TableCell><Typography variant="button" display="block" color={sub_row.color}>{sub_row.name}</Typography></TableCell>
+                                                            <TableCell><Typography variant="button" display="block" 
+                                                                style={{  color: theme.palette.getContrastText(blue[700]),
+                                                                    padding: '.3em .3em .3em .3em',
+                                                                    margin: 'auto',
+                                                                    textAlign: 'center',
+                                                                    verticalAlign: 'middle',
+                                                                    fontWeight: '500',
+                                                                    borderRadius: '.25em',
+                                                                    fontSize: '90%',
+                                                                    backgroundColor: blue[700],
+                                                                    textTransform: 'uppercase' }}
+                                                                >{row.name}</Typography></TableCell>
+                                                            <TableCell><Typography variant="button" display="block" style={{  color: theme.palette.getContrastText(blue[700]),
+                                                                    padding: '.3em .3em .3em .3em',
+                                                                    margin: 'auto',
+                                                                    textAlign: 'center',
+                                                                    verticalAlign: 'middle',
+                                                                    fontWeight: '500',
+                                                                    borderRadius: '.25em',
+                                                                    fontSize: '90%',
+                                                                    backgroundColor: sub_row.color,
+                                                                    textTransform: 'uppercase' }}
+                                                            >
+                                                                {sub_row.name}
+                                                            </Typography></TableCell>
                                                             <TableCell>{sub_row.description}</TableCell>
                                                         </TableRow>
                                                     ))
@@ -181,4 +180,4 @@ ListLayersComponent.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(useStyles)(ListLayersComponent);
+export default withStyles(styles, { withTheme: true })(ListLayersComponent);
