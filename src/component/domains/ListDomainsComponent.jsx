@@ -166,7 +166,7 @@ class ListDomainsComponent extends Component {
         ApiService.listAllCatalogs().then((res) => {
             console.log(res);
             let res_as_map = res.data.map( obj => {
-                    return this.state.catalogs.set(obj.id, obj.name);
+                    return this.state.catalogs.set(obj.id, obj);
                 }
             )
         }).catch( (err) => {
@@ -423,7 +423,11 @@ class ListDomainsComponent extends Component {
                                                                                 </ListItemIcon>
                                                                                 <ListItemText>
                                                                                     <Grid container spacing={2}>
-                                                                                        <Grid item xs={8}><Typography>{curr_domain.name}</Typography></Grid>
+                                                                                        <Grid item xs={8}><Typography>
+                                                                                            {/* <Link href={this.state.catalogs.get(curr_domain.catalog_id).http_base_uri + curr_domain.name} target="_blank"> */}
+                                                                                                {curr_domain.name}
+                                                                                            {/* </Link> */}
+                                                                                        </Typography></Grid>
                                                                                         <Grid item xs={4}><Typography align="right" style={{  color: theme.palette.getContrastText(blueGrey[100]),
                                                                                             padding: '.3em .3em .3em .3em',
                                                                                             margin: 'auto',
@@ -434,7 +438,7 @@ class ListDomainsComponent extends Component {
                                                                                             fontSize: '90%',
                                                                                             backgroundColor: blueGrey[100],
                                                                                             textTransform: 'uppercase' }}>
-                                                                                        { this.state.catalogs.get(curr_domain.catalog_id) }
+                                                                                        { this.state.catalogs.get(curr_domain.catalog_id).name }
                                                                                         </Typography>
                                                                                         </Grid>
                                                                                     </Grid>
@@ -514,8 +518,8 @@ class ListDomainsComponent extends Component {
                                                         <TableRow>
                                                             <TableCell className={this.props.classes.head}>Catalog</TableCell>
                                                             <TableCell className={this.props.classes.head} ></TableCell>
-                                                            <TableCell className={this.props.classes.head} >OpenAPI Specification</TableCell>
                                                             <TableCell className={this.props.classes.head}>Declared Domain</TableCell>
+                                                            <TableCell className={this.props.classes.head} >OpenAPI Specification</TableCell>
                                                             <TableCell className={this.props.classes.head}># of resources</TableCell>
                                                         </TableRow>
                                                     </TableHead>
@@ -532,17 +536,16 @@ class ListDomainsComponent extends Component {
                                                                                             fontSize: '90%',
                                                                                             backgroundColor: blueGrey[100],
                                                                                             textTransform: 'uppercase' }}>
-                                                                    {this.state.catalogs.get(row.spec_catalog_id)}
+                                                                    { this.state.catalogs.get(row.spec_catalog_id).name }
                                                                     </Typography>
                                                                 </TableCell>
                                                                 <TableCell>
                                                                     <ErrorOutlineIcon color="error" fontSize="small"/>
                                                                 </TableCell>
-                                                                <TableCell>
-                                                                    <LinkIcon/>
-                                                                    <Link href={process.env.REACT_APP_STASH_BASE_URL + "/browse/catalog/" + row.spec_path} target="_blank">{row.spec_path}</Link>
-                                                                </TableCell>
                                                                 <TableCell>{row.spec_domain}</TableCell>
+                                                                <TableCell>
+                                                                    <LinkIcon fontSize="small"/><Link href={this.state.catalogs.get(row.spec_catalog_id).http_base_uri + row.spec_path} target="_blank">{row.spec_path}</Link>
+                                                                </TableCell>
                                                                 <TableCell>{row.resources}</TableCell>
 
                                                             </TableRow>
