@@ -101,6 +101,12 @@ class ApiService {
         return axios.get('/v1/catalogs');
     }
 
+    search(query) {
+        console.info("ApiService - Search with [" + query + "]");
+
+        return axios.post('/v1/search', {"query": query} );
+    }
+
 }
 
 export default new ApiService();

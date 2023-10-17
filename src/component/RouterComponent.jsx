@@ -8,6 +8,7 @@ import ListDomainsComponent from "./domains/ListDomainsComponent"
 import DashBoardComponent from "./DashboardComponent"
 import ListReviewsComponent from "./reviews/ListReviewsComponent"
 import ListLayersComponents from './layers/ListLayersComponent';
+import DisplayComponent from './search/DisplayComponent';
 
 import ListEnvsComponent from './envs/ListEnvsComponent';
 
@@ -26,6 +27,7 @@ import ListEnvsComponent from './envs/ListEnvsComponent';
                     <Route path="/reviews" exact element={<ListReviewsComponent/>} />
                     <Route path="/apis" exact element={<ListApiComponent/>} />
                     <Route path="/envs" exact element={<ListEnvsComponent/>} />
+                    <Route path="/display" element={<DisplayComponent/>} />
                 </Routes>
             // </BrowserRouter>
         // </div>

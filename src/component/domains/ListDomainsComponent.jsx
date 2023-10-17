@@ -87,9 +87,6 @@ TabPanel.propTypes = {
     value: PropTypes.any.isRequired,
 };
 
-const styles = (theme) => ({
-
-  });
 
 class ListDomainsComponent extends Component {
     constructor(props) {
@@ -378,7 +375,7 @@ class ListDomainsComponent extends Component {
                                                 </TableHead>
                                                 <TableBody>
                                                     {this.state.domains_per_system_and_layer.map(row => ( 
-                                                            <TableRow hover key={row.id}>
+                                                            <TableRow hover key={row[0] + row[1] }>
                                                                 <TableCell style={{ verticalAlign: 'top' }}>
                                                                     <ListItem button component="a" href={process.env.REACT_APP_API_DOC_URL + this.getHtmlDocUri(row[0], row[1])} target="_blank">
                                                                         <Tooltip title="Link to HTML API doc (do not contain all specs depending on catalogs)">
@@ -745,4 +742,4 @@ ListDomainsComponent.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles, { withTheme: true })(ListDomainsComponent);
+export default withStyles(useStyles, { withTheme: true })(ListDomainsComponent);

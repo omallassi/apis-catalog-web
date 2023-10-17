@@ -24,8 +24,6 @@ import CloseIcon from '@mui/icons-material/Close';
 
 import Avatar from '@mui/material/Avatar';
 
-const styles = (theme) => ({
-  });
 
 class ListLayersComponent extends Component {
     constructor(props) {
@@ -106,9 +104,7 @@ class ListLayersComponent extends Component {
                                             <TableHead>
                                                 <TableRow>
                                                     <TableCell className={this.props.classes.head}></TableCell>
-                                                    <TableCell className={this.props.classes.head} >
-                                                        System Name
-                                                    </TableCell>
+                                                    <TableCell className={this.props.classes.head} >System Name</TableCell>
                                                     <TableCell className={this.props.classes.head}>Layer Name</TableCell>
                                                     <TableCell className={this.props.classes.head}>Description</TableCell>
                                                 </TableRow>
@@ -116,7 +112,7 @@ class ListLayersComponent extends Component {
                                             <TableBody>
                                                 {this.state.systems.map(row => ( 
                                                     row.layers.map( sub_row => (
-                                                        <TableRow hover>
+                                                        <TableRow hover key={row.name + sub_row.name}>
                                                             <TableCell><Avatar src={sub_row.image} /></TableCell>
                                                             <TableCell><Typography variant="button" display="block" 
                                                                 style={{  color: theme.palette.getContrastText(blue[700]),
@@ -180,4 +176,4 @@ ListLayersComponent.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles, { withTheme: true })(ListLayersComponent);
+export default withStyles(useStyles, { withTheme: true })(ListLayersComponent);

@@ -18,6 +18,11 @@ import Grid from '@mui/material/Grid';
 import MenuIcon from '@mui/icons-material/Menu';
 import MenuRouter from './Menu';
 import AppRouter from "./component/RouterComponent";
+import SearchIcon from '@mui/icons-material/Search';
+import TextField from '@mui/material/TextField';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { useState } from 'react';
+
 
 const drawerWidth = 240;
 
@@ -143,43 +148,47 @@ function App(props) {
   );
 
   const container = window !== undefined ? () => window().document.body : undefined;
+  
 
+
+  const [searchInput, setSearchInput] = useState('');
+
+  const data = {
+    query : searchInput
+  }
 
   return (
     // <ThemeProvider theme={theme}>
     <BrowserRouter>
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
-        <AppBar position="fixed" sx={{
+        <AppBar 
+          // position="fixed" 
+          sx={{
             width: { sm: `calc(100% - ${drawerWidth}px)` },
             ml: { sm: `${drawerWidth}px` },
           }}
         >
           <Toolbar>
-            <IconButton
-              edge="start"
-              color="inherit"
-              aria-label="open drawer"
-              onClick={handleDrawerToggle}
-              sx={{ mr: 2, display: { sm: 'none' } }}
-              >
-              <MenuIcon />
-            </IconButton>
-            {/* TODO className can be removed */}
-            <Typography variant="h6" color="inherit" noWrap className={classes.title}> 
-              APIs Catalog
-            </Typography>
-            <img src="logo.png" alt="logo" className={classes.logo} />
+            <Grid container alignItems="center" justifyContent="flex-end" spacing={2}>
+              <Grid item xs={3}>
+                <IconButton edge="start" color="inherit" aria-label="open drawer" onClick={handleDrawerToggle} sx={{ mr: 2, display: { sm: 'none' } }}>
+                  <MenuIcon />
+                </IconButton>
+                <img src="logo.png" alt="logo" className={classes.logo} />
+              </Grid>
+              <Grid item xs={8}>
+                <TextField label="Search" value={searchInput} onChange={(e) => setSearchInput(e.target.value)} variant="outlined" fullWidth style={{ background: 'white', color: 'white' }}/>
+              </Grid>
+              <Grid item xs={1}>
+                <IconButton color="inherit" component={Link} to="/display" state={data} ><SearchIcon fontSize="small" /></IconButton>
+              </Grid>
+            </Grid>
           </Toolbar>
         </AppBar>
 
 
-        <Box
-          component="nav"
-          sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
-          aria-label="menu"
-        >
-
+        <Box component="nav" sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }} aria-label="menu">
           <Drawer
             container={container}
             variant="temporary"
@@ -208,10 +217,9 @@ function App(props) {
         </Box>
 
 
-        <Box
-          component="main"
-          sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
-        >
+        <Box component="main" sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}>
+          {/* crappy workaround but for now */}
+          <Toolbar />
           <Toolbar />
           <Grid item xs={12}>
             <AppRouter />
