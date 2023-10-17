@@ -24,7 +24,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import { useState } from 'react';
 
 
-const drawerWidth = 240;
+const drawerWidth = 300;
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -148,10 +148,13 @@ function App(props) {
   );
 
   const container = window !== undefined ? () => window().document.body : undefined;
-  
-
-
   const [searchInput, setSearchInput] = useState('');
+
+  const handleSearchInputChange = (e) => {
+
+    setSearchInput(e.target.value);
+    
+  }
 
   const data = {
     query : searchInput
@@ -178,7 +181,7 @@ function App(props) {
                 <img src="logo.png" alt="logo" className={classes.logo} />
               </Grid>
               <Grid item xs={8}>
-                <TextField label="Search" value={searchInput} onChange={(e) => setSearchInput(e.target.value)} variant="outlined" fullWidth style={{ background: 'white', color: 'white' }}/>
+                <TextField label="Search" value={searchInput} variant="outlined" onChange={handleSearchInputChange} fullWidth style={{ background: 'white', color: 'white' }}/>
               </Grid>
               <Grid item xs={1}>
                 <IconButton color="inherit" component={Link} to="/display" state={data} ><SearchIcon fontSize="small" /></IconButton>

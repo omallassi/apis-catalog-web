@@ -36,16 +36,10 @@ const DisplayComponent = (props) => {
     useEffect(() => {
         
         if(state && state.query){
-            console.log("loa" + state + "  " + state.query);
             ApiService.search(state.query).then((res) => {
                 console.log(res);
                 let results = res.data;
-
-                console.log("dadada" + results);
-
-
                 ApiService.listAllCatalogs().then((res) => {
-                    console.log("hop" + res.data.length);
                     let res_as_map = new Map();
                     for (let i = 0; i < res.data.length; i++) {
                         res_as_map.set(res.data[i].id, res.data[i]);
@@ -116,7 +110,7 @@ const DisplayComponent = (props) => {
                                     </TableHead>
                                     <TableBody>
                                         {searchResult.map( row => (
-                                            <TableRow hover key={row.catalog_id + row.operation}>
+                                            <TableRow hover key={row.spec_path}>
                                                 <TableCell>
                                                     <Typography align="right" style={{  color: theme.palette.getContrastText(blueGrey[100]),
                                                             padding: '.3em .3em .3em .3em',
