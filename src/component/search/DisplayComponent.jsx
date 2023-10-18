@@ -27,37 +27,36 @@ const useStyles = makeStyles(theme => ({
 
 
 const DisplayComponent = (props) => {
+    const classes = useStyles(); 
+    const theme = props.theme;
     const location = useLocation();
     const state = location.state;
     const [searchResult, setSearchResult] = useState([]);
     const [catalogs, setCatalogs] = useState(new Map());
-    const [systems, setSystems] = useState([])
+    // const [systems, setSystems] = useState([])
         
     useEffect(() => {
         
-        if(state && state.query){
-            ApiService.search(state.query).then((res) => {
-                console.log(res);
-                let results = res.data;
-                ApiService.listAllCatalogs().then((res) => {
-                    let res_as_map = new Map();
-                    for (let i = 0; i < res.data.length; i++) {
-                        res_as_map.set(res.data[i].id, res.data[i]);
-                    }
-                    setCatalogs( res_as_map );
-                    setSearchResult(results);
-        
-                }).catch( (err) => {
-                    console.error("Error while getting catalogs " + err);
-                    //this.setState({message: "Error while getting catalogs - " + err.message, message_level: 'error'});
-                });
-    
-            }).catch( (err) => {
-                console.error("Error while search for query " + state.query + " - " + err);
-                //this.setState({message: "Error while listing domains - " + err.message, message_level: 'error'});
-            });
-        }
+        ApiService.search(state.query).then((res) => {
+            console.log(res);
+            let results = res.data;
+            ApiService.listAllCatalogs().then((res) => {
+                let res_as_map = new Map();
+                for (let i = 0; i < res.data.length; i++) {
+                    res_as_map.set(res.data[i].id, res.data[i]);
+                }
+                setCatalogs( res_as_map );
+                setSearchResult(results);
 
+            }).catch( (err) => {
+                console.error("Error while getting catalogs " + err);
+                //this.setState({message: "Error while getting catalogs - " + err.message, message_level: 'error'});
+            });
+
+        }).catch( (err) => {
+            console.error("Error while search for query " + state.query + " - " + err);
+            //this.setState({message: "Error while listing domains - " + err.message, message_level: 'error'});
+        });
 
       }, [location.state]);
 
@@ -75,9 +74,6 @@ const DisplayComponent = (props) => {
     //             {this.state.message}
     //         </Alert></Collapse>
     // }
-
-    const classes = useStyles(); 
-    const theme = props.theme;
 
     return (
         <>
@@ -122,7 +118,7 @@ const DisplayComponent = (props) => {
                                                             fontSize: '90%',
                                                             backgroundColor: blueGrey[100],
                                                             textTransform: 'uppercase' }}>
-                                                        {catalogs.get(row.catalog_id).name}
+                                                        {catalogs.get(row.catalog_id) ? catalogs.get(row.catalog_id).name : row.catalog_id}
                                                     </Typography>
                                                 </TableCell>
                                                 <TableCell>
@@ -173,11 +169,11 @@ const DisplayComponent = (props) => {
                                                 <TableCell>{row.domain}</TableCell>
                                                 <TableCell>{row.path}</TableCell>
                                                 <TableCell>
-                                                    <a href={catalogs.get(row.catalog_id).http_base_uri + row.spec_path} target="_blank" rel="noopener noreferrer">
+                                                    {/* <a href={catalogs.get(row.catalog_id).http_base_uri + row.spec_path} target="_blank" rel="noopener noreferrer">
                                                         <IconButton color="primary">
                                                             <LinkIcon fontSize="small"/>
                                                         </IconButton>
-                                                    </a>
+                                                    </a> */}
                                                 </TableCell>
                                             </TableRow>
                                         ))}

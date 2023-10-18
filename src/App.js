@@ -148,16 +148,11 @@ function App(props) {
   );
 
   const container = window !== undefined ? () => window().document.body : undefined;
-  const [searchInput, setSearchInput] = useState('');
+  const [searchInput, setSearchInput] = useState({});
 
   const handleSearchInputChange = (e) => {
-
-    setSearchInput(e.target.value);
-    
-  }
-
-  const data = {
-    query : searchInput
+    console.log(e);
+    setSearchInput({ query : e.target.value });
   }
 
   return (
@@ -181,15 +176,16 @@ function App(props) {
                 <img src="logo.png" alt="logo" className={classes.logo} />
               </Grid>
               <Grid item xs={8}>
-                <TextField label="Search" value={searchInput} variant="outlined" onChange={handleSearchInputChange} fullWidth style={{ background: 'white', color: 'white' }}/>
+                <TextField label="Search" variant="outlined" value={searchInput.query}  onChange={handleSearchInputChange} fullWidth style={{ background: 'white', color: 'white' }}/>
+
+                
               </Grid>
               <Grid item xs={1}>
-                <IconButton color="inherit" component={Link} to="/display" state={data} ><SearchIcon fontSize="small" /></IconButton>
+                <IconButton color="inherit" component={Link} to="/display" state={searchInput} ><SearchIcon fontSize="small" /></IconButton>
               </Grid>
             </Grid>
           </Toolbar>
         </AppBar>
-
 
         <Box component="nav" sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }} aria-label="menu">
           <Drawer
