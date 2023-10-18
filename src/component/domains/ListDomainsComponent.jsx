@@ -383,7 +383,7 @@ class ListDomainsComponent extends Component {
                                                                         </Tooltip>
                                                                     </ListItem>
                                                                 </TableCell>
-                                                                <TableCell style={{ verticalAlign: 'top' }} ><Typography style={{  color: theme.palette.getContrastText(blue[700]),
+                                                                <TableCell style={{ verticalAlign: 'top' }} ><Typography style={{  color: theme.palette.getContrastText(blueGrey[100]),
                                                                     padding: '.3em .3em .3em .3em',
                                                                     margin: 'auto',
                                                                     textAlign: 'center',
@@ -391,7 +391,7 @@ class ListDomainsComponent extends Component {
                                                                     fontWeight: '500',
                                                                     borderRadius: '.25em',
                                                                     fontSize: '90%',
-                                                                    backgroundColor: blue[700],
+                                                                    backgroundColor: blueGrey[100],
                                                                     textTransform: 'uppercase' }}> 
                                                                         { row[0] }  
                                                                     </Typography>
@@ -415,28 +415,49 @@ class ListDomainsComponent extends Component {
                                                                         <List>
                                                                         {row[2].map( curr_domain => (     
                                                                             <ListItem>
-                                                                                <ListItemIcon>
+                                                                                {/* <ListItemIcon>
                                                                                     <LensBlurOutlinedIcon fontSize="small" color="info"/>
-                                                                                </ListItemIcon>
+                                                                                </ListItemIcon> */}
                                                                                 <ListItemText>
                                                                                     <Grid container spacing={2}>
-                                                                                        <Grid item xs={8}><Typography>
-                                                                                            {/* <Link href={this.state.catalogs.get(curr_domain.catalog_id).http_base_uri + curr_domain.name} target="_blank"> */}
+                                                                                        <Grid item xs={2}>
+                                                                                            <Typography>
                                                                                                 {curr_domain.name}
-                                                                                            {/* </Link> */}
-                                                                                        </Typography></Grid>
-                                                                                        <Grid item xs={4}><Typography align="right" style={{  color: theme.palette.getContrastText(blueGrey[100]),
-                                                                                            padding: '.3em .3em .3em .3em',
-                                                                                            margin: 'auto',
-                                                                                            textAlign: 'center',
-                                                                                            verticalAlign: 'middle',
-                                                                                            fontWeight: '500',
-                                                                                            borderRadius: '.25em',
-                                                                                            fontSize: '90%',
-                                                                                            backgroundColor: blueGrey[100],
-                                                                                            textTransform: 'uppercase' }}>
-                                                                                        { this.state.catalogs.get(curr_domain.catalog_id).name }
-                                                                                        </Typography>
+                                                                                            </Typography>
+                                                                                        </Grid>
+                                                                                        <Grid item xs={10}>
+                                                                                            {curr_domain.specs.map( spec => ( 
+                                                                                             <Grid container spacing={2}>
+                                                                                                <ListItem>
+                                                                                                {/* <ListItemText> */}
+                                                                                                    <Grid item xs={10}> 
+                                                                                                        <Typography className={classes.customTypography}>
+                                                                                                            <Link href={this.state.catalogs.get(spec.catalog_id).http_base_uri + spec.spec_path} target="_blank">
+                                                                                                            {spec.spec_path}
+                                                                                                            </Link>
+                                                                                                        </Typography>
+                                                                                                    </Grid>
+                                                                                                    <Grid item xs={2}>
+                                                                                                        <Typography align="right" className={classes.customTypography} style={{  color: theme.palette.getContrastText(blueGrey[100]),
+                                                                                                            //padding: '.3em .3em .3em .3em',
+                                                                                                            margin: 'auto',
+                                                                                                            textAlign: 'center',
+                                                                                                            verticalAlign: 'middle',
+                                                                                                            //fontWeight: '500',
+                                                                                                            borderRadius: '.25em',
+                                                                                                            fontSize: '90%',
+                                                                                                            backgroundColor: blueGrey[100],
+                                                                                                            textTransform: 'uppercase' }}>
+                                                                                                        { this.state.catalogs.get(spec.catalog_id).name }
+                                                                                                        </Typography>
+                                                                                                    </Grid>
+                                                                                                {/* </ListItemText> */}
+                                                                                                </ListItem>
+                                                                                            </Grid>
+                                                                                            
+                                                                                            
+
+                                                                                            ))}
                                                                                         </Grid>
                                                                                     </Grid>
                                                                                 </ListItemText>
@@ -735,7 +756,10 @@ const useStyles = theme => ({
     },
     table_cell_is_empty: {
         color: theme.palette.error.dark
-    }
+    }, 
+    customTypography: {
+        lineHeight: 2,
+      },
 });
 
 ListDomainsComponent.propTypes = {

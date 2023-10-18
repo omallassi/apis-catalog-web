@@ -22,13 +22,25 @@ const useStyles = makeStyles(theme => ({
     head: {
         backgroundColor: blue[700],
         color: theme.palette.getContrastText(blue[700])
+    },
+    blueGrey: {
+        color: theme.palette.getContrastText(blueGrey[100]),
+        padding: '.3em .3em .3em .3em',
+        margin: 'auto',
+        textAlign: 'center',
+        verticalAlign: 'middle',
+        fontWeight: '500',
+        borderRadius: '.25em',
+        fontSize: '90%',
+        backgroundColor: blueGrey[100],
+        textTransform: 'uppercase' 
     }
 }));
 
 
 const DisplayComponent = (props) => {
-    const classes = useStyles(); 
     const theme = props.theme;
+    const classes = useStyles(); 
     const location = useLocation();
     const state = location.state;
     const [searchResult, setSearchResult] = useState([]);
@@ -108,72 +120,33 @@ const DisplayComponent = (props) => {
                                         {searchResult.map( row => (
                                             <TableRow hover key={row.spec_path}>
                                                 <TableCell>
-                                                    <Typography align="right" style={{  color: theme.palette.getContrastText(blueGrey[100]),
-                                                            padding: '.3em .3em .3em .3em',
-                                                            margin: 'auto',
-                                                            textAlign: 'center',
-                                                            verticalAlign: 'middle',
-                                                            fontWeight: '500',
-                                                            borderRadius: '.25em',
-                                                            fontSize: '90%',
-                                                            backgroundColor: blueGrey[100],
-                                                            textTransform: 'uppercase' }}>
+                                                    <Typography align="right" className={classes.blueGrey}>
                                                         {catalogs.get(row.catalog_id) ? catalogs.get(row.catalog_id).name : row.catalog_id}
                                                     </Typography>
                                                 </TableCell>
                                                 <TableCell>
-                                                    <Typography align="right" style={{  color: theme.palette.getContrastText(blueGrey[100]),
-                                                            padding: '.3em .3em .3em .3em',
-                                                            margin: 'auto',
-                                                            textAlign: 'center',
-                                                            verticalAlign: 'middle',
-                                                            fontWeight: '500',
-                                                            borderRadius: '.25em',
-                                                            fontSize: '90%',
-                                                            backgroundColor: blueGrey[100],
-                                                            textTransform: 'uppercase' }}>
+                                                    <Typography align="right" className={classes.blueGrey}>
                                                         {row.audience}
                                                     </Typography>
                                                 </TableCell>
                                                 <TableCell>
-                                                    <Typography variant="button" display="block" 
-                                                        style={{  color: theme.palette.getContrastText(blue[700]),
-                                                            padding: '.3em .3em .3em .3em',
-                                                            margin: 'auto',
-                                                            textAlign: 'center',
-                                                            verticalAlign: 'middle',
-                                                            fontWeight: '500',
-                                                            borderRadius: '.25em',
-                                                            fontSize: '90%',
-                                                            backgroundColor: blueGrey[100],
-                                                            textTransform: 'uppercase' }}
-                                                        >
+                                                    <Typography variant="button" display="block" className={classes.blueGrey}>
                                                         TBD
                                                     </Typography>
                                                 </TableCell>
                                                 <TableCell>
-                                                    <Typography variant="button" display="block" style={{  color: theme.palette.getContrastText(blue[700]),
-                                                            padding: '.3em .3em .3em .3em',
-                                                            margin: 'auto',
-                                                            textAlign: 'center',
-                                                            verticalAlign: 'middle',
-                                                            fontWeight: '500',
-                                                            borderRadius: '.25em',
-                                                            fontSize: '90%',
-                                                            backgroundColor: blueGrey[100],
-                                                            textTransform: 'uppercase' }}
-                                                            >
+                                                    <Typography variant="button" display="block" className={classes.blueGrey}>
                                                         {row.layer}
                                                     </Typography>
                                                 </TableCell>
                                                 <TableCell>{row.domain}</TableCell>
                                                 <TableCell>{row.path}</TableCell>
                                                 <TableCell>
-                                                    {/* <a href={catalogs.get(row.catalog_id).http_base_uri + row.spec_path} target="_blank" rel="noopener noreferrer">
+                                                    <a href={catalogs.get(row.catalog_id).http_base_uri + row.spec_path} target="_blank" rel="noopener noreferrer">
                                                         <IconButton color="primary">
                                                             <LinkIcon fontSize="small"/>
                                                         </IconButton>
-                                                    </a> */}
+                                                    </a>
                                                 </TableCell>
                                             </TableRow>
                                         ))}
@@ -190,4 +163,5 @@ const DisplayComponent = (props) => {
       );
 }
 
-export default withStyles(useStyles, { withTheme: true })(DisplayComponent);
+// export default withStyles(useStyles, { withTheme: true })(DisplayComponent);
+export default DisplayComponent;

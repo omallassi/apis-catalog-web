@@ -14,7 +14,7 @@ import withStyles from '@mui/styles/withStyles';
 import IconButton from '@mui/material/IconButton';
 import { Grid, TableContainer } from '@mui/material';
 
-import { blue } from '@mui/material/colors';
+import { blue, blueGrey } from '@mui/material/colors';
 
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
@@ -115,7 +115,7 @@ class ListLayersComponent extends Component {
                                                         <TableRow hover key={row.name + sub_row.name}>
                                                             <TableCell><Avatar src={sub_row.image} /></TableCell>
                                                             <TableCell><Typography variant="button" display="block" 
-                                                                style={{  color: theme.palette.getContrastText(blue[700]),
+                                                                style={{  color: theme.palette.getContrastText(blueGrey[100]),
                                                                     padding: '.3em .3em .3em .3em',
                                                                     margin: 'auto',
                                                                     textAlign: 'center',
@@ -123,7 +123,7 @@ class ListLayersComponent extends Component {
                                                                     fontWeight: '500',
                                                                     borderRadius: '.25em',
                                                                     fontSize: '90%',
-                                                                    backgroundColor: blue[700],
+                                                                    backgroundColor: blueGrey[100],
                                                                     textTransform: 'uppercase' }}
                                                                 >{row.name}</Typography></TableCell>
                                                             <TableCell><Typography variant="button" display="block" style={{  color: theme.palette.getContrastText(blue[700]),
