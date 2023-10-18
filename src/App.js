@@ -11,7 +11,6 @@ import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import MuiAppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import Grid from '@mui/material/Grid';
@@ -22,6 +21,8 @@ import SearchIcon from '@mui/icons-material/Search';
 import TextField from '@mui/material/TextField';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import { useState } from 'react';
+import Tooltip from "@mui/material/Tooltip";
+import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 
 
 const drawerWidth = 300;
@@ -177,11 +178,12 @@ function App(props) {
               </Grid>
               <Grid item xs={8}>
                 <TextField label="Search" variant="outlined" value={searchInput.query}  onChange={handleSearchInputChange} fullWidth style={{ background: 'white', color: 'white' }}/>
-
-                
               </Grid>
               <Grid item xs={1}>
-                <IconButton color="inherit" component={Link} to="/display" state={searchInput} ><SearchIcon fontSize="small" /></IconButton>
+                <Tooltip title="This is a free text search with additional features : (1) use AND to have the two terms, (2) the following axis can be used: audience, domain, systems, layer, operations. Meaning you search something like: toto AND systems:default AND operations:POST AND audience:default">
+                  <IconButton color="inherit" component={Link} to="/display" state={searchInput} ><SearchIcon fontSize="small" /></IconButton>
+                </Tooltip>
+                
               </Grid>
             </Grid>
           </Toolbar>

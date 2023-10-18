@@ -12,8 +12,8 @@ import CardContent from '@mui/material/CardContent';
 import withStyles from '@mui/styles/withStyles';
 import IconButton from '@mui/material/IconButton';
 import { Grid, TableContainer } from '@mui/material';
-
-import { blue, blueGrey } from '@mui/material/colors';
+import { TextField } from '@mui/material';
+import { blue, blueGrey, red, green, orange } from '@mui/material/colors';
 import { useLocation } from "react-router-dom";
 import { makeStyles } from '@material-ui/core/styles';
 import LinkIcon from '@mui/icons-material/Link';
@@ -33,6 +33,66 @@ const useStyles = makeStyles(theme => ({
         borderRadius: '.25em',
         fontSize: '90%',
         backgroundColor: blueGrey[100],
+        textTransform: 'uppercase' 
+    },
+    ope: {
+        color: theme.palette.getContrastText(blueGrey[100]),
+        padding: '.3em .3em .3em .3em',
+        margin: 'auto',
+        textAlign: 'center',
+        verticalAlign: 'middle',
+        fontWeight: '500',
+        borderRadius: '.25em',
+        fontSize: '80%',
+        backgroundColor: blueGrey[100],
+        textTransform: 'uppercase' 
+    },
+    post: {
+        color: theme.palette.getContrastText(blue[500]),
+        padding: '.3em .3em .3em .3em',
+        margin: 'auto',
+        textAlign: 'center',
+        verticalAlign: 'middle',
+        fontWeight: '500',
+        borderRadius: '.25em',
+        fontSize: '80%',
+        backgroundColor: blue[500],
+        textTransform: 'uppercase' 
+    },
+    get: {
+        color: theme.palette.getContrastText(green[500]),
+        padding: '.3em .3em .3em .3em',
+        margin: 'auto',
+        textAlign: 'center',
+        verticalAlign: 'middle',
+        fontWeight: '500',
+        borderRadius: '.25em',
+        fontSize: '80%',
+        backgroundColor: green[500],
+        textTransform: 'uppercase' 
+    },
+    delete: {
+        color: theme.palette.getContrastText(red[500]),
+        padding: '.3em .3em .3em .3em',
+        margin: 'auto',
+        textAlign: 'center',
+        verticalAlign: 'middle',
+        fontWeight: '500',
+        borderRadius: '.25em',
+        fontSize: '80%',
+        backgroundColor: red[500],
+        textTransform: 'uppercase' 
+    },
+    put: {
+        color: theme.palette.getContrastText(orange[100]),
+        padding: '.3em .3em .3em .3em',
+        margin: 'auto',
+        textAlign: 'center',
+        verticalAlign: 'middle',
+        fontWeight: '500',
+        borderRadius: '.25em',
+        fontSize: '80%',
+        backgroundColor: orange[100],
         textTransform: 'uppercase' 
     }
 }));
@@ -71,6 +131,19 @@ const DisplayComponent = (props) => {
         });
 
       }, [location.state]);
+
+    function operationsClass(classes, status) {
+        if (status === "GET")
+            return classes.get;
+        else if (status === "POST")
+            return classes.post;
+        else if (status === "DELETE")
+            return classes.delete;
+        else if (status === "PUT")
+            return classes.delete;
+        else
+            return classes.ope;
+    }
 
     let message_component;
     // if (this.state.message)
@@ -112,7 +185,8 @@ const DisplayComponent = (props) => {
                                             <TableCell className={classes.head}>System(s)</TableCell>
                                             <TableCell className={classes.head}>Layer</TableCell>
                                             <TableCell className={classes.head}>Domain</TableCell>
-                                            <TableCell className={classes.head}>Operation</TableCell>
+                                            <TableCell className={classes.head}>Operations</TableCell>
+                                            <TableCell className={classes.head}>Path</TableCell>
                                             <TableCell className={classes.head}>Link to Spec</TableCell>
                                         </TableRow>
                                     </TableHead>
@@ -130,9 +204,11 @@ const DisplayComponent = (props) => {
                                                     </Typography>
                                                 </TableCell>
                                                 <TableCell>
-                                                    <Typography variant="button" display="block" className={classes.blueGrey}>
-                                                        TBD
-                                                    </Typography>
+                                                    {row.systems.map( system => (
+                                                        <Box m={1}>
+                                                            <Typography variant="button" display="block" className={classes.blueGrey}>{system}</Typography>
+                                                        </Box>
+                                                    ))}
                                                 </TableCell>
                                                 <TableCell>
                                                     <Typography variant="button" display="block" className={classes.blueGrey}>
@@ -140,6 +216,15 @@ const DisplayComponent = (props) => {
                                                     </Typography>
                                                 </TableCell>
                                                 <TableCell>{row.domain}</TableCell>
+                                                <TableCell>
+                                                    {row.operations.map( ope => (
+                                                        <Box m={1}>
+                                                            <Typography variant="button" display="block" className={operationsClass(classes, ope)}>
+                                                                {ope}
+                                                            </Typography>
+                                                        </Box>
+                                                    ))}
+                                                </TableCell>
                                                 <TableCell>{row.path}</TableCell>
                                                 <TableCell>
                                                     <a href={catalogs.get(row.catalog_id).http_base_uri + row.spec_path} target="_blank" rel="noopener noreferrer">

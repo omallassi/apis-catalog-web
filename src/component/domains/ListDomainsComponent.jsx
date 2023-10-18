@@ -438,6 +438,7 @@ class ListDomainsComponent extends Component {
                                                                                                         </Typography>
                                                                                                     </Grid>
                                                                                                     <Grid item xs={2}>
+                                                                                                        <Box m={1}>
                                                                                                         <Typography align="right" className={classes.customTypography} style={{  color: theme.palette.getContrastText(blueGrey[100]),
                                                                                                             //padding: '.3em .3em .3em .3em',
                                                                                                             margin: 'auto',
@@ -450,6 +451,7 @@ class ListDomainsComponent extends Component {
                                                                                                             textTransform: 'uppercase' }}>
                                                                                                         { this.state.catalogs.get(spec.catalog_id).name }
                                                                                                         </Typography>
+                                                                                                        </Box>
                                                                                                     </Grid>
                                                                                                 {/* </ListItemText> */}
                                                                                                 </ListItem>
