@@ -152,7 +152,6 @@ function App(props) {
   const [searchInput, setSearchInput] = useState({});
 
   const handleSearchInputChange = (e) => {
-    console.log(e);
     setSearchInput({ query : e.target.value });
   }
 

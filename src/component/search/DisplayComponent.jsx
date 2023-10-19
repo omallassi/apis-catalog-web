@@ -142,6 +142,14 @@ const DisplayComponent = (props) => {
 
       }, [location.state]);
 
+    function generateUniqueID() {
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+            var r = (Math.random() * 16) | 0,
+              v = c === 'x' ? r : (r & 0x3) | 0x8;
+            return v.toString(16);
+          });
+    }
+
     function operationsClass(classes, status) {
         if (status === "GET")
             return classes.get;
@@ -179,7 +187,7 @@ const DisplayComponent = (props) => {
                 <CardContent>
                     <Grid container>
                         <Grid item xs={11}>
-                            <Typography variant="h6" color="primary">Search Results for: {state.query}</Typography>
+                            <Typography variant="h6" color="primary">Found <b>{searchResult.length}</b> results for: <b>{state.query}</b></Typography>
                             {message_component}
                         </Grid>
                         <Grid item xs={1}></Grid>
@@ -204,7 +212,7 @@ const DisplayComponent = (props) => {
                                     </TableHead>
                                     <TableBody>
                                         {searchResult.map( row => (
-                                            <TableRow hover key={row.spec_path}>
+                                            <TableRow hover key={generateUniqueID()}>
                                                 <TableCell>
                                                     <Typography align="right" className={classes.blueGrey}>
                                                         {catalogs.get(row.catalog_id) ? catalogs.get(row.catalog_id).name : row.catalog_id}
