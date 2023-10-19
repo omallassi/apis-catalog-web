@@ -9,11 +9,9 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import withStyles from '@mui/styles/withStyles';
 import IconButton from '@mui/material/IconButton';
 import { Grid, TableContainer } from '@mui/material';
-import { TextField } from '@mui/material';
-import { blue, blueGrey, red, green, orange } from '@mui/material/colors';
+import { blue, blueGrey, red, green, orange, deepPurple } from '@mui/material/colors';
 import { useLocation } from "react-router-dom";
 import { makeStyles } from '@material-ui/core/styles';
 import LinkIcon from '@mui/icons-material/Link';
@@ -37,62 +35,74 @@ const useStyles = makeStyles(theme => ({
     },
     ope: {
         color: theme.palette.getContrastText(blueGrey[100]),
-        padding: '.3em .3em .3em .3em',
+        //padding: '.3em .3em .3em .3em',
         margin: 'auto',
         textAlign: 'center',
         verticalAlign: 'middle',
         fontWeight: '500',
         borderRadius: '.25em',
-        fontSize: '80%',
+        fontSize: '70%',
         backgroundColor: blueGrey[100],
         textTransform: 'uppercase' 
     },
     post: {
-        color: theme.palette.getContrastText(blue[500]),
-        padding: '.3em .3em .3em .3em',
+        color: theme.palette.getContrastText(blue[600]),
+        padding: '.1em .1em .1em .1em',
         margin: 'auto',
         textAlign: 'center',
         verticalAlign: 'middle',
         fontWeight: '500',
         borderRadius: '.25em',
-        fontSize: '80%',
-        backgroundColor: blue[500],
+        fontSize: '70%',
+        backgroundColor: blue[600],
         textTransform: 'uppercase' 
     },
     get: {
-        color: theme.palette.getContrastText(green[500]),
-        padding: '.3em .3em .3em .3em',
+        color: theme.palette.getContrastText(green[600]),
+        padding: '.1em .1em .1em .1em',
         margin: 'auto',
         textAlign: 'center',
         verticalAlign: 'middle',
         fontWeight: '500',
         borderRadius: '.25em',
-        fontSize: '80%',
-        backgroundColor: green[500],
+        fontSize: '70%',
+        backgroundColor: green[600],
         textTransform: 'uppercase' 
     },
     delete: {
-        color: theme.palette.getContrastText(red[500]),
-        padding: '.3em .3em .3em .3em',
+        color: theme.palette.getContrastText(red[400]),
+        padding: '.1em .1em .1em .1em',
         margin: 'auto',
         textAlign: 'center',
         verticalAlign: 'middle',
         fontWeight: '500',
         borderRadius: '.25em',
-        fontSize: '80%',
-        backgroundColor: red[500],
+        fontSize: '70%',
+        backgroundColor: red[400],
         textTransform: 'uppercase' 
     },
     put: {
-        color: theme.palette.getContrastText(orange[100]),
-        padding: '.3em .3em .3em .3em',
+        color: theme.palette.getContrastText(deepPurple[800]),
+        padding: '.1em .1em .1em .1em',
         margin: 'auto',
         textAlign: 'center',
         verticalAlign: 'middle',
         fontWeight: '500',
         borderRadius: '.25em',
-        fontSize: '80%',
-        backgroundColor: orange[100],
+        fontSize: '70%',
+        backgroundColor: deepPurple[800],
+        textTransform: 'uppercase' 
+    },
+    patch: {
+        color: theme.palette.getContrastText(orange[800]),
+        padding: '.1em .1em .1em .1em',
+        margin: 'auto',
+        textAlign: 'center',
+        verticalAlign: 'middle',
+        fontWeight: '500',
+        borderRadius: '.25em',
+        fontSize: '70%',
+        backgroundColor: orange[800],
         textTransform: 'uppercase' 
     }
 }));
@@ -140,7 +150,9 @@ const DisplayComponent = (props) => {
         else if (status === "DELETE")
             return classes.delete;
         else if (status === "PUT")
-            return classes.delete;
+            return classes.put;
+        else if (status === "PATCH")
+            return classes.patch;
         else
             return classes.ope;
     }
