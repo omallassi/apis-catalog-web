@@ -15,6 +15,10 @@ import { blue, blueGrey, red, green, orange, deepPurple } from '@mui/material/co
 import { useLocation } from "react-router-dom";
 import { makeStyles } from '@material-ui/core/styles';
 import LinkIcon from '@mui/icons-material/Link';
+import Collapse from '@mui/material/Collapse';
+import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
+import CloseIcon from '@mui/icons-material/Close';
 
 const useStyles = makeStyles(theme => ({
     head: {
@@ -115,6 +119,9 @@ const DisplayComponent = (props) => {
     const state = location.state;
     const [searchResult, setSearchResult] = useState([]);
     const [catalogs, setCatalogs] = useState(new Map());
+    const [message, setMessage] = useState("");
+    const [messageLevel, setMessageLevel] = useState("");
+
     // const [systems, setSystems] = useState([])
         
     useEffect(() => {
@@ -132,12 +139,14 @@ const DisplayComponent = (props) => {
 
             }).catch( (err) => {
                 console.error("Error while getting catalogs " + err);
-                //this.setState({message: "Error while getting catalogs - " + err.message, message_level: 'error'});
+                setMessage("Error while getting catalogs - " + err.message);
+                setMessageLevel("error");
             });
 
         }).catch( (err) => {
             console.error("Error while search for query " + state.query + " - " + err);
-            //this.setState({message: "Error while listing domains - " + err.message, message_level: 'error'});
+            setMessage("Error while searching - " + err.message);
+            setMessageLevel("error");
         });
 
       }, [location.state]);
@@ -166,19 +175,19 @@ const DisplayComponent = (props) => {
     }
 
     let message_component;
-    // if (this.state.message)
-    // {
-    //     message_component =  <Collapse in = {true} ><Alert severity={this.state.message_level} action={<IconButton aria-label="close" color={this.state.message_level} size="small"
-    //         onClick={() => {
-    //             this.setState({message: ''});
-    //         }}
-    //         >
-    //         <CloseIcon fontSize="inherit" />
-    //         </IconButton>}>
-    //             <AlertTitle><strong>{this.state.message_level}</strong></AlertTitle>
-    //             {this.state.message}
-    //         </Alert></Collapse>
-    // }
+    if (message)
+    {
+        message_component =  <Collapse in = {true} ><Alert severity={messageLevel} action={<IconButton aria-label="close" color={messageLevel} size="small"
+            onClick={() => {
+                setMessage("");
+            }}
+            >
+            <CloseIcon fontSize="inherit" />
+            </IconButton>}>
+                <AlertTitle><strong>{messageLevel}</strong></AlertTitle>
+                {message}
+            </Alert></Collapse>
+    }
 
     return (
         <>
@@ -268,5 +277,4 @@ const DisplayComponent = (props) => {
       );
 }
 
-// export default withStyles(useStyles, { withTheme: true })(DisplayComponent);
 export default DisplayComponent;

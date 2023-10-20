@@ -104,7 +104,7 @@ class ApiService {
     search(query) {
         console.info("ApiService - Search with [" + query + "]");
 
-        return axios.post('/v1/search', {"query": query} );
+        return axios.post('/v1/search', {"query": query, "limit": 500} );
     }
 
 }
