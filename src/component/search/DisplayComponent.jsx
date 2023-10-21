@@ -13,7 +13,7 @@ import IconButton from '@mui/material/IconButton';
 import { Grid, TableContainer } from '@mui/material';
 import { blue, blueGrey, red, green, orange, deepPurple } from '@mui/material/colors';
 import { useLocation } from "react-router-dom";
-import { makeStyles } from '@material-ui/core/styles';
+import makeStyles from '@mui/styles/makeStyles';
 import LinkIcon from '@mui/icons-material/Link';
 import Collapse from '@mui/material/Collapse';
 import Alert from '@mui/material/Alert';
