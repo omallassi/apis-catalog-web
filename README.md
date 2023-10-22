@@ -38,6 +38,9 @@ Then, you can create APIs and manage their lifecycles;
 
 HTTP backend is available here https://github.com/omallassi/apis-catalog
 
+### Full text search across specifications
+
+There is a full-text search available that will help you find specifications. 
 
 ## Installation 
 
