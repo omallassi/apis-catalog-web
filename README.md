@@ -9,21 +9,28 @@ The Web UI (at this stage, mostly providing read-only access) to [apis-catalog](
 
 The [dashboard provides](https://github.com/omallassi/apis-catalog/wiki/stats-overview)
 
-* metrics w.r.t pull requests: # of pull requests, metrics regarding how long pull requests stay opened..
-* metrics w.r.t. the catalog: # of operations, # of resources per domains
-* metrics w.r.t. zally: # and types of zally ignore
-* others. 
+* metrics 
+    * w.r.t pull requests: # of pull requests, metrics regarding how long pull requests stay opened..
+    * w.r.t. the catalog: # of operations, # of resources per domains
+    * metrics w.r.t. zally: # and types of zally ignore
+* visibility on domains; organisation per systems and layers, domains not in the "catalog of domains", OAI specs related to the domain etc.
+* full text search on OAI specs
 
 Please, refer to [Web UIs](https://github.com/omallassi/apis-catalog/wiki/Web-UI-Overview) for more details about available UIs and information.
 
 These metrics are also "enriched" with pull-requests so that you can understand which PR made your stats drifted. 
 
-### Metrics related dashboards
+### Full text search across specifications
 
-![screenshot](img/dashboard.png)
-![screenshot](img/dashboard_2.png)
+There is a full-text search available that will help you find specifications. 
+
+![screenshot](img/search.png)
 
 ### Domains related dashboards 
+
+You can view how domains (and related specs) are organised per systems and layers
+
+![screenshot](img/domain-org.png)
 
 You can view the repartition of `operations` per domains
 
@@ -38,9 +45,10 @@ Then, you can create APIs and manage their lifecycles;
 
 HTTP backend is available here https://github.com/omallassi/apis-catalog
 
-### Full text search across specifications
+### Metrics related dashboards
 
-There is a full-text search available that will help you find specifications. 
+![screenshot](img/dashboard.png)
+![screenshot](img/dashboard_2.png)
 
 ## Installation 
 
