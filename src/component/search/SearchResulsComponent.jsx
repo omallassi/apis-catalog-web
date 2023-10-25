@@ -112,7 +112,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-const DisplayComponent = (props) => {
+const SearchResulsComponent = (props) => {
     const theme = props.theme;
     const classes = useStyles(); 
     const location = useLocation();
@@ -209,13 +209,13 @@ const DisplayComponent = (props) => {
                                 <Table className={classes.table}>
                                     <TableHead>
                                         <TableRow>
-                                            <TableCell className={classes.head}>Catalog</TableCell>
-                                            <TableCell className={classes.head} >Audience</TableCell>
                                             <TableCell className={classes.head}>System(s)</TableCell>
                                             <TableCell className={classes.head}>Layer</TableCell>
+                                            <TableCell className={classes.head} >Audience</TableCell>
                                             <TableCell className={classes.head}>Domain</TableCell>
                                             <TableCell className={classes.head}>Operations</TableCell>
                                             <TableCell className={classes.head}>Path</TableCell>
+                                            <TableCell className={classes.head}>Catalog</TableCell>
                                             <TableCell className={classes.head}>Link to Spec</TableCell>
                                         </TableRow>
                                     </TableHead>
@@ -223,26 +223,15 @@ const DisplayComponent = (props) => {
                                         {searchResult.map( row => (
                                             <TableRow hover key={generateUniqueID()}>
                                                 <TableCell>
-                                                    <Typography align="right" className={classes.blueGrey}>
-                                                        {catalogs.get(row.catalog_id) ? catalogs.get(row.catalog_id).name : row.catalog_id}
-                                                    </Typography>
-                                                </TableCell>
-                                                <TableCell>
-                                                    <Typography align="right" className={classes.blueGrey}>
-                                                        {row.audience}
-                                                    </Typography>
-                                                </TableCell>
-                                                <TableCell>
                                                     {row.systems.map( system => (
-                                                        <Box m={1}>
-                                                            <Typography variant="button" display="block" className={classes.blueGrey}>{system}</Typography>
-                                                        </Box>
+                                                        <Box m={1}><Typography variant="button" display="block" className={classes.blueGrey}>{system}</Typography></Box>
                                                     ))}
                                                 </TableCell>
                                                 <TableCell>
-                                                    <Typography variant="button" display="block" className={classes.blueGrey}>
-                                                        {row.layer}
-                                                    </Typography>
+                                                    <Typography variant="button" display="block" className={classes.blueGrey}>{row.layer}</Typography>
+                                                </TableCell>
+                                                <TableCell>
+                                                    <Typography align="right" className={classes.blueGrey}>{row.audience}</Typography>
                                                 </TableCell>
                                                 <TableCell>{row.domain}</TableCell>
                                                 <TableCell>
@@ -255,6 +244,11 @@ const DisplayComponent = (props) => {
                                                     ))}
                                                 </TableCell>
                                                 <TableCell>{row.path}</TableCell>
+                                                <TableCell>
+                                                    <Typography align="right" className={classes.blueGrey}>
+                                                        {catalogs.get(row.catalog_id) ? catalogs.get(row.catalog_id).name : row.catalog_id}
+                                                    </Typography>
+                                                </TableCell>
                                                 <TableCell>
                                                     <a href={catalogs.get(row.catalog_id).http_base_uri + row.spec_path} target="_blank" rel="noopener noreferrer">
                                                         <IconButton color="primary">
@@ -277,4 +271,4 @@ const DisplayComponent = (props) => {
       );
 }
 
-export default DisplayComponent;
+export default SearchResulsComponent;
