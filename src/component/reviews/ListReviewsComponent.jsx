@@ -31,16 +31,18 @@ class ListReviewsComponent extends Component {
             reviews: [], //TODO to obsolete
             reviews_stats: [],
             showDetails: false,
-            selectedReview: 0
+            selectedReview: 0,
+            config: {}
         }
 
         this.reviewDetails = React.createRef();
-
+        this.listConfig = this.listConfig.bind(this);
         this.listAllReviews = this.listAllReviews.bind(this);
     }
 
     componentDidMount() {
         this.listAllReviews();
+        this.listConfig();
     }
 
     componentWillUnmount(){
@@ -48,6 +50,14 @@ class ListReviewsComponent extends Component {
             return;
         };
     }
+
+    listConfig(){
+        ApiService.listConfig().then( (res) => {
+          this.setState( { config: res.data } );
+        } ).catch( (err) => {
+          console.error("Error while getting config " + err);
+        });
+      }
 
     listAllReviews() {
         ApiService.listAllReviews().then((res) => {
@@ -156,7 +166,6 @@ class ListReviewsComponent extends Component {
                                         {this.state.reviews_stats.map(row => (
                                             <TableRow hover key={row.id}>
                                                 <TableCell>
-                                                    <LinkIcon/>
                                                     <Link href={this.state.config.stash_base_url + "/pull-requests/" + row.id + "/overview"} target="_blank">{row.id}</Link>
                                                 </TableCell>
                                                 <TableCell component="th" scope="row">
