@@ -107,6 +107,12 @@ class ApiService {
         return axios.post('/v1/search', {"query": query, "limit": 500} );
     }
 
+    listConfig() {
+        console.info("ApiService - List UI Config");
+
+        return axios.get('/v1/config');
+    }
+
 }
 
 export default new ApiService();

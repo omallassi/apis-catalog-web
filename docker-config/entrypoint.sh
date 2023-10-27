@@ -9,8 +9,6 @@ cat /apis-catalog/config/local.toml
 # Build the UI
 echo -e "\033[1;32m*** Building apis-catalog-web UI w/ .env.production ***\033[0m"
 
-echo "REACT_APP_API_DOC_URL=$REACT_APP_API_DOC_URL\nREACT_APP_PACT_DOC_URL=$REACT_APP_PACT_DOC_URL\nREACT_APP_STASH_BASE_URL=$REACT_APP_STASH_BASE_URL\nREACT_APP_BETA=$REACT_APP_BETA" > /apis-catalog-web/.env.production
-
 cat /apis-catalog-web/.env.production
 cd /apis-catalog-web/ && npm run build
 

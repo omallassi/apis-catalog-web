@@ -157,7 +157,7 @@ class ListReviewsComponent extends Component {
                                             <TableRow hover key={row.id}>
                                                 <TableCell>
                                                     <LinkIcon/>
-                                                    <Link href={process.env.REACT_APP_STASH_BASE_URL + "/pull-requests/" + row.id + "/overview"} target="_blank">{row.id}</Link>
+                                                    <Link href={this.state.config.stash_base_url + "/pull-requests/" + row.id + "/overview"} target="_blank">{row.id}</Link>
                                                 </TableCell>
                                                 <TableCell component="th" scope="row">
                                                     <Link component="button" variant="body2" onClick={() => {

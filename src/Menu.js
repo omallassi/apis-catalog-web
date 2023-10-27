@@ -19,8 +19,7 @@ import Stack from '@mui/material/Stack';
 import withStyles from '@mui/styles/withStyles';
 import PropTypes from 'prop-types';
 
-import Divider from '@mui/material/Divider';
-
+import ApiService from "./service/ApiService"
 
 function ListItemLink(props) {
   const { icon, primary, to } = props;
@@ -48,9 +47,35 @@ ListItemLink.propTypes = {
   to: PropTypes.string.isRequired,
 };
 
-// export default function ListRouter() {
+
 class ListRouter extends Component {
-  // const classes = useStyles();
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      config: {}
+    }
+
+    this.listConfig = this.listConfig.bind(this);
+  }
+
+  componentDidMount(){
+    this.listConfig();
+  }
+
+  componentWillUnmount(){
+    this.setState = (state,callback)=>{
+        return;
+    };
+  }
+
+  listConfig(){
+    ApiService.listConfig().then( (res) => {
+      this.setState( { config: res.data } );
+    } ).catch( (err) => {
+      console.error("Error while getting config " + err);
+    });
+  }
 
   render() {
     return (      
@@ -60,35 +85,35 @@ class ListRouter extends Component {
            <ListItemLink to="/layers" primary="Systems & Layers" icon={<LayersIcon color="primary" />} />
            <ListItemLink to="/domains" primary="Domain Governance" icon={<FilterTiltShiftIcon color="primary" />} />
 
-            {process.env.REACT_APP_BETA
+            {this.state.config.beta
               ? <Stack direction="row" spacing={1}><Chip label="beta" color="warning" variant="outlined" size="small" />< ListItemLink to="/" primary="Dashboard" icon={<DashboardIcon color="primary" />} /></Stack>
               : null
             }
-            {process.env.REACT_APP_BETA
+            {this.state.config.beta
               ? <Stack direction="row" spacing={1}><Chip label="beta" color="warning" variant="outlined"  size="small" /><ListItemLink to="/reviews" primary="APIs Reviews" icon={<RateReviewIcon color="primary" />} /></Stack>
               : null
             }
             
-            {process.env.REACT_APP_BETA
+            {this.state.config.beta
               ? <Stack direction="row" spacing={1}><Chip label="beta" color="warning" variant="outlined"  size="small" />< ListItemLink to="/apis" primary="Apis" icon={<ListAltIcon color="primary" />} /></Stack>
               : null
             }
-            {process.env.REACT_APP_BETA
+            {this.state.config.beta
               ? <Stack direction="row" spacing={1}><Chip label="beta" color="warning" variant="outlined" size="small" />< ListItemLink to="/envs" primary="Environments" icon={<ComputerIcon color="primary" />} /></Stack>
               : null
             }
 
             <Stack direction="row" spacing={1}>
-              <ListItem button component="a" href={process.env.REACT_APP_PACT_DOC_URL} target="_blank">
+              <ListItem button component="a" href={this.state.config.pact_url} target="_blank">
                 <ListItemIcon>
                   <LinkIcon /> 
                 </ListItemIcon>
-                <ListItemText primary="PACT Broker" />
+                <ListItemText primary="PACT Broker"/>
               </ListItem>
             </Stack>
 
             <Stack direction="row" spacing={1}>
-              <ListItem button component="a" href={process.env.REACT_APP_API_DOC_URL} target="_blank">
+              <ListItem button component="a" href={this.state.config.api_doc_url} target="_blank">
                 <ListItemIcon>
                 <DatasetLinkedIcon/>
                 </ListItemIcon>

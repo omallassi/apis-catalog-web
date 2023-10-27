@@ -86,15 +86,18 @@ class DashboardComponent extends Component {
             message: '',
             message_level: '',
             chart_loading: false,
+            config: {}
         }
 
         this.getStats = this.getStats.bind(this);
         this.getOldestPr = this.getOldestPr.bind(this);
+        this.listConfig = this.listConfig.bind(this);
     }
 
     componentDidMount() {
         this.getStats();
         this.getOldestPr();
+        this.listConfig();
     }
 
     componentWillUnmount(){
@@ -102,6 +105,14 @@ class DashboardComponent extends Component {
             return;
         };
     }
+
+    listConfig(){
+        ApiService.listConfig().then( (res) => {
+          this.setState( { config: res.data } );
+        } ).catch( (err) => {
+          console.error("Error while getting config " + err);
+        });
+      }
 
     createDataTable(origin_data, merged_pull_requests) {
         //need to parse them to have an array of array
@@ -464,7 +475,7 @@ class DashboardComponent extends Component {
                                                 <TableRow hover key={row.id}>
                                                     <TableCell>
                                                         <LinkIcon/>
-                                                        <Link href={process.env.REACT_APP_STASH_BASE_URL + "/pull-requests/" + row.id + "/overview"} target="_blank">{row.id}</Link>
+                                                        <Link href={this.state.config.stash_base_url + "/pull-requests/" + row.id + "/overview"} target="_blank">{row.id}</Link>
                                                     </TableCell>
                                                     <TableCell>{row.title}</TableCell>
                                                     <TableCell>{this.getCreationDate(row.createdDate)}</TableCell>

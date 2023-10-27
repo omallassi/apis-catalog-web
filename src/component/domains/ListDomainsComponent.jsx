@@ -109,6 +109,7 @@ class ListDomainsComponent extends Component {
             domains_per_system_and_layer: [],
             catalogs: new Map(),
             systems: new Map(),
+            config: {}
         }
 
         this.listAllDomains = this.listAllDomains.bind(this);
@@ -116,6 +117,7 @@ class ListDomainsComponent extends Component {
         this.listAllDomainsErrors = this.listAllDomainsErrors.bind(this);
         this.listAllDomainsPerLayersAndSystems = this.listAllDomainsPerLayersAndSystems.bind(this);
         this.listAllCatalogs = this.listAllCatalogs.bind(this);
+        this.listConfig = this.listConfig.bind(this);
         //
         // this.domainEditorRef = React.createRef();
     }
@@ -126,6 +128,7 @@ class ListDomainsComponent extends Component {
         this.buildDomainTreeMap();
         this.listAllDomainsPerLayersAndSystems();
         this.listAllCatalogs();
+        this.listConfig();
     }
 
     componentWillUnmount(){
@@ -133,6 +136,14 @@ class ListDomainsComponent extends Component {
             return;
         };
     }
+
+    listConfig(){
+        ApiService.listConfig().then( (res) => {
+          this.setState( { config: res.data } );
+        } ).catch( (err) => {
+          console.error("Error while getting config " + err);
+        });
+      }
 
     listAllDomains() {
         ApiService.listAllDomains().then((res) => {
@@ -377,7 +388,7 @@ class ListDomainsComponent extends Component {
                                                     {this.state.domains_per_system_and_layer.map(row => ( 
                                                             <TableRow hover key={row[0] + row[1] }>
                                                                 <TableCell style={{ verticalAlign: 'top' }}>
-                                                                    <ListItem button component="a" href={process.env.REACT_APP_API_DOC_URL + this.getHtmlDocUri(row[0], row[1])} target="_blank">
+                                                                    <ListItem button component="a" href={this.state.config.api_doc_url + this.getHtmlDocUri(row[0], row[1])} target="_blank">
                                                                         <Tooltip title="Link to HTML API doc (do not contain all specs depending on catalogs)">
                                                                             <DatasetLinkedIcon fontSize='small' color='primary'/>
                                                                         </Tooltip>

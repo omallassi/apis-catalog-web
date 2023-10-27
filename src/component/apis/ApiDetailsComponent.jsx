@@ -205,7 +205,7 @@ class ApiDetailsComponent extends Component {
                                                     <TableCell>{row.description}</TableCell>
                                                     <TableCell>
                                                     <LinkIcon/>
-                                                    <Link href={process.env.REACT_APP_STASH_BASE_URL + "/browse/catalog/" + row.name} target="_blank">{row.name}</Link>
+                                                    <Link href={this.state.config.stash_base_url + "/browse/catalog/" + row.name} target="_blank">{row.name}</Link>
                                                     </TableCell>
                                                 </TableRow>
                                             ))
