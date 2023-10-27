@@ -343,9 +343,9 @@ class ListDomainsComponent extends Component {
                             indicatorColor="primary"
                             textColor="primary">
                             
-                            <Tab label="Domain Org." icon={<Inventory2Icon />} {...this.a11yProps(0)} />
-                            <Tab label="Violation(s)" icon={<Badge badgeContent={this.state.errors.length} showZero color={this.state.errors.length == 0 ? "success" : "error"}><AssignmentLateIcon/></Badge>} {...this.a11yProps(1)} />
-                            <Tab label="Domain Catalog" icon={<AssignmentIcon />} {...this.a11yProps(2)} />
+                            <Tab label="Domain Org. Across Catalogs" icon={<Inventory2Icon />} {...this.a11yProps(0)} />
+                            <Tab label="Domain Violation(s)" icon={<Badge badgeContent={this.state.errors.length} showZero color={this.state.errors.length == 0 ? "success" : "error"}><AssignmentLateIcon/></Badge>} {...this.a11yProps(1)} />
+                            <Tab label="Governed Domain Catalog" icon={<AssignmentIcon />} {...this.a11yProps(2)} />
                             <Tab label="Domain Statistics" icon={<TableChartTwoToneIcon />} {...this.a11yProps(3)} />
                             
                         </Tabs>
@@ -536,16 +536,23 @@ class ListDomainsComponent extends Component {
                                                 <Table className={this.props.classes.table}>
                                                     <TableHead>
                                                         <TableRow>
-                                                            <TableCell className={this.props.classes.head}>Catalog</TableCell>
                                                             <TableCell className={this.props.classes.head} ></TableCell>
                                                             <TableCell className={this.props.classes.head}>Declared Domain</TableCell>
                                                             <TableCell className={this.props.classes.head} >OpenAPI Specification</TableCell>
-                                                            <TableCell className={this.props.classes.head}># of resources</TableCell>
+                                                            <TableCell className={this.props.classes.head}>Catalog</TableCell>
                                                         </TableRow>
                                                     </TableHead>
                                                     <TableBody>
                                                         {this.state.errors.map(row => (
                                                             <TableRow hover key={row.spec_path}>
+                                                                <TableCell>
+                                                                    <ErrorOutlineIcon color="error" fontSize="small"/>
+                                                                </TableCell>
+                                                                <TableCell>{row.spec_domain}</TableCell>
+                                                                <TableCell>
+                                                                    {/* <LinkIcon fontSize="small"/> */}
+                                                                    <Link href={this.state.catalogs.get(row.spec_catalog_id).http_base_uri + row.spec_path} target="_blank">{row.spec_path}</Link>
+                                                                </TableCell>
                                                                 <TableCell><Typography style={{  color: theme.palette.getContrastText(blueGrey[100]),
                                                                                             padding: '.3em .3em .3em .3em',
                                                                                             margin: 'auto',
@@ -559,15 +566,6 @@ class ListDomainsComponent extends Component {
                                                                     { this.state.catalogs.get(row.spec_catalog_id).name }
                                                                     </Typography>
                                                                 </TableCell>
-                                                                <TableCell>
-                                                                    <ErrorOutlineIcon color="error" fontSize="small"/>
-                                                                </TableCell>
-                                                                <TableCell>{row.spec_domain}</TableCell>
-                                                                <TableCell>
-                                                                    <LinkIcon fontSize="small"/><Link href={this.state.catalogs.get(row.spec_catalog_id).http_base_uri + row.spec_path} target="_blank">{row.spec_path}</Link>
-                                                                </TableCell>
-                                                                <TableCell>{row.resources}</TableCell>
-
                                                             </TableRow>
                                                         ))}
                                                     </TableBody>
