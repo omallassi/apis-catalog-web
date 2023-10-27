@@ -216,6 +216,7 @@ const SearchResulsComponent = (props) => {
                                             <TableCell className={classes.head}>Operations</TableCell>
                                             <TableCell className={classes.head}>Path</TableCell>
                                             <TableCell className={classes.head}>Catalog</TableCell>
+                                            <TableCell className={classes.head}>Spec Version</TableCell>
                                             <TableCell className={classes.head}>Link to Spec</TableCell>
                                         </TableRow>
                                     </TableHead>
@@ -248,6 +249,9 @@ const SearchResulsComponent = (props) => {
                                                     <Typography align="right" className={classes.blueGrey}>
                                                         {catalogs.get(row.catalog_id) ? catalogs.get(row.catalog_id).name : row.catalog_id}
                                                     </Typography>
+                                                </TableCell>
+                                                <TableCell>
+                                                    <Typography align="right" className={classes.blueGrey}>{row.spec_version}</Typography>
                                                 </TableCell>
                                                 <TableCell>
                                                     <a href={catalogs.get(row.catalog_id).http_base_uri + row.spec_path} target="_blank" rel="noopener noreferrer">
