@@ -7,10 +7,10 @@ envsubst < "/apis-catalog/config/local-template.toml" > "/apis-catalog/config/lo
 cat /apis-catalog/config/local.toml
 
 # Build the UI
-echo -e "\033[1;32m*** Building apis-catalog-web UI w/ .env.production ***\033[0m"
+echo -e "\033[1;32m*** Starting apis-catalog-web UI ***\033[0m"
 
-cat /apis-catalog-web/.env.production
-cd /apis-catalog-web/ && npm run build
+#cat /apis-catalog-web/.env.production
+#cd /apis-catalog-web/ && npm run build
 
 # Start the server
 echo -e "\033[1;32m*** Starting apis-catalog Server ***\033[0m"
