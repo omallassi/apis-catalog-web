@@ -196,7 +196,7 @@ const SearchResulsComponent = (props) => {
                 <CardContent>
                     <Grid container>
                         <Grid item xs={11}>
-                            <Typography variant="h6" color="primary">Found <b>{searchResult.length}</b> results for: <b>{state.query}</b></Typography>
+                            <Typography variant="h6" color="primary">Search Results : Found <b>{searchResult.length}</b> result(s) for: <b>{state.query}</b></Typography>
                             {message_component}
                         </Grid>
                         <Grid item xs={1}></Grid>

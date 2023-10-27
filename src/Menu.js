@@ -57,8 +57,8 @@ class ListRouter extends Component {
       <div className={this.props.classes.root}>
         <Paper elevation={0}>
           <List>
-           <ListItemLink to="/layers" primary="System & Layer Mgmt" icon={<LayersIcon color="primary" />} />
-           <ListItemLink to="/domains" primary="Domain Mgmt" icon={<FilterTiltShiftIcon color="primary" />} />
+           <ListItemLink to="/layers" primary="Systems & Layers" icon={<LayersIcon color="primary" />} />
+           <ListItemLink to="/domains" primary="Domain Governance" icon={<FilterTiltShiftIcon color="primary" />} />
 
             {process.env.REACT_APP_BETA
               ? <Stack direction="row" spacing={1}><Chip label="beta" color="warning" variant="outlined" size="small" />< ListItemLink to="/" primary="Dashboard" icon={<DashboardIcon color="primary" />} /></Stack>

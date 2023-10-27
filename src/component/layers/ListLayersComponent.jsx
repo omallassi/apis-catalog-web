@@ -81,7 +81,7 @@ class ListLayersComponent extends Component {
                     <CardContent>
                         <Grid container>
                             <Grid item xs={11}>
-                                <Typography variant="h6" color="primary">Systems & Layers Management</Typography>
+                                <Typography variant="h6" color="primary">Systems & Layers</Typography>
                                 {message_component}
                             </Grid>
                             <Grid item xs={1}></Grid>

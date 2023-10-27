@@ -322,7 +322,7 @@ class ListDomainsComponent extends Component {
                     <CardContent>
                         <Grid container>
                             <Grid item xs={11}>
-                                <Typography variant="h6" color="primary">Domain Management</Typography>
+                                <Typography variant="h6" color="primary">Domain Governance Overview</Typography>
                                 {message_component}
                             </Grid>
                             <Grid item xs={1}></Grid>
