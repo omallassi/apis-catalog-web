@@ -37,7 +37,7 @@ import Inventory2Icon from '@mui/icons-material/Inventory2';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 
-import { blue, blueGrey } from '@mui/material/colors';
+import { blue, blueGrey, lightGreen, purple } from '@mui/material/colors';
 
 import Link from '@mui/material/Link';
 import LinkIcon from '@mui/icons-material/Link';
@@ -441,12 +441,32 @@ class ListDomainsComponent extends Component {
                                                                                              <Grid container spacing={2}>
                                                                                                 <ListItem>
                                                                                                 {/* <ListItemText> */}
-                                                                                                    <Grid item xs={10}> 
+                                                                                                    <Grid item xs={9}> 
+                                                                                                        <Box m={1}> 
                                                                                                         <Typography className={classes.customTypography}>
                                                                                                             <Link href={this.state.catalogs.get(spec.catalog_id).http_base_uri + spec.spec_path} target="_blank">
                                                                                                             {spec.spec_path}
                                                                                                             </Link>
                                                                                                         </Typography>
+                                                                                                        </Box>
+                                                                                                    </Grid>
+                                                                                                    <Grid item xs={1}>
+                                                                                                        <Box m={1}>
+                                                                                                            {console.log(spec.grammar, spec.grammar.length)}
+                                                                                                            {console.log(spec.grammar === "OpenAPI.v3")}
+                                                                                                        <Typography align="right" className={classes.customTypography} style={{  color: spec.grammar === "OpenAPI.v3" ? theme.palette.getContrastText(lightGreen[300]) : spec.grammar === "AsyncAPI.v1" ? theme.palette.getContrastText(purple[500]) : spec.grammar === "AsyncAPI.v2" ? theme.palette.getContrastText(purple[500]) : theme.palette.getContrastText(blueGrey[100]),
+                                                                                                            //padding: '.3em .3em .3em .3em',
+                                                                                                            margin: 'auto',
+                                                                                                            textAlign: 'center',
+                                                                                                            verticalAlign: 'middle',
+                                                                                                            //fontWeight: '500',
+                                                                                                            borderRadius: '.25em',
+                                                                                                            fontSize: '90%',
+                                                                                                            backgroundColor: spec.grammar === "OpenAPI.v3" ? lightGreen[300] : spec.grammar === "AsyncAPI.v1" ? purple[500] : spec.grammar === "AsyncAPI.v2" ? purple[500] : blueGrey[100],
+                                                                                                            textTransform: 'uppercase' }}>
+                                                                                                        { spec.grammar }
+                                                                                                        </Typography>
+                                                                                                        </Box>
                                                                                                     </Grid>
                                                                                                     <Grid item xs={2}>
                                                                                                         <Box m={1}>
