@@ -11,7 +11,7 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import IconButton from '@mui/material/IconButton';
 import { Grid, TableContainer } from '@mui/material';
-import { blue, blueGrey, red, green, orange, deepPurple } from '@mui/material/colors';
+import { blue, blueGrey, red, green, orange, deepPurple, purple } from '@mui/material/colors';
 import { useLocation } from "react-router-dom";
 import makeStyles from '@mui/styles/makeStyles';
 import LinkIcon from '@mui/icons-material/Link';
@@ -108,6 +108,18 @@ const useStyles = makeStyles(theme => ({
         fontSize: '70%',
         backgroundColor: orange[800],
         textTransform: 'uppercase' 
+    },
+    async: {
+        color: theme.palette.getContrastText(purple[500]),
+        padding: '.1em .1em .1em .1em',
+        margin: 'auto',
+        textAlign: 'center',
+        verticalAlign: 'middle',
+        fontWeight: '500',
+        borderRadius: '.25em',
+        fontSize: '70%',
+        backgroundColor: purple[500],
+        textTransform: 'uppercase' 
     }
 }));
 
@@ -170,6 +182,8 @@ const SearchResulsComponent = (props) => {
             return classes.put;
         else if (status === "PATCH")
             return classes.patch;
+        else if (status === "publish" || status === "subscribe")
+            return classes.async;
         else
             return classes.ope;
     }
