@@ -452,8 +452,6 @@ class ListDomainsComponent extends Component {
                                                                                                     </Grid>
                                                                                                     <Grid item xs={1}>
                                                                                                         <Box m={1}>
-                                                                                                            {console.log(spec.grammar, spec.grammar.length)}
-                                                                                                            {console.log(spec.grammar === "OpenAPI.v3")}
                                                                                                         <Typography align="right" className={classes.customTypography} style={{  color: spec.grammar === "OpenAPI.v3" ? theme.palette.getContrastText(lightGreen[300]) : spec.grammar === "AsyncAPI.v1" ? theme.palette.getContrastText(purple[500]) : spec.grammar === "AsyncAPI.v2" ? theme.palette.getContrastText(purple[500]) : theme.palette.getContrastText(blueGrey[100]),
                                                                                                             //padding: '.3em .3em .3em .3em',
                                                                                                             margin: 'auto',
@@ -461,7 +459,7 @@ class ListDomainsComponent extends Component {
                                                                                                             verticalAlign: 'middle',
                                                                                                             //fontWeight: '500',
                                                                                                             borderRadius: '.25em',
-                                                                                                            fontSize: '90%',
+                                                                                                            fontSize: '70%',
                                                                                                             backgroundColor: spec.grammar === "OpenAPI.v3" ? lightGreen[300] : spec.grammar === "AsyncAPI.v1" ? purple[500] : spec.grammar === "AsyncAPI.v2" ? purple[500] : blueGrey[100],
                                                                                                             textTransform: 'uppercase' }}>
                                                                                                         { spec.grammar }
@@ -477,7 +475,7 @@ class ListDomainsComponent extends Component {
                                                                                                             verticalAlign: 'middle',
                                                                                                             //fontWeight: '500',
                                                                                                             borderRadius: '.25em',
-                                                                                                            fontSize: '90%',
+                                                                                                            fontSize: '70%',
                                                                                                             backgroundColor: blueGrey[100],
                                                                                                             textTransform: 'uppercase' }}>
                                                                                                         { this.state.catalogs.get(spec.catalog_id).name }

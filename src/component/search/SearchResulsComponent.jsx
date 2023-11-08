@@ -33,7 +33,7 @@ const useStyles = makeStyles(theme => ({
         verticalAlign: 'middle',
         fontWeight: '500',
         borderRadius: '.25em',
-        fontSize: '90%',
+        fontSize: '80%',
         backgroundColor: blueGrey[100],
         textTransform: 'uppercase' 
     },
